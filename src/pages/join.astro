@@ -110,7 +110,9 @@ const metadata = {
         <ul class="checklist">
           <li class="checklist-item" data-item="5-1">
             <div class="checkbox"></div>
-            <span class="checkbox-label">案内メールで「初回に払う金額」と「支払期限」を確認した</span>
+            <span class="checkbox-label">
+              案内メールで「初回に払う金額」と「支払期限」を確認した
+            </span>
           </li>
           <li class="checklist-item" data-item="5-2">
             <div class="checkbox"></div>
@@ -494,7 +496,7 @@ const metadata = {
     function initTodoChecklist() {
       const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
-      document.querySelectorAll<HTMLElement>('#join-todo .checklist-item').forEach((item) => {
+      document.querySelectorAll('#join-todo .checklist-item').forEach((item) => {
         const itemId = item.dataset.item;
         if (itemId && savedData[itemId]) {
           item.classList.add('checked');
@@ -502,7 +504,7 @@ const metadata = {
 
         item.addEventListener('click', function () {
           this.classList.toggle('checked');
-          const step = this.closest('.step') as HTMLElement;
+          const step = this.closest('.step');
           if (step) {
             updateStepProgress(step);
             saveState();
@@ -510,12 +512,12 @@ const metadata = {
         });
       });
 
-      function updateStepProgress(step: HTMLElement) {
+      function updateStepProgress(step) {
         const items = step.querySelectorAll('.checklist-item');
         const checkedItems = step.querySelectorAll('.checklist-item.checked');
         const progress = (checkedItems.length / items.length) * 100;
 
-        const progressFill = step.querySelector('.progress-fill') as HTMLElement;
+        const progressFill = step.querySelector('.progress-fill');
         if (progressFill) {
           progressFill.style.width = progress + '%';
         }
@@ -528,8 +530,8 @@ const metadata = {
       }
 
       function saveState() {
-        const state: Record<string, boolean> = {};
-        document.querySelectorAll<HTMLElement>('#join-todo .checklist-item.checked').forEach((item) => {
+        const state = {};
+        document.querySelectorAll('#join-todo .checklist-item.checked').forEach((item) => {
           const itemId = item.dataset.item;
           if (itemId) {
             state[itemId] = true;
@@ -538,7 +540,7 @@ const metadata = {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       }
 
-      document.querySelectorAll<HTMLElement>('#join-todo .step').forEach((step) => {
+      document.querySelectorAll('#join-todo .step').forEach((step) => {
         updateStepProgress(step);
       });
     }
