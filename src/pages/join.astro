@@ -1,5 +1,4 @@
 ---
-// /src/pages/join.astro
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
@@ -17,7 +16,14 @@ const metadata = {
           <div class="step-number">1</div>
           <h2>無料体験のお申込み</h2>
         </div>
-        <a href="https://www.stsrjk.com/無料体験のご予約/" target="_blank" rel="noopener noreferrer" class="step-button">無料体験のお申込み</a>
+        <a
+          href="https://www.stsrjk.com/無料体験のご予約/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="step-button"
+        >
+          無料体験のお申込み
+        </a>
         <ul class="checklist">
           <li class="checklist-item" data-item="1-1">
             <div class="checkbox"></div>
@@ -58,7 +64,9 @@ const metadata = {
         <ul class="checklist">
           <li class="checklist-item" data-item="3-1">
             <div class="checkbox"></div>
-            <span class="checkbox-label">体験授業に参加して、「ここならやっていけそうか」「雰囲気が合いそうか」を確認した</span>
+            <span class="checkbox-label">
+              体験授業に参加して、「ここならやっていけそうか」「雰囲気が合いそうか」を確認した
+            </span>
           </li>
         </ul>
         <div class="progress-bar">
@@ -71,7 +79,14 @@ const metadata = {
           <div class="step-number">4</div>
           <h2>入塾のお申込み</h2>
         </div>
-        <a href="https://www.stsrjk.com/入塾のお申込み/" target="_blank" rel="noopener noreferrer" class="step-button">入塾のお申込み</a>
+        <a
+          href="https://www.stsrjk.com/入塾のお申込み/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="step-button"
+        >
+          入塾のお申込み
+        </a>
         <ul class="checklist">
           <li class="checklist-item" data-item="4-1">
             <div class="checkbox"></div>
@@ -103,15 +118,21 @@ const metadata = {
           </li>
           <li class="checklist-item" data-item="5-3">
             <div class="checkbox"></div>
-            <span class="checkbox-label">口座振替の開始が間に合わない場合、2回目の月謝も銀行振込になることを理解した</span>
+            <span class="checkbox-label">
+              口座振替の開始が間に合わない場合、2回目の月謝も銀行振込になることを理解した
+            </span>
           </li>
           <li class="checklist-item" data-item="5-4">
             <div class="checkbox"></div>
-            <span class="checkbox-label">初回授業で、お子さまが教室で「口座振替依頼書」を受け取った</span>
+            <span class="checkbox-label">
+              初回授業で、お子さまが教室で「口座振替依頼書」を受け取った
+            </span>
           </li>
           <li class="checklist-item" data-item="5-5">
             <div class="checkbox"></div>
-            <span class="checkbox-label">口座振替依頼書に銀行印を押し、記入漏れ・銀行印のまちがいがないか確認してから提出した</span>
+            <span class="checkbox-label">
+              口座振替依頼書に銀行印を押し、記入漏れ・銀行印のまちがいがないか確認してから提出した
+            </span>
           </li>
         </ul>
         <div class="progress-bar">
@@ -382,16 +403,32 @@ const metadata = {
     }
 
     /* .step は .join-container 直下に5つ並んでいる想定 */
-    .join-container > .step:nth-of-type(1) { animation-delay: 0s; }
-    .join-container > .step:nth-of-type(2) { animation-delay: 0.1s; }
-    .join-container > .step:nth-of-type(3) { animation-delay: 0.2s; }
-    .join-container > .step:nth-of-type(4) { animation-delay: 0.3s; }
-    .join-container > .step:nth-of-type(5) { animation-delay: 0.4s; }
+    .join-container > .step:nth-of-type(1) {
+      animation-delay: 0s;
+    }
+    .join-container > .step:nth-of-type(2) {
+      animation-delay: 0.1s;
+    }
+    .join-container > .step:nth-of-type(3) {
+      animation-delay: 0.2s;
+    }
+    .join-container > .step:nth-of-type(4) {
+      animation-delay: 0.3s;
+    }
+    .join-container > .step:nth-of-type(5) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes checkPop {
-      0% { transform: scale(0) rotate(-180deg); }
-      50% { transform: scale(1.2) rotate(0deg); }
-      100% { transform: scale(1) rotate(0deg); }
+      0% {
+        transform: scale(0) rotate(-180deg);
+      }
+      50% {
+        transform: scale(1.2) rotate(0deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
     }
 
     @media (max-width: 640px) {
@@ -453,17 +490,17 @@ const metadata = {
 
   <script>
     const STORAGE_KEY = 'stsrjk_join_todo_v1';
-    
+
     function initTodoChecklist() {
       const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      
-      document.querySelectorAll<HTMLElement>('#join-todo .checklist-item').forEach(item => {
+
+      document.querySelectorAll<HTMLElement>('#join-todo .checklist-item').forEach((item) => {
         const itemId = item.dataset.item;
         if (itemId && savedData[itemId]) {
           item.classList.add('checked');
         }
-        
-        item.addEventListener('click', function() {
+
+        item.addEventListener('click', function () {
           this.classList.toggle('checked');
           const step = this.closest('.step') as HTMLElement;
           if (step) {
@@ -477,12 +514,12 @@ const metadata = {
         const items = step.querySelectorAll('.checklist-item');
         const checkedItems = step.querySelectorAll('.checklist-item.checked');
         const progress = (checkedItems.length / items.length) * 100;
-        
+
         const progressFill = step.querySelector('.progress-fill') as HTMLElement;
         if (progressFill) {
           progressFill.style.width = progress + '%';
         }
-        
+
         if (progress === 100) {
           step.classList.add('completed');
         } else {
@@ -492,7 +529,7 @@ const metadata = {
 
       function saveState() {
         const state: Record<string, boolean> = {};
-        document.querySelectorAll<HTMLElement>('#join-todo .checklist-item.checked').forEach(item => {
+        document.querySelectorAll<HTMLElement>('#join-todo .checklist-item.checked').forEach((item) => {
           const itemId = item.dataset.item;
           if (itemId) {
             state[itemId] = true;
@@ -501,7 +538,7 @@ const metadata = {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       }
 
-      document.querySelectorAll<HTMLElement>('#join-todo .step').forEach(step => {
+      document.querySelectorAll<HTMLElement>('#join-todo .step').forEach((step) => {
         updateStepProgress(step);
       });
     }
