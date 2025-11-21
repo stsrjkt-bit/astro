@@ -29,6 +29,18 @@ export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
+  // Guard against missing SITE.site to prevent TypeError
+  if (!SITE.site) {
+    // Fallback to relative path when site URL is not configured
+    const relativePath = path.startsWith('/') ? path : `/${path}`;
+    if (SITE.trailingSlash == false && path && relativePath.endsWith('/')) {
+      return relativePath.slice(0, -1);
+    } else if (SITE.trailingSlash == true && path && !relativePath.endsWith('/')) {
+      return relativePath + '/';
+    }
+    return relativePath;
+  }
+
   const url = String(new URL(path, SITE.site));
   if (SITE.trailingSlash == false && path && url.endsWith('/')) {
     return url.slice(0, -1);
