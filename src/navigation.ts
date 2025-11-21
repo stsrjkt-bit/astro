@@ -14,10 +14,6 @@ export const headerData = {
       text: '理系大学をめざすあなたへ',
       href: getPermalink('/rikei'),
     },
-    {
-      text: '今月のお休み',
-      href: getPermalink('/off'),
-    },
   ],
   actions: [],
 };

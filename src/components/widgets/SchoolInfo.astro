@@ -1,0 +1,66 @@
+---
+const calendarUrl =
+  'https://calendar.google.com/calendar/u/0/embed?src=f927cc21f73c5d1b2a2ff1cd51ad58da3288ca06760c437b5e477ec43e87f4da@group.calendar.google.com&ctz=Asia/Tokyo&hl=ja&mode=MONTH&wkst=2&showTitle=0&showTabs=0&showPrint=0';
+
+const mapUrl =
+  'https://www.google.com/maps?q=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B2%BC%E6%B4%A5%E5%B8%82%E6%B2%A2%E7%94%B0%E7%94%BA1-3+%E7%89%A7%E5%8E%9F%E3%83%93%E3%83%AB102';
+---
+
+<section class="bg-white text-black py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-sm md:text-base tracking-widest text-[#9C9C9C] mb-4">SCHOOL INFO</p>
+        <h2 class="text-3xl md:text-4xl font-bold">教室情報・アクセス</h2>
+      </div>
+
+      <div class="space-y-8">
+        <dl class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-start border-b border-[#E5E5E5] pb-3">
+            <dt class="font-bold text-[#333333] min-w-[7rem] mb-1 sm:mb-0">教室名</dt>
+            <dd class="text-[#666666]">さとう数理塾</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-start border-b border-[#E5E5E5] pb-3">
+            <dt class="font-bold text-[#333333] min-w-[7rem] mb-1 sm:mb-0">住所</dt>
+            <dd class="text-[#666666]">〒410-0052 静岡県沼津市沢田町1-3 牧原ビル102</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-start border-b border-[#E5E5E5] pb-3">
+            <dt class="font-bold text-[#333333] min-w-[7rem] mb-1 sm:mb-0">開校日</dt>
+            <dd class="text-[#666666]">月〜金</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-start border-b border-[#E5E5E5] pb-3">
+            <dt class="font-bold text-[#333333] min-w-[7rem] mb-1 sm:mb-0">開校時間</dt>
+            <dd class="text-[#666666]">18:50〜21:50</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-start border-b border-[#E5E5E5] pb-3">
+            <dt class="font-bold text-[#333333] min-w-[7rem] mb-1 sm:mb-0">休校日</dt>
+            <dd class="text-[#666666]">土日・8月のお盆・年末年始</dd>
+          </div>
+        </dl>
+
+        <p class="text-sm text-[#9C9C9C] italic">
+          ※ 詳しい休校日程は下記の「今月のお休み（Googleカレンダー）」からご確認ください。
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <a
+            href={calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-black border-2 border-black rounded-full hover:bg-white hover:text-black transition-all duration-200"
+          >
+            今月のお休みを Googleカレンダーで見る
+          </a>
+          <a
+            href={mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-black bg-white border-2 border-black rounded-full hover:bg-black hover:text-white transition-all duration-200"
+          >
+            Googleマップで教室の場所を見る
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
