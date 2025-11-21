@@ -11,7 +11,7 @@ metadata:
   title:
     default: さとう数理塾
     template: '%s — さとう数理塾'
-  description: "沼津の理系専門個別指導。数学が苦手でも、理系をあきらめない。"
+  description: '沼津の理系専門個別指導。数学が苦手でも、理系をあきらめない。'
   robots:
     index: true
     follow: true
