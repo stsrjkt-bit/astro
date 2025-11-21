@@ -79,12 +79,7 @@ const metadata = {
           <div class="step-number">4</div>
           <h2>入塾のお申込み</h2>
         </div>
-        <a
-          href="https://www.stsrjk.com/入塾のお申込み/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="step-button"
-        >
+        <a href="https://www.stsrjk.com/入塾のお申込み/" target="_blank" rel="noopener noreferrer" class="step-button">
           入塾のお申込み
         </a>
         <ul class="checklist">
@@ -110,9 +105,7 @@ const metadata = {
         <ul class="checklist">
           <li class="checklist-item" data-item="5-1">
             <div class="checkbox"></div>
-            <span class="checkbox-label">
-              案内メールで「初回に払う金額」と「支払期限」を確認した
-            </span>
+            <span class="checkbox-label"> 案内メールで「初回に払う金額」と「支払期限」を確認した </span>
           </li>
           <li class="checklist-item" data-item="5-2">
             <div class="checkbox"></div>
@@ -126,9 +119,7 @@ const metadata = {
           </li>
           <li class="checklist-item" data-item="5-4">
             <div class="checkbox"></div>
-            <span class="checkbox-label">
-              初回授業で、お子さまが教室で「口座振替依頼書」を受け取った
-            </span>
+            <span class="checkbox-label"> 初回授業で、お子さまが教室で「口座振替依頼書」を受け取った </span>
           </li>
           <li class="checklist-item" data-item="5-5">
             <div class="checkbox"></div>
@@ -496,9 +487,7 @@ const metadata = {
     function initTodoChecklist() {
       const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
-      const items = document.querySelectorAll(
-        '#join-todo .checklist-item',
-      ) as NodeListOf<HTMLElement>;
+      const items = document.querySelectorAll('#join-todo .checklist-item') as NodeListOf<HTMLElement>;
       items.forEach((item) => {
         const itemId = item.dataset.item;
         if (itemId && savedData[itemId]) {
@@ -534,9 +523,7 @@ const metadata = {
 
       function saveState() {
         const state: Record<string, boolean> = {};
-        const checkedItems = document.querySelectorAll(
-          '#join-todo .checklist-item.checked',
-        ) as NodeListOf<HTMLElement>;
+        const checkedItems = document.querySelectorAll('#join-todo .checklist-item.checked') as NodeListOf<HTMLElement>;
         checkedItems.forEach((item) => {
           const itemId = item.dataset.item;
           if (itemId) {
