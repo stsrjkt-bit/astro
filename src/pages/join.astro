@@ -459,7 +459,7 @@ const metadata = {
       
       document.querySelectorAll<HTMLElement>('#join-todo .checklist-item').forEach(item => {
         const itemId = item.dataset.item;
-        if (savedData[itemId]) {
+        if (itemId && savedData[itemId]) {
           item.classList.add('checked');
         }
         
