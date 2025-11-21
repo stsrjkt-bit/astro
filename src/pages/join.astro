@@ -496,7 +496,9 @@ const metadata = {
     function initTodoChecklist() {
       const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
-      const items = document.querySelectorAll('#join-todo .checklist-item') as NodeListOf<HTMLElement>;
+      const items = document.querySelectorAll(
+        '#join-todo .checklist-item',
+      ) as NodeListOf<HTMLElement>;
       items.forEach((item) => {
         const itemId = item.dataset.item;
         if (itemId && savedData[itemId]) {
@@ -533,7 +535,7 @@ const metadata = {
       function saveState() {
         const state: Record<string, boolean> = {};
         const checkedItems = document.querySelectorAll(
-          '#join-todo .checklist-item.checked'
+          '#join-todo .checklist-item.checked',
         ) as NodeListOf<HTMLElement>;
         checkedItems.forEach((item) => {
           const itemId = item.dataset.item;
