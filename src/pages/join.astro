@@ -496,7 +496,8 @@ const metadata = {
     function initTodoChecklist() {
       const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
-      document.querySelectorAll('#join-todo .checklist-item').forEach((item) => {
+      const items = document.querySelectorAll('#join-todo .checklist-item') as NodeListOf<HTMLElement>;
+      items.forEach((item) => {
         const itemId = item.dataset.item;
         if (itemId && savedData[itemId]) {
           item.classList.add('checked');
@@ -504,7 +505,7 @@ const metadata = {
 
         item.addEventListener('click', function () {
           this.classList.toggle('checked');
-          const step = this.closest('.step');
+          const step = this.closest('.step') as HTMLElement | null;
           if (step) {
             updateStepProgress(step);
             saveState();
@@ -512,12 +513,12 @@ const metadata = {
         });
       });
 
-      function updateStepProgress(step) {
+      function updateStepProgress(step: HTMLElement) {
         const items = step.querySelectorAll('.checklist-item');
         const checkedItems = step.querySelectorAll('.checklist-item.checked');
         const progress = (checkedItems.length / items.length) * 100;
 
-        const progressFill = step.querySelector('.progress-fill');
+        const progressFill = step.querySelector('.progress-fill') as HTMLElement | null;
         if (progressFill) {
           progressFill.style.width = progress + '%';
         }
@@ -530,8 +531,11 @@ const metadata = {
       }
 
       function saveState() {
-        const state = {};
-        document.querySelectorAll('#join-todo .checklist-item.checked').forEach((item) => {
+        const state: Record<string, boolean> = {};
+        const checkedItems = document.querySelectorAll(
+          '#join-todo .checklist-item.checked'
+        ) as NodeListOf<HTMLElement>;
+        checkedItems.forEach((item) => {
           const itemId = item.dataset.item;
           if (itemId) {
             state[itemId] = true;
@@ -540,7 +544,8 @@ const metadata = {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       }
 
-      document.querySelectorAll('#join-todo .step').forEach((step) => {
+      const steps = document.querySelectorAll('#join-todo .step') as NodeListOf<HTMLElement>;
+      steps.forEach((step) => {
         updateStepProgress(step);
       });
     }
