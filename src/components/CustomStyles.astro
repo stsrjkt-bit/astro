@@ -25,19 +25,26 @@ import '@fontsource-variable/inter';
     --aw-font-serif: 'Inter Variable';
     --aw-font-heading: 'Inter Variable';
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
+    /* LARGO Monochrome 3-Color Palette */
+    --largo-black: #000000;
+    --largo-gray: #9C9C9C;
+    --largo-white: #FFFFFF;
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
+    /* Apply LARGO colors to theme variables */
+    --aw-color-primary: var(--largo-black);
+    --aw-color-secondary: var(--largo-gray);
+    --aw-color-accent: var(--largo-gray);
 
-    --aw-color-bg-page-dark: rgb(3 6 32);
+    --aw-color-text-heading: var(--largo-black);
+    --aw-color-text-default: var(--largo-black);
+    --aw-color-text-muted: var(--largo-gray);
+    --aw-color-bg-page: var(--largo-white);
+
+    --aw-color-bg-page-dark: var(--largo-black);
 
     ::selection {
-      background-color: lavender;
+      background-color: var(--largo-gray);
+      color: var(--largo-white);
     }
   }
 
@@ -46,18 +53,19 @@ import '@fontsource-variable/inter';
     --aw-font-serif: 'Inter Variable';
     --aw-font-heading: 'Inter Variable';
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
+    /* LARGO colors for dark mode */
+    --aw-color-primary: var(--largo-white);
+    --aw-color-secondary: var(--largo-gray);
+    --aw-color-accent: var(--largo-gray);
 
-    --aw-color-text-heading: rgb(247, 248, 248);
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: rgb(3 6 32);
+    --aw-color-text-heading: var(--largo-white);
+    --aw-color-text-default: var(--largo-white);
+    --aw-color-text-muted: var(--largo-gray);
+    --aw-color-bg-page: var(--largo-black);
 
     ::selection {
-      background-color: black;
-      color: snow;
+      background-color: var(--largo-gray);
+      color: var(--largo-black);
     }
   }
 </style>
