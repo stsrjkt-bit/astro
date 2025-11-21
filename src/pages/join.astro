@@ -1,9 +1,13 @@
 ---
 // /src/pages/join.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: '体験〜入塾 TODO - さとう数理塾',
+};
 ---
 
-<BaseLayout title="体験〜入塾 TODO | さとう数理塾">
+<Layout metadata={metadata}>
   <div id="join-todo">
     <div class="join-container">
       <h1 class="join-title">体験〜入塾 TODO</h1>
@@ -501,4 +505,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       initTodoChecklist();
     }
   </script>
-</BaseLayout>
+</Layout>
