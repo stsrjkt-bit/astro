@@ -1,0 +1,63 @@
+---
+/**
+ * 右下の「よくある質問」ボタン＋FAQチャット iframe ラウンチャー
+ * - FAQチャットURLは固定で https://juku-faq.vercel.app/ を使用
+ * - ボタン → iframe の開閉はこのコンポーネント内の <script> で完結
+ */
+
+const faqChatUrl = 'https://juku-faq.vercel.app/';
+---
+
+<div class="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
+  <!-- チャット本体（iframe） -->
+  <div
+    id="faq-chat-iframe-wrapper"
+    class="w-[min(100vw-2rem,420px)] h-[min(70vh,560px)] rounded-2xl shadow-2xl border border-slate-200 bg-white overflow-hidden transition-all duration-200 ease-out translate-y-2 opacity-0 pointer-events-none"
+    aria-hidden="true"
+  >
+    <iframe src={faqChatUrl} title="さとう数理塾 よくある質問チャット" class="w-full h-full border-0" loading="lazy"
+    ></iframe>
+  </div>
+
+  <!-- 起動ボタン -->
+  <button
+    id="faq-chat-toggle"
+    type="button"
+    class="inline-flex items-center gap-2 rounded-full bg-white/95 border border-slate-200 shadow-xl px-4 py-2.5 text-sm font-semibold text-slate-800 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-150"
+  >
+    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white text-lg"> ? </span>
+    <span class="whitespace-nowrap"> よくある質問 </span>
+  </button>
+</div>
+
+<script>
+  // 右下ボタン → iframe の開閉を制御
+  if (typeof window !== 'undefined') {
+    const toggle = document.getElementById('faq-chat-toggle');
+    const wrapper = document.getElementById('faq-chat-iframe-wrapper');
+
+    if (toggle && wrapper) {
+      let isOpen = false;
+
+      const applyState = () => {
+        if (isOpen) {
+          wrapper.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+          wrapper.classList.add('opacity-100', 'translate-y-0');
+          wrapper.removeAttribute('aria-hidden');
+        } else {
+          wrapper.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+          wrapper.classList.remove('opacity-100', 'translate-y-0');
+          wrapper.setAttribute('aria-hidden', 'true');
+        }
+      };
+
+      // 初期状態は閉じる
+      applyState();
+
+      toggle.addEventListener('click', () => {
+        isOpen = !isOpen;
+        applyState();
+      });
+    }
+  }
+</script>
