@@ -1,0 +1,71 @@
+---
+import '@fontsource-variable/inter';
+
+// 'DM Sans'
+// Nunito
+// Dosis
+// Outfit
+// Roboto
+// Literata
+// 'IBM Plex Sans'
+// Karla
+// Poppins
+// 'Fira Sans'
+// 'Libre Franklin'
+// Inconsolata
+// Raleway
+// Oswald
+// 'Space Grotesk'
+// Urbanist
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Inter Variable';
+
+    /* LARGO Monochrome 3-Color Palette */
+    --largo-black: #000000;
+    --largo-gray: #9c9c9c;
+    --largo-white: #ffffff;
+
+    /* Apply LARGO colors to theme variables */
+    --aw-color-primary: var(--largo-black);
+    --aw-color-secondary: var(--largo-gray);
+    --aw-color-accent: var(--largo-gray);
+
+    --aw-color-text-heading: var(--largo-black);
+    --aw-color-text-default: var(--largo-black);
+    --aw-color-text-muted: var(--largo-gray);
+    --aw-color-bg-page: var(--largo-white);
+
+    --aw-color-bg-page-dark: var(--largo-black);
+
+    ::selection {
+      background-color: var(--largo-gray);
+      color: var(--largo-white);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Inter Variable';
+
+    /* LARGO colors for dark mode */
+    --aw-color-primary: var(--largo-white);
+    --aw-color-secondary: var(--largo-gray);
+    --aw-color-accent: var(--largo-gray);
+
+    --aw-color-text-heading: var(--largo-white);
+    --aw-color-text-default: var(--largo-white);
+    --aw-color-text-muted: var(--largo-gray);
+    --aw-color-bg-page: var(--largo-black);
+
+    ::selection {
+      background-color: var(--largo-gray);
+      color: var(--largo-black);
+    }
+  }
+</style>
