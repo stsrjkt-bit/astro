@@ -1,0 +1,265 @@
+---
+/**
+ * StitchLanding Component
+ * A landing page section inspired by Google Stitch design
+ * Includes: Hero with background image, About section, Features carousel, and Classroom info with map
+ */
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const calendarUrl =
+  'https://calendar.google.com/calendar/u/0/embed?src=f927cc21f73c5d1b2a2ff1cd51ad58da3288ca06760c437b5e477ec43e87f4da@group.calendar.google.com&ctz=Asia/Tokyo&hl=ja&mode=MONTH&wkst=2&showTitle=0&showTabs=0&showPrint=0';
+
+const mapEmbedUrl =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3272.076820123456!2d138.8631!3d35.0962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDA1JzQ2LjMiTiAxMzjCsDUxJzQ3LjIiRQ!5e0!3m2!1sja!2sjp!4v1234567890';
+---
+
+<div {...id ? { id } : {}}>
+  <!-- Hero Section with Background Image -->
+  <section class="relative bg-gradient-to-br from-blue-900 via-purple-800 to-purple-900 text-white py-24 md:py-32 overflow-hidden">
+    <!-- Background Image Overlay -->
+    <div class="absolute inset-0 opacity-40">
+      <img
+        src="/images/stitch-hero.jpg"
+        alt="Students studying science and math"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-800/80 to-purple-900/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
+          数学が苦手でも、<br />
+          理系をあきらめない。
+        </h1>
+        <p class="text-lg md:text-xl mb-4 leading-relaxed drop-shadow-md">
+          AI教材と1対1の個別指導で、
+        </p>
+        <p class="text-lg md:text-xl mb-10 leading-relaxed drop-shadow-md">
+          「わからない」から一歩ずつ抜け出すための塾です。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/math-nigate"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-blue-600 border-2 border-blue-500 rounded-full hover:bg-blue-500 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
+            数学が苦手な高校生へ
+          </a>
+          <a
+            href="/rikei"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-purple-600 border-2 border-purple-500 rounded-full hover:bg-purple-500 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
+            理系大学をめざすあなたへ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="bg-white text-black py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8">さとう数理塾について</h2>
+        <div class="space-y-6 text-[17px] leading-relaxed text-gray-700">
+          <p>
+            さとう数理塾は、理系志望を軸とした生徒のための塾です。<br />
+            学びあは課題を明らかにしていくことです。
+          </p>
+          <p>
+            <span class="font-semibold text-gray-900">「AI教材」という名のしらみつぶし</span> と <span class="font-semibold text-gray-900">「1対1の個別指導」</span>で、<br />
+            AI教材と1対1の個別指導で、理系大学をめざす学生をサポートしています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section with Carousel -->
+  <section class="bg-gradient-to-br from-blue-900 via-purple-800 to-purple-900 text-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">3つの特徴</h2>
+
+      <!-- Carousel Container -->
+      <div class="relative">
+        <!-- Previous Button -->
+        <button
+          type="button"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50"
+          onclick="document.getElementById('features-carousel').scrollBy({ left: -400, behavior: 'smooth' })"
+          aria-label="Previous"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <!-- Cards Container -->
+        <div
+          id="features-carousel"
+          class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar pb-4"
+        >
+          <!-- Card 01: 個別対応 -->
+          <div class="flex-none w-full md:w-[calc(33.333%-16px)] snap-center">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl h-full">
+              <div class="relative h-48 bg-gray-200">
+                <img
+                  src="/images/stitch-feature-01.jpg"
+                  alt="個別対応 - Teacher and student working together"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-xl font-bold shadow-lg border-4 border-white"
+                >
+                  <span class="text-sm">Card</span><br />
+                  <span class="text-2xl">01</span>
+                </div>
+              </div>
+              <div class="p-6 text-center text-gray-900">
+                <h3 class="text-2xl font-bold mb-4">個別対応</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  個個のセルター、適むた小から適な<br />数学室を多数発することです。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 02: 理系特化 -->
+          <div class="flex-none w-full md:w-[calc(33.333%-16px)] snap-center">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl h-full">
+              <div class="relative h-48 bg-gray-200">
+                <img
+                  src="/images/stitch-feature-02.jpg"
+                  alt="理系特化 - Science laboratory equipment"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl font-bold shadow-lg border-4 border-white"
+                >
+                  <span class="text-sm">Card</span><br />
+                  <span class="text-2xl">02</span>
+                </div>
+              </div>
+              <div class="p-6 text-center text-gray-900">
+                <h3 class="text-2xl font-bold mb-4">理系特化</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  AI教材と1対1の個別指導理導で、<br />理系大学をめざす学生を対応すます。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 03: 実績重視 -->
+          <div class="flex-none w-full md:w-[calc(33.333%-16px)] snap-center">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl h-full">
+              <div class="relative h-48 bg-gray-200">
+                <img
+                  src="/images/stitch-feature-03.jpg"
+                  alt="実績重視 - Growth charts and results"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center text-xl font-bold shadow-lg border-4 border-white"
+                >
+                  <span class="text-sm">Card</span><br />
+                  <span class="text-2xl">03</span>
+                </div>
+              </div>
+              <div class="p-6 text-center text-gray-900">
+                <h3 class="text-2xl font-bold mb-4">実績重視</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  実績重視・国立大学理系に実績<br />多数用目を必成を記録します。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <button
+          type="button"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50"
+          onclick="document.getElementById('features-carousel').scrollBy({ left: 400, behavior: 'smooth' })"
+          aria-label="Next"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Classroom Info & Access Section -->
+  <section class="bg-gray-50 text-black py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">教室情報・アクセス</h2>
+
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+        <!-- Left Column: Buttons -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-lg p-8 shadow-md">
+            <h3 class="text-xl font-bold mb-6 text-center">さとう数理塾について</h3>
+            <p class="text-gray-600 mb-6 text-center">詳しい情報はこちらから</p>
+          </div>
+
+          <a
+            href={calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full px-6 py-4 text-center text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            今月のお休みを<br class="sm:hidden" />Googleカレンダーで見る
+          </a>
+
+          <a
+            href="https://www.google.com/maps?q=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B2%BC%E6%B4%A5%E5%B8%82%E6%B2%A2%E7%94%B0%E7%94%BA1-3+%E7%89%A7%E5%8E%9F%E3%83%93%E3%83%AB102"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full px-6 py-4 text-center text-base font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            Googleマップで<br class="sm:hidden" />教室の場所を見る
+          </a>
+
+          <a
+            href="/join"
+            class="block w-full px-6 py-4 text-center text-base font-medium text-white bg-gray-700 rounded-lg hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            入塾までの流れを見る
+          </a>
+        </div>
+
+        <!-- Right Column: Map -->
+        <div class="relative rounded-lg overflow-hidden shadow-lg h-[400px] md:h-full min-h-[400px]">
+          <iframe
+            src={mapEmbedUrl}
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="さとう数理塾の場所"
+            class="absolute inset-0 w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
