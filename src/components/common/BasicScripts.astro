@@ -154,13 +154,16 @@ import { UI } from 'astrowind:config';
     document.querySelector('#header nav')?.classList.add('hidden');
   };
 
-  window.onload = onLoad;
-  window.onpageshow = onPageShow;
-
-  document.addEventListener('astro:after-swap', () => {
+  // View Transitions + 通常ロード両対応
+  const runAll = () => {
     initTheme();
     onLoad();
     onPageShow();
+  };
+
+  // 1回目の読み込み（プリレンダー時も含む）は astro:page-load で実行
+  document.addEventListener('astro:page-load', () => {
+    runAll();
   });
 </script>
 

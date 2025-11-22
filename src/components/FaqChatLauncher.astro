@@ -8,7 +8,9 @@
 const faqChatUrl = 'https://juku-faq.vercel.app/';
 ---
 
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
+<div
+  class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none"
+>
   <!-- チャット本体（iframe） -->
   <div
     id="faq-chat-iframe-wrapper"
@@ -23,7 +25,7 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
   <button
     id="faq-chat-toggle"
     type="button"
-    class="self-end inline-flex items-center gap-2 rounded-full bg-white/95 border border-slate-200 shadow-xl px-4 py-2.5 text-sm font-semibold text-slate-800 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-150"
+    class="self-end inline-flex items-center gap-2 rounded-full bg-white/95 border border-slate-200 shadow-xl px-4 py-2.5 text-sm font-semibold text-slate-800 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-150 pointer-events-auto"
   >
     <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white">
       <svg aria-hidden="true" viewBox="0 0 24 24" class="w-4 h-4">
@@ -48,11 +50,11 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
       const applyState = () => {
         if (isOpen) {
           wrapper.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
-          wrapper.classList.add('opacity-100', 'translate-y-0');
+          wrapper.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
           wrapper.removeAttribute('aria-hidden');
         } else {
           wrapper.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
-          wrapper.classList.remove('opacity-100', 'translate-y-0');
+          wrapper.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
           wrapper.setAttribute('aria-hidden', 'true');
         }
       };
