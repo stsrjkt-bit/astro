@@ -15,6 +15,7 @@
 `src/components/FaqChatLauncher.astro` の親 `<div>` が、スマホ幅で画面下部全体を覆う透明な領域として存在し、`pointer-events: none` が設定されていないため、SchoolInfo セクションのボタン群を含む画面下部の要素へのタップイベントをすべてブロックしている。
 
 **特定の問題箇所**:
+
 - **ファイル**: `src/components/FaqChatLauncher.astro` (11行目)
 - **問題のクラス**: `fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch`
 - **スマホ幅での挙動**: `items-stretch` により子要素が横幅いっぱいに引き延ばされ、`gap-3` の隙間部分も含めて親コンテナが画面下部の広範囲を占有
@@ -25,6 +26,7 @@
 Astro の `ClientRouter` (View Transitions) を使用しているにもかかわらず、`window.onload` のみに依存した初期化を行っているため、ページ初回ロード時にハンバーガーメニューなどのイベントリスナーが正しくアタッチされない可能性がある。
 
 **特定の問題箇所**:
+
 - **ファイル**: `src/components/common/BasicScripts.astro` (157行目)
 - **問題のコード**: `window.onload = onLoad;`
 - **欠落している処理**: `astro:page-load` イベントリスナーがない
@@ -38,21 +40,22 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 **ファイルパス**: `src/components/FaqChatLauncher.astro`
 
 **問題のコード** (11行目):
+
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
+<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0"></div>
 ```
 
 #### 詳細分析
 
-| プロパティ | 値 | スマホ幅での影響 |
-|----------|-----|----------------|
-| `position` | `fixed` | ビューポートに対して固定配置 |
-| `inset-x-0` | `left: 0; right: 0;` | 画面の左右いっぱいに広がる |
-| `bottom-0` | `bottom: 0;` | 画面下部に配置 |
-| `z-index` | `z-50` | 他の要素より手前（ヘッダーは `z-40`） |
-| `flex-direction` | `flex-col` | 縦方向に子要素を配置 |
-| `align-items` | `items-stretch` (スマホ) | **子要素を横幅いっぱいに引き延ばす** |
-| `gap` | `gap-3` (0.75rem) | 子要素間に隙間を作る |
+| プロパティ       | 値                       | スマホ幅での影響                      |
+| ---------------- | ------------------------ | ------------------------------------- |
+| `position`       | `fixed`                  | ビューポートに対して固定配置          |
+| `inset-x-0`      | `left: 0; right: 0;`     | 画面の左右いっぱいに広がる            |
+| `bottom-0`       | `bottom: 0;`             | 画面下部に配置                        |
+| `z-index`        | `z-50`                   | 他の要素より手前（ヘッダーは `z-40`） |
+| `flex-direction` | `flex-col`               | 縦方向に子要素を配置                  |
+| `align-items`    | `items-stretch` (スマホ) | **子要素を横幅いっぱいに引き延ばす**  |
+| `gap`            | `gap-3` (0.75rem)        | 子要素間に隙間を作る                  |
 
 **重要な問題点**:
 
@@ -65,6 +68,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
    - この結果、親コンテナが画面下部の左右全体を覆う形になる
 
 3. **子要素の構成**:
+
 ```
 親コンテナ (pointer-events 未指定、z-50)
 ├── iframe ラッパー (pointer-events-none で初期は非表示)
@@ -73,6 +77,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 ```
 
 **実際のコード** (src/components/FaqChatLauncher.astro 11-36行目):
+
 ```html
 <div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
   <!-- チャット本体（iframe） -->
@@ -81,7 +86,12 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
     class="w-full h-[min(100vh-4rem,720px)] sm:w-[min(100vw-2rem,420px)] sm:h-[min(70vh,560px)] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 bg-white overflow-hidden transition-all duration-200 ease-out translate-y-2 opacity-0 pointer-events-none"
     aria-hidden="true"
   >
-    <iframe src={faqChatUrl} title="さとう数理塾 よくある質問チャット" class="w-full h-full border-0" loading="lazy"></iframe>
+    <iframe
+      src="{faqChatUrl}"
+      title="さとう数理塾 よくある質問チャット"
+      class="w-full h-full border-0"
+      loading="lazy"
+    ></iframe>
   </div>
 
   <!-- 起動ボタン -->
@@ -96,6 +106,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 ```
 
 **どこに配置されているか**:
+
 - `src/layouts/PageLayout.astro` の 32行目で読み込まれている
 - ページ全体のレイアウトに含まれるため、トップページを含むすべてのページで表示される
 
@@ -106,10 +117,11 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 ### 1.2 その他のオーバーレイ要素候補（問題なし）
 
 #### Header コンポーネント
+
 **ファイルパス**: `src/components/widgets/Header.astro` (53行目)
 
 ```html
-<header class="top-0 z-40 ..." data-aw-sticky-header>
+<header class="top-0 z-40 ..." data-aw-sticky-header></header>
 ```
 
 - `z-40` で FaqChatLauncher の `z-50` より下
@@ -118,6 +130,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 - **問題なし**: 画面全体を覆う要素ではない
 
 #### Footer コンポーネント
+
 **ファイルパス**: `src/components/widgets/Footer.astro` (26行目)
 
 ```html
@@ -129,13 +142,15 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 - **問題なし**: クリックをブロックしない
 
 #### Hero/HeroText/Hero2 コンポーネント
-**ファイルパス**: 
+
+**ファイルパス**:
+
 - `src/components/widgets/Hero.astro` (22行目)
 - `src/components/widgets/Hero2.astro` (22行目)
 - `src/components/widgets/HeroText.astro` (25行目)
 
 ```html
-<div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+<div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 ```
 
 - すべて `pointer-events-none` が設定されている
@@ -150,6 +165,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 **ファイルパス**: `src/components/common/ToggleMenu.astro`
 
 **実装** (13行目):
+
 ```html
 <button type="button" class="..." aria-label="Toggle Menu" data-aw-toggle-menu>
   <span class="sr-only">Toggle Menu</span>
@@ -165,6 +181,7 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 **ファイルパス**: `src/components/widgets/Header.astro`
 
 **ハンバーガーボタン** (77-79行目):
+
 ```html
 <div class="flex items-center md:hidden">
   <ToggleMenu />
@@ -172,18 +189,21 @@ Astro の `ClientRouter` (View Transitions) を使用しているにもかかわ
 ```
 
 **ナビゲーションメニュー本体** (81-84行目):
+
 ```html
 <nav
   class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
   aria-label="Main navigation"
->
+></nav>
 ```
 
 **初期状態のクラス**:
+
 - `hidden` クラスが付いている（初期は非表示）
 - `md:flex` により、デスクトップ幅（768px以上）では表示される
 
 **JavaScript による切り替え** (src/components/common/BasicScripts.astro 57-65行目):
+
 ```javascript
 attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
   elem.classList.toggle('expanded');
@@ -197,6 +217,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 ```
 
 **問題点**:
+
 - このイベントリスナーは `window.onload` 後に実行される
 - しかし、ClientRouter (View Transitions) 環境では、`window.onload` が期待通りに発火しない可能性がある
 - 結果として、ハンバーガーボタンをタップしてもイベントリスナーが存在せず、何も起こらない
@@ -210,8 +231,9 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 **ファイルパス**: `src/components/widgets/SchoolInfo.astro`
 
 **セクション全体** (9行目):
+
 ```html
-<section class="bg-white text-black py-20 md:py-28">
+<section class="bg-white text-black py-20 md:py-28"></section>
 ```
 
 - z-index の指定なし
@@ -219,10 +241,11 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 - **問題なし**
 
 **リンクボタン** (46-68行目):
+
 ```html
 <div class="flex flex-col sm:flex-row gap-4 pt-4">
   <a
-    href={calendarUrl}
+    href="{calendarUrl}"
     target="_blank"
     rel="noopener noreferrer"
     class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-black border-2 border-black rounded-full hover:bg-white hover:text-black transition-all duration-200"
@@ -230,7 +253,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
     今月のお休みを Googleカレンダーで見る
   </a>
   <a
-    href={mapUrl}
+    href="{mapUrl}"
     target="_blank"
     rel="noopener noreferrer"
     class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-black bg-white border-2 border-black rounded-full hover:bg-black hover:text-white transition-all duration-200"
@@ -247,6 +270,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 ```
 
 **確認結果**:
+
 - `<a>` タグは正しく `href` を持っている
 - `pointer-events` の明示的な制限はなし
 - z-index の指定もなし
@@ -257,6 +281,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 SchoolInfo セクションは `<section>` として通常のドキュメントフロー内に配置されており、z-index も指定されていない（デフォルトの `auto`）。
 
 一方、FaqChatLauncher の親コンテナは：
+
 - `position: fixed` で画面下部に固定
 - `z-index: 50` で非常に高い
 - 画面下部全体を覆う可能性がある
@@ -264,6 +289,7 @@ SchoolInfo セクションは `<section>` として通常のドキュメント�
 このため、SchoolInfo セクションのボタンの**上に** FaqChatLauncher が重なっており、タップイベントが FaqChatLauncher の親コンテナでキャプチャされてしまうと考えられる。
 
 **レイヤー構造の推定**:
+
 ```
 [上層] z-50: FaqChatLauncher 親コンテナ（pointer-events 未指定）← タップイベントを奪う
   ↑
@@ -281,19 +307,20 @@ SchoolInfo セクションは `<section>` として通常のドキュメント�
 **ファイルパス**: `src/components/FaqChatLauncher.astro` (11行目)
 
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
+<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0"></div>
 ```
 
 **問題となるレスポンシブ設定**:
 
-| クラス | スマホ幅 (< 640px) | タブレット以上 (≥ 640px) |
-|-------|------------------|----------------------|
-| `items-stretch` | ✅ 適用 - 横幅いっぱい | ❌ 無効 |
-| `sm:items-end` | ❌ 無効 | ✅ 適用 - 右端に寄せる |
-| `px-2` | ✅ 適用 | ❌ 無効 |
-| `sm:px-0` | ❌ 無効 | ✅ 適用 |
+| クラス          | スマホ幅 (< 640px)     | タブレット以上 (≥ 640px) |
+| --------------- | ---------------------- | ------------------------ |
+| `items-stretch` | ✅ 適用 - 横幅いっぱい | ❌ 無効                  |
+| `sm:items-end`  | ❌ 無効                | ✅ 適用 - 右端に寄せる   |
+| `px-2`          | ✅ 適用                | ❌ 無効                  |
+| `sm:px-0`       | ❌ 無効                | ✅ 適用                  |
 
 **スマホ幅での実際の挙動**:
+
 1. 親コンテナが `items-stretch` により、子要素を横幅いっぱいに引き延ばそうとする
 2. iframe ラッパーは `w-full` なので画面幅いっぱいに広がる（ただし `pointer-events-none` で初期は無効）
 3. FAQ ボタンは `self-end` で右端に配置される
@@ -302,11 +329,13 @@ SchoolInfo セクションは `<section>` として通常のドキュメント�
 6. 親コンテナには `pointer-events-none` が設定されていないため、この領域がクリックイベントをキャプチャする
 
 **タブレット以上での挙動**:
+
 - `sm:items-end` により子要素が右端に寄せられる
 - 親コンテナの実効的な幅も右端のみに限定される
 - 画面左側や中央の要素はブロックされない
 
 **なぜスマホのみで問題が起こるのか**:
+
 - Tailwind CSS の `items-stretch` は、flexコンテナの子要素を交差軸（この場合は横方向）いっぱいに引き延ばす
 - スマホ幅では `items-stretch` が有効なため、親コンテナが横幅いっぱいに広がる領域を確保する
 - この親コンテナに `pointer-events-none` が設定されていないため、画面下部全体がクリック不可になる
@@ -328,12 +357,14 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 ```
 
 **展開時に追加されるクラス**:
+
 - `h-screen`: ヘッダーが画面の高さいっぱいに広がる
 - `overflow-hidden`: body のスクロールを無効化
 - `expanded`: カスタムクラス
 - `bg-page`: 背景色を設定
 
 **問題点**:
+
 - このイベントリスナー自体が `window.onload` 後に初期化されるため、そもそもハンバーガーボタンが機能しない
 - FaqChatLauncher の問題とは別の、独立した問題
 
@@ -346,6 +377,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 **ファイルパス**: `src/components/common/BasicScripts.astro`
 
 **現在の初期化コード** (43-165行目):
+
 ```javascript
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
   // ... 省略 ...
@@ -378,6 +410,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 #### 🔴 `window.onload` だけに依存している
 
 **問題**:
+
 - `window.onload` は、すべてのリソース（画像、スタイルシートなど）の読み込みが完了してから発火する
 - Astro の `ClientRouter` (View Transitions) を使用している場合、初回ページロードでは `window.onload` が期待通りに発火しないことがある
 - 特に、他のスクリプトが `window.onload` を上書きしていると、BasicScripts の `onLoad` 関数が実行されない
@@ -385,19 +418,23 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 #### 🔴 `astro:page-load` イベントリスナーがない
 
 **問題**:
+
 - Astro の View Transitions を使用する場合、ページ遷移時には `astro:after-swap` が発火するが、**初回ページロード時には発火しない**
 - 初回ページロード時には `astro:page-load` イベントを使用する必要がある
 - 現在のコードには `astro:after-swap` のリスナーはあるが、`astro:page-load` のリスナーがない
 
 **Astro のライフサイクルイベント**:
+
 - `astro:page-load`: 初回ページロード時と、View Transitions による遷移後の両方で発火
 - `astro:after-swap`: View Transitions による遷移時のみ発火（初回ロードでは発火しない）
 
 **現状の問題**:
+
 1. 初回ページロード時: `window.onload` に依存（タイミングの問題あり）
 2. ページ遷移時: `astro:after-swap` で `onLoad()` を再実行（こちらは動作する）
 
 **結果**:
+
 - 初回ページロード時にイベントリスナーが正しくアタッチされない
 - ハンバーガーメニューをタップしても反応しない
 - 一度別ページに遷移して戻ってくると、`astro:after-swap` で再初期化されるため動作する可能性がある
@@ -447,10 +484,12 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
    - SchoolInfo セクション（z-index 未指定 = auto）より確実に手前に配置される
 
 **影響範囲**:
+
 - SchoolInfo セクションの全ボタン（Googleマップ、カレンダー、入塾案内）
 - ページ下部の他のインタラクティブ要素すべて
 
 **なぜスマホのみで発生するのか**:
+
 - `items-stretch` がスマホ幅でのみ適用される（`sm:items-end` は 640px 以上）
 - タブレット以上では `sm:items-end` により子要素が右端に寄せられ、親コンテナの実効領域も右端のみになる
 
@@ -468,6 +507,7 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
    - `astro:after-swap` でイベントリスナーが再アタッチされるため、遷移後は動作する可能性がある
 
 **影響範囲**:
+
 - ハンバーガーメニューの開閉
 - テーマ切り替えボタン
 - その他 BasicScripts で管理されるすべてのインタラクティブ要素
@@ -476,11 +516,11 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 
 ### 6.2 コード上の根拠まとめ
 
-| 問題箇所 | ファイルパス | 行番号 | 問題のあるクラス/コード | 影響度 |
-|---------|------------|-------|---------------------|-------|
-| FaqChatLauncher 親コンテナ | `src/components/FaqChatLauncher.astro` | 11 | `fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end` | ⭐️⭐️⭐️⭐️⭐️ |
-| BasicScripts 初期化 | `src/components/common/BasicScripts.astro` | 157 | `window.onload = onLoad;` | ⭐️⭐️⭐️⭐️ |
-| astro:page-load の欠落 | `src/components/common/BasicScripts.astro` | 160-164 | `document.addEventListener('astro:after-swap', ...)` のみ | ⭐️⭐️⭐️⭐️ |
+| 問題箇所                   | ファイルパス                               | 行番号  | 問題のあるクラス/コード                                                  | 影響度          |
+| -------------------------- | ------------------------------------------ | ------- | ------------------------------------------------------------------------ | --------------- |
+| FaqChatLauncher 親コンテナ | `src/components/FaqChatLauncher.astro`     | 11      | `fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end` | ⭐️⭐️⭐️⭐️⭐️ |
+| BasicScripts 初期化        | `src/components/common/BasicScripts.astro` | 157     | `window.onload = onLoad;`                                                | ⭐️⭐️⭐️⭐️    |
+| astro:page-load の欠落     | `src/components/common/BasicScripts.astro` | 160-164 | `document.addEventListener('astro:after-swap', ...)` のみ                | ⭐️⭐️⭐️⭐️    |
 
 ---
 
@@ -491,39 +531,39 @@ attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
 **ファイル**: `src/components/FaqChatLauncher.astro` (11行目)
 
 **現在**:
+
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
+<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0"></div>
 ```
 
 **修正後**:
+
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none">
+<div
+  class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none"
+></div>
 ```
 
 **さらに、子要素に `pointer-events-auto` を追加**:
 
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none">
+<div
+  class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none"
+>
   <!-- チャット本体（iframe）: pointer-events-none のままでOK -->
-  <div
-    id="faq-chat-iframe-wrapper"
-    class="w-full ... pointer-events-none"
-  >
-    <iframe src={faqChatUrl} ...></iframe>
+  <div id="faq-chat-iframe-wrapper" class="w-full ... pointer-events-none">
+    <iframe src="{faqChatUrl}" ...></iframe>
   </div>
 
   <!-- 起動ボタン: pointer-events-auto を追加 -->
-  <button
-    id="faq-chat-toggle"
-    type="button"
-    class="self-end ... pointer-events-auto"
-  >
+  <button id="faq-chat-toggle" type="button" class="self-end ... pointer-events-auto">
     <!-- ボタンの中身 -->
   </button>
 </div>
 ```
 
 **修正後の JavaScript** (FaqChatLauncher.astro 48-58行目):
+
 ```javascript
 const applyState = () => {
   if (isOpen) {
@@ -539,6 +579,7 @@ const applyState = () => {
 ```
 
 **効果**:
+
 - 親コンテナがクリックイベントを通過させる（`pointer-events-none`）
 - ボタンと開いた iframe だけがクリック可能（`pointer-events-auto`）
 - SchoolInfo セクションのボタンにタップイベントが届くようになる
@@ -550,6 +591,7 @@ const applyState = () => {
 **ファイル**: `src/components/common/BasicScripts.astro` (157-164行目)
 
 **現在**:
+
 ```javascript
 window.onload = onLoad;
 window.onpageshow = onPageShow;
@@ -562,6 +604,7 @@ document.addEventListener('astro:after-swap', () => {
 ```
 
 **修正後**:
+
 ```javascript
 // DOMContentLoaded を使用（window.onload より早く、より確実）
 if (document.readyState === 'loading') {
@@ -581,6 +624,7 @@ document.addEventListener('astro:page-load', () => {
 ```
 
 **効果**:
+
 - 初回ページロード時に確実にイベントリスナーがアタッチされる
 - View Transitions による遷移後も正しく動作する
 - `DOMContentLoaded` を使用することで、`window.onload` より早く実行される
@@ -594,27 +638,33 @@ document.addEventListener('astro:page-load', () => {
 **ファイル**: `src/components/FaqChatLauncher.astro` (11行目)
 
 **現在**:
+
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0">
+<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0"></div>
 ```
 
 **修正後**:
+
 ```html
-<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-end gap-3 px-2 sm:px-0">
+<div class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-end gap-3 px-2 sm:px-0"></div>
 ```
 
 **変更点**:
+
 - `items-stretch` を削除し、すべての画面幅で `items-end` を使用
 - スマホ幅でも子要素が右端に寄せられる
 
 **追加の調整**:
+
 - iframe ラッパーの幅を調整する必要があるかもしれない（現在は `w-full`）
 
 **効果**:
+
 - 親コンテナの実効領域が右端のみになる
 - 画面中央や左側の要素をブロックしなくなる
 
 **欠点**:
+
 - スマホ幅で iframe が画面いっぱいに表示されなくなる（デザインの変更が必要かもしれない）
 
 ---
@@ -646,7 +696,7 @@ import { ClientRouter } from 'astro:transitions';
 
 // ...
 
-<ClientRouter fallback="swap" />
+<ClientRouter fallback="swap" />;
 ```
 
 Astro の View Transitions が有効になっており、ページ遷移時に完全なページリロードではなく、部分的な DOM 更新が行われる。このため、従来の `window.onload` だけに依存した初期化は不適切。
@@ -656,6 +706,7 @@ Astro の View Transitions が有効になっており、ページ遷移時に�
 **ファイルパス**: `tailwind.config.js`
 
 Tailwind CSS のデフォルトブレークポイント:
+
 - `sm`: 640px 以上
 - `md`: 768px 以上
 - `lg`: 1024px 以上
