@@ -1,6 +1,6 @@
-import { c as createComponent, r as renderComponent, a as renderTemplate } from '../chunks/astro/server_CmjTqM-c.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate } from '../chunks/astro/server_7FE2qpej.mjs';
 import 'kleur/colors';
-import { $ as $$PageLayout } from '../chunks/PageLayout_D8B0VJ2z.mjs';
+import { $ as $$PageLayout } from '../chunks/PageLayout_BE-pmHuj.mjs';
 import { jsxs, jsx } from 'react/jsx-runtime';
 import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronDown, CheckCircle2, Atom, FlaskConical, Calculator, Layers, BrainCircuit, MessageCircle, BookOpen, GraduationCap, HeartHandshake, Mail } from 'lucide-react';

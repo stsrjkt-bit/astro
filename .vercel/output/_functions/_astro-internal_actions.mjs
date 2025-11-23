@@ -1,9 +1,9 @@
-import './chunks/_astro_actions_C5xhioEB.mjs';
+import './chunks/_astro_actions_qV6r5rZa.mjs';
 import * as z from 'zod';
 import { Resend } from 'resend';
-import { d as defineAction } from './chunks/server_9ASqhGUN.mjs';
+import { d as defineAction } from './chunks/server_Bs8bwSnh.mjs';
 
-const resend = new Resend("re_Vh1hQ1hJ_6qsHauoFFv5MoCc9iFrKo54x");
+const resend = new Resend(undefined                              );
 const FROM_EMAIL = "onboarding@resend.dev";
 const ADMIN_EMAIL = "stsrjk@gmail.com";
 const server = {
