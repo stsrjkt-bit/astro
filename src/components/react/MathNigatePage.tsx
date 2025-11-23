@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Calendar, Clock, ArrowRight, ChevronDown, 
   AlertCircle, HeartHandshake, BrainCircuit, LineChart,
-  MessageCircle, GraduationCap
+  MessageCircle, GraduationCap, Mail
 } from 'lucide-react';
 
 // --- ブランドカラー定義 (トップページと共通) ---
@@ -499,20 +499,38 @@ export default function MathNigatePage() {
                 </p>
               </div>
 
-              <div className="flex flex-col md:flex-row justify-center gap-6">
-                {/* TODO: 無料体験・学習相談フォームのページができたら、このボタンのhrefを実URLに差し替える */}
-                <a href="#" className="group flex items-center justify-center gap-3 px-8 py-5 bg-[#009DE0] text-white rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                  <span>無料体験・相談に申し込む</span>
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </a>
-                
-                <a 
-                  href="https://lin.ee/blKCpXC" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-3 px-8 py-5 bg-[#06C755] text-white rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              {/* Updated CTA buttons to match Top Page style (Split Free Trial & Consultation) */}
+              <div className="flex flex-col md:flex-row gap-4 justify-center mt-10 flex-wrap">
+                {/* Free Trial Button */}
+                <a
+                  href="#"
+                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
                 >
-                  <MessageCircle className="fill-white text-[#06C755]" />
+                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
+                  <Mail size={20} />
+                  無料体験に申し込む
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                {/* Consultation Button */}
+                <a
+                  href="#"
+                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                >
+                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
+                  <MessageCircle size={20} />
+                  学習相談に申し込む
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                {/* LINE Button */}
+                <a
+                  href="https://lin.ee/blKCpXC"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] text-white rounded-full shadow-lg hover:bg-[#05b04d] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                >
+                  <MessageCircle size={20} className="fill-white text-[#06C755]" />
                   <span>LINEで気軽に質問する</span>
                 </a>
               </div>
