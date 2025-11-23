@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, Calendar, Clock, ArrowRight, Menu, X, ChevronRight, ExternalLink, ChevronLeft, CheckCircle2, MessageCircle, GraduationCap, ChevronDown, Mail, FileText, AlertCircle, Phone, Home } from 'lucide-react';
+import { Menu, X, CheckCircle2, FileText, AlertCircle, Phone } from 'lucide-react';
 
 // --- ブランドカラー定義 ---
 // Primary: #009DE0, Secondary: #D6DE26, Text: #334455, Base: #F8FAFC
 
 // --- 共通コンポーネント: アニメーション (Reveal) ---
-const Reveal = ({ children, delay = 0, className = "" }) => {
+const Reveal = ({ children, delay = 0, className = '' }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
   useEffect(() => {
@@ -16,10 +16,12 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => { if (ref.current) observer.unobserve(ref.current); };
+    return () => {
+      if (ref.current) observer.unobserve(ref.current);
+    };
   }, []);
 
   return (
@@ -49,15 +51,15 @@ export default function App() {
 
   // SEO: 検索除け (noindex) の設定
   useEffect(() => {
-    document.title = "ご利用の手引 | さとう数理塾";
+    document.title = 'ご利用の手引 | さとう数理塾';
     // 実際の運用環境ではheadタグ等に直接記述推奨ですが、SPA動作確認用に動的追加します
     const meta = document.createElement('meta');
-    meta.name = "robots";
-    meta.content = "noindex";
+    meta.name = 'robots';
+    meta.content = 'noindex';
     document.head.appendChild(meta);
     return () => {
       // クリーンアップ
-      if(document.head.contains(meta)) document.head.removeChild(meta);
+      if (document.head.contains(meta)) document.head.removeChild(meta);
     };
   }, []);
 
@@ -74,35 +76,47 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 overflow-x-hidden relative">
-      
       {/* 背景パターン */}
-      <div className="fixed inset-0 z-[-1] pointer-events-none opacity-40" 
-           style={{
-             backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
-             backgroundSize: '24px 24px'
-           }}>
-      </div>
+      <div
+        className="fixed inset-0 z-[-1] pointer-events-none opacity-40"
+        style={{
+          backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      ></div>
 
       {/* ===========================================
         HEADER
         ===========================================
       */}
-      <header className={`fixed w-full top-0 z-50 transition-all duration-500 border-b ${
-        scrollPosition > 50 
-          ? 'bg-[#F8FAFC]/95 backdrop-blur-md border-[#009DE0]/10 py-2 shadow-sm' 
-          : 'bg-transparent border-transparent py-4'
-      }`}>
+      <header
+        className={`fixed w-full top-0 z-50 transition-all duration-500 border-b ${
+          scrollPosition > 50
+            ? 'bg-[#F8FAFC]/95 backdrop-blur-md border-[#009DE0]/10 py-2 shadow-sm'
+            : 'bg-transparent border-transparent py-4'
+        }`}
+      >
         <div className="max-w-5xl mx-auto px-6 h-12 md:h-14 flex items-center justify-between">
           <h1 className="flex items-center">
             <a href="/" className="block w-32 md:w-40 transition-opacity hover:opacity-80">
-              <img src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo" alt="さとう数理塾" className="w-full h-auto object-contain" width={160} height={40} />
+              <img
+                src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo"
+                alt="さとう数理塾"
+                className="w-full h-auto object-contain"
+                width={160}
+                height={40}
+              />
             </a>
           </h1>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex gap-8">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="text-sm text-[#334455]/70 hover:text-[#009DE0] transition-colors tracking-wider relative group py-2 font-medium">
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm text-[#334455]/70 hover:text-[#009DE0] transition-colors tracking-wider relative group py-2 font-medium"
+              >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#009DE0] transition-all duration-300 group-hover:w-full"></span>
               </a>
@@ -116,10 +130,16 @@ export default function App() {
         </div>
 
         {/* Mobile Nav Dropdown */}
-        <div className={`md:hidden absolute top-full left-0 w-full bg-[#F8FAFC] border-b border-[#009DE0]/10 shadow-sm overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div
+          className={`md:hidden absolute top-full left-0 w-full bg-[#F8FAFC] border-b border-[#009DE0]/10 shadow-sm overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}
+        >
           <nav className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="text-[#334455] py-2 border-b border-gray-200 hover:text-[#009DE0] hover:pl-2 transition-all font-medium">
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[#334455] py-2 border-b border-gray-200 hover:text-[#009DE0] hover:pl-2 transition-all font-medium"
+              >
                 {link.name}
               </a>
             ))}
@@ -133,19 +153,18 @@ export default function App() {
       */}
       <main className="pt-24 pb-20 px-4 md:px-6 w-full">
         <div className="max-w-3xl mx-auto">
-          
           {/* Page Title & Intro */}
           <Reveal>
             <div className="mb-12 text-center md:text-left">
               <div className="inline-flex items-center gap-2 text-xs font-bold text-[#009DE0] tracking-widest mb-3 uppercase">
                 <FileText size={14} /> Guide
               </div>
-              <h1 className="font-serif text-3xl md:text-4xl text-[#334455] font-bold mb-6">
-                ご利用の手引
-              </h1>
+              <h1 className="font-serif text-3xl md:text-4xl text-[#334455] font-bold mb-6">ご利用の手引</h1>
               <p className="text-[#334455]/80 leading-relaxed text-sm md:text-base">
-                さとう数理塾をご利用いただきありがとうございます。<br className="hidden md:inline" />
-                本書は、保護者様・生徒さんに安心して通塾していただくためのルールとお願いをまとめたものです。<br className="hidden md:inline" />
+                さとう数理塾をご利用いただきありがとうございます。
+                <br className="hidden md:inline" />
+                本書は、保護者様・生徒さんに安心して通塾していただくためのルールとお願いをまとめたものです。
+                <br className="hidden md:inline" />
                 ご一読のうえ、ご家庭でも共有いただけますと幸いです。
               </p>
             </div>
@@ -153,7 +172,6 @@ export default function App() {
 
           {/* Document Content */}
           <div className="space-y-12">
-            
             {/* Section 1 */}
             <Reveal delay={100}>
               <section className="bg-white p-8 md:p-10 rounded-xl shadow-sm border border-[#009DE0]/10">
@@ -209,8 +227,10 @@ export default function App() {
                       ご入室の時間について
                     </h3>
                     <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
-                      授業開始前は清掃等の準備を行っております。<br/>
-                      そのため、<span className="font-bold text-[#009DE0]">開店時間以降にご入室</span>いただきますよう、お願いいたします。
+                      授業開始前は清掃等の準備を行っております。
+                      <br />
+                      そのため、<span className="font-bold text-[#009DE0]">開店時間以降にご入室</span>
+                      いただきますよう、お願いいたします。
                     </p>
                   </div>
 
@@ -221,7 +241,9 @@ export default function App() {
                       自転車でお越しの場合
                     </h3>
                     <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
-                      自転車は、教室に向かって<span className="font-bold border-b-2 border-[#D6DE26]/50">左側の壁際に整列して</span>お停めください。
+                      自転車は、教室に向かって
+                      <span className="font-bold border-b-2 border-[#D6DE26]/50">左側の壁際に整列して</span>
+                      お停めください。
                     </p>
                   </div>
 
@@ -246,7 +268,7 @@ export default function App() {
                   <span className="text-3xl opacity-20 font-sans font-black select-none text-[#009DE0]">02</span>
                   体調管理と感染症対策
                 </h2>
-                
+
                 <div className="space-y-10">
                   <div>
                     <h3 className="text-lg font-bold text-[#334455] mb-4 flex items-center gap-2">
@@ -254,7 +276,9 @@ export default function App() {
                       体調不良時の出欠について
                     </h3>
                     <div className="bg-[#F0F7FF] p-5 rounded-lg border border-[#009DE0]/10 text-sm text-[#334455] leading-relaxed">
-                      <p className="mb-2 font-bold">発熱・咳・のどの痛み・強いだるさなど、体調がすぐれない場合は無理をせず欠席をお願いいたします。</p>
+                      <p className="mb-2 font-bold">
+                        発熱・咳・のどの痛み・強いだるさなど、体調がすぐれない場合は無理をせず欠席をお願いいたします。
+                      </p>
                       <p className="opacity-80">感染症拡大防止のためにも、ご理解とご協力をお願いいたします。</p>
                     </div>
                   </div>
@@ -289,26 +313,41 @@ export default function App() {
                   {/* Contact Box */}
                   <div className="bg-[#334455] text-white p-6 md:p-8 rounded-xl shadow-md relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-[#009DE0] rounded-full blur-3xl opacity-20 pointer-events-none"></div>
-                    
+
                     <h3 className="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
                       <Phone size={20} className="text-[#D6DE26]" />
                       連絡先
                     </h3>
-                    
+
                     <div className="grid md:grid-cols-2 gap-8 relative z-10">
                       <div>
-                        <span className="block text-[10px] font-bold text-white/50 tracking-widest uppercase mb-2">Emergency</span>
+                        <span className="block text-[10px] font-bold text-white/50 tracking-widest uppercase mb-2">
+                          Emergency
+                        </span>
                         <p className="text-xs font-bold text-white/80 mb-1">緊急のご連絡先</p>
-                        <a href="tel:080-8108-0767" className="text-2xl font-bold font-sans tracking-wide hover:text-[#009DE0] transition-colors">
+                        <a
+                          href="tel:080-8108-0767"
+                          className="text-2xl font-bold font-sans tracking-wide hover:text-[#009DE0] transition-colors"
+                        >
                           080-8108-0767
                         </a>
                       </div>
                       <div>
-                         <span className="block text-[10px] font-bold text-white/50 tracking-widest uppercase mb-2">Inquiry</span>
+                        <span className="block text-[10px] font-bold text-white/50 tracking-widest uppercase mb-2">
+                          Inquiry
+                        </span>
                         <p className="text-xs font-bold text-white/80 mb-1">緊急でないお問い合わせ</p>
                         <p className="text-sm text-white/90 leading-relaxed">
-                          LINEまたはメールにて<br/>お問い合わせください。<br/>
-                          <a href="mailto:stsrjk@gmail.com" className="text-[#009DE0] underline decoration-white/20 underline-offset-4 mt-1 inline-block">stsrjk@gmail.com</a>
+                          LINEまたはメールにて
+                          <br />
+                          お問い合わせください。
+                          <br />
+                          <a
+                            href="mailto:stsrjk@gmail.com"
+                            className="text-[#009DE0] underline decoration-white/20 underline-offset-4 mt-1 inline-block"
+                          >
+                            stsrjk@gmail.com
+                          </a>
                         </p>
                       </div>
                     </div>
@@ -336,11 +375,11 @@ export default function App() {
                       以下の内容につきましては、まずはご家庭でお子様ご本人にご確認ください。
                     </p>
                     <div className="bg-[#F8FAFC] p-6 rounded-lg border border-gray-100 mb-6">
-                       <ul className="space-y-3">
+                      <ul className="space-y-3">
                         {[
-                          "きちんと勉強できているか",
-                          "学校や塾の成績表を見せているか",
-                          "困っていることを先生に相談しているか"
+                          'きちんと勉強できているか',
+                          '学校や塾の成績表を見せているか',
+                          '困っていることを先生に相談しているか',
                         ].map((item, i) => (
                           <li key={i} className="flex items-center gap-3 text-sm text-[#334455] font-medium">
                             <div className="w-5 h-5 rounded-full border-2 border-[#009DE0]/20 flex items-center justify-center bg-white shrink-0">
@@ -352,7 +391,8 @@ export default function App() {
                       </ul>
                     </div>
                     <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
-                      当塾では、生徒さんに「勉強は強制しないけれど、自分で考えて動いてみよう」というスタンスを伝えています。<br />
+                      当塾では、生徒さんに「勉強は強制しないけれど、自分で考えて動いてみよう」というスタンスを伝えています。
+                      <br />
                       そのため、お子様を飛び越えて、塾から一方的に保護者様に指導状況等をお伝えすることは控えております。何とぞご理解ください。
                     </p>
                   </div>
@@ -367,42 +407,44 @@ export default function App() {
                   <span className="text-3xl opacity-20 font-sans font-black select-none text-[#009DE0]">04</span>
                   その他のご案内
                 </h2>
-                
-                 <div className="space-y-8">
-                   <div className="grid md:grid-cols-2 gap-8">
-                     <div>
-                        <h3 className="text-lg font-bold text-[#334455] mb-3 flex items-center gap-2">
-                          <span className="w-1.5 h-6 bg-[#D6DE26] rounded-full"></span>
-                          臨時休業について
-                        </h3>
-                        <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
-                          台風や大雪、講師の急病などによる臨時休業は、メールおよび教室入口の掲示にてお知らせいたします。
-                        </p>
-                     </div>
 
-                     <div>
-                        <h3 className="text-lg font-bold text-[#334455] mb-3 flex items-center gap-2">
-                          <span className="w-1.5 h-6 bg-[#D6DE26] rounded-full"></span>
-                          退塾について
-                        </h3>
-                        <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
-                          退塾をご希望の際は、メール（<a href="mailto:stsrjk@gmail.com" className="text-[#009DE0] underline">stsrjk@gmail.com</a>）にてご連絡をお願いいたします。
-                        </p>
-                     </div>
-                   </div>
-                   
-                   <div className="pt-8 border-t border-dashed border-gray-200 text-center mt-8">
-                      <p className="text-[#334455] font-serif font-medium text-lg mb-8">
-                        これまでのご通塾に、心より感謝申し上げます。
+                <div className="space-y-8">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-lg font-bold text-[#334455] mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-6 bg-[#D6DE26] rounded-full"></span>
+                        臨時休業について
+                      </h3>
+                      <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
+                        台風や大雪、講師の急病などによる臨時休業は、メールおよび教室入口の掲示にてお知らせいたします。
                       </p>
-                      <p className="text-[#334455]/80 text-sm mb-2">
-                        以上となります。ご不明な点がございましたら、どうぞ遠慮なくお問い合わせください。
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-bold text-[#334455] mb-3 flex items-center gap-2">
+                        <span className="w-1.5 h-6 bg-[#D6DE26] rounded-full"></span>
+                        退塾について
+                      </h3>
+                      <p className="text-[#334455]/80 text-sm leading-relaxed pl-4 border-l border-gray-100">
+                        退塾をご希望の際は、メール（
+                        <a href="mailto:stsrjk@gmail.com" className="text-[#009DE0] underline">
+                          stsrjk@gmail.com
+                        </a>
+                        ）にてご連絡をお願いいたします。
                       </p>
-                      <p className="text-[#334455] font-bold text-sm">
-                        さとう数理塾　佐藤
-                      </p>
-                   </div>
-                 </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-8 border-t border-dashed border-gray-200 text-center mt-8">
+                    <p className="text-[#334455] font-serif font-medium text-lg mb-8">
+                      これまでのご通塾に、心より感謝申し上げます。
+                    </p>
+                    <p className="text-[#334455]/80 text-sm mb-2">
+                      以上となります。ご不明な点がございましたら、どうぞ遠慮なくお問い合わせください。
+                    </p>
+                    <p className="text-[#334455] font-bold text-sm">さとう数理塾 佐藤</p>
+                  </div>
+                </div>
               </section>
             </Reveal>
 
@@ -410,7 +452,6 @@ export default function App() {
             <p className="text-center text-xs text-[#334455]/40 mt-12 pb-8">
               ※ 本ページの内容は随時見直し・更新する可能性があります。（最終更新: 2025年11月）
             </p>
-
           </div>
         </div>
       </main>
@@ -423,15 +464,19 @@ export default function App() {
         <Reveal>
           <div className="max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
             <div className="mb-4 w-32 md:w-40">
-                <img src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo" alt="さとう数理塾" className="w-full h-auto object-contain opacity-80" width={160} height={40} />
+              <img
+                src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo"
+                alt="さとう数理塾"
+                className="w-full h-auto object-contain opacity-80"
+                width={160}
+                height={40}
+              />
             </div>
-            
+
             <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 text-xs tracking-wider mb-8 font-medium">
               <span>〒410-0052 静岡県沼津市沢田町1-3 牧原ビル102</span>
             </div>
-            <p className="text-[10px] tracking-widest opacity-60">
-              © 2016-2025 さとう数理塾
-            </p>
+            <p className="text-[10px] tracking-widest opacity-60">© 2016-2025 さとう数理塾</p>
           </div>
         </Reveal>
       </footer>
