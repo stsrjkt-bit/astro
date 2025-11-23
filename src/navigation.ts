@@ -14,6 +14,10 @@ export const headerData = {
       text: '理系大学をめざすあなたへ',
       href: getPermalink('/rikei'),
     },
+    {
+      text: '入塾までの流れ',
+      href: getPermalink('/join'),
+    },
   ],
   actions: [],
 };
