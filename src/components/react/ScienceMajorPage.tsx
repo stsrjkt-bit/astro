@@ -25,9 +25,11 @@ const SECTIONS = [
 // --- アニメーションコンポーネント (共通) ---
 const Reveal = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hasHydrated, setHasHydrated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setHasHydrated(true);
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,14 +49,20 @@ const Reveal = ({ children, delay = 0, className = "" }: { children: React.React
     };
   }, []);
 
+  const baseClasses = "transition-all duration-1000 ease-out transform";
+  const visibleClasses = "opacity-100 translate-y-0 blur-0 scale-100";
+  const hiddenClasses = "opacity-0 translate-y-8 blur-sm scale-[0.98]";
+
+  const animationClasses = !hasHydrated
+    ? visibleClasses
+    : isVisible
+      ? visibleClasses
+      : hiddenClasses;
+
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out transform ${
-        isVisible 
-          ? 'opacity-100 translate-y-0 blur-0 scale-100' 
-          : 'opacity-0 translate-y-8 blur-sm scale-[0.98]'
-      } ${className}`}
+      className={`${baseClasses} ${animationClasses} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
