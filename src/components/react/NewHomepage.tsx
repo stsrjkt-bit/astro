@@ -178,11 +178,11 @@ export default function NewHomepage() {
   // Removed navLinks
 
   const galleryImages = [
-    { src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1000&q=80", alt: "明るく清潔感のある教室全体の様子" },
-    { src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80", alt: "集中できる自習スペース" },
-    { src: "https://images.unsplash.com/photo-1509062522246-37559cc792f9?auto=format&fit=crop&w=1000&q=80", alt: "1対1の個別指導を行うデスク" },
-    { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1000&q=80", alt: "豊富な参考書が並ぶ本棚" },
-    { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80", alt: "オンライン学習・AI教材用のタブレット端末" },
+    { src: "https://lh3.googleusercontent.com/d/1fA4R4476PQrHyip-NootpyjEO9V6umGe=s0", alt: "明るく清潔感のある教室全体の様子" },
+    { src: "https://lh3.googleusercontent.com/d/18WWMFN5jCNy_k5eM8x6bDSDo9qJI2OKr=s0", alt: "集中できる自習スペース" },
+    { src: "https://lh3.googleusercontent.com/d/1dYZaS_o8O3IrbwioJlWPkJcEbgT7b-VZ=s0", alt: "1対1の個別指導を行うデスク" },
+    { src: "https://lh3.googleusercontent.com/d/1YZemnybxdBF7zgX4bGrQvnvTYCKqWmlM=s0", alt: "豊富な参考書が並ぶ本棚" },
+    { src: "https://lh3.googleusercontent.com/d/1NEyLD4KY4MIpD8E8pJF58BGt37qavNEI=s0", alt: "オンライン学習・AI教材用のタブレット端末" },
   ];
 
   return (

@@ -74,7 +74,7 @@ export default defineConfig({
   ],
 
   image: {
-    domains: ['cdn.pixabay.com', 'images.unsplash.com', 'placehold.co'],
+    domains: ['cdn.pixabay.com', 'images.unsplash.com', 'placehold.co', 'lh3.googleusercontent.com'],
   },
 
   markdown: {
