@@ -3,7 +3,7 @@ import * as z from 'zod';
 import { Resend } from 'resend';
 import { d as defineAction } from './chunks/server_9ASqhGUN.mjs';
 
-const resend = new Resend("re_123456789");
+const resend = new Resend("re_Vh1hQ1hJ_6qsHauoFFv5MoCc9iFrKo54x");
 const FROM_EMAIL = "onboarding@resend.dev";
 const ADMIN_EMAIL = "stsrjk@gmail.com";
 const server = {
@@ -21,7 +21,7 @@ const server = {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: ADMIN_EMAIL,
-          reply_to: input.email,
+          replyTo: input.email,
           subject: `【予約あり】学習相談: ${input.name}様 (${input.reservationDate})`,
           html: `
             <h2>Webサイトから学習相談の予約が入りました</h2>
@@ -39,7 +39,7 @@ const server = {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: input.email,
-          reply_to: ADMIN_EMAIL,
+          replyTo: ADMIN_EMAIL,
           subject: `【さとう数理塾】無料相談のご予約を承りました`,
           html: `
             <p>${input.name} 様</p>

@@ -61,7 +61,7 @@ function ConsultationForm() {
     const reservationDateTime = `${selectedDate} ${selectedTime}`;
     formData.append("reservationDate", reservationDateTime);
     try {
-      const { data, error } = await actions.sendConsultation(formData);
+      const { error } = await actions.sendConsultation(formData);
       if (error) {
         setSubmitStatus("error");
         setErrorMessage(error.message || "送信中にエラーが発生しました。");
@@ -70,6 +70,7 @@ function ConsultationForm() {
         e.target.reset();
       }
     } catch (err) {
+      console.error(err);
       setSubmitStatus("error");
       setErrorMessage("予期せぬエラーが発生しました。");
     } finally {
@@ -163,33 +164,40 @@ function ConsultationForm() {
               );
             }) })
           ] }),
-          /* @__PURE__ */ jsxs("div", { className: `transition-all duration-500 ${selectedDate ? "opacity-100" : "opacity-50 pointer-events-none blur-sm"}`, children: [
-            /* @__PURE__ */ jsxs("p", { className: "text-base text-[#334455] mb-4 font-bold flex items-center gap-2", children: [
-              /* @__PURE__ */ jsx("span", { className: "bg-[#334455] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm", children: "2" }),
-              "時間を選ぶ",
-              /* @__PURE__ */ jsx(Clock, { size: 18, className: "text-[#334455]/50" })
-            ] }),
-            /* @__PURE__ */ jsx("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3", children: TIME_SLOTS.map((time, index) => {
-              const isSelected = selectedTime === time;
-              return /* @__PURE__ */ jsx(
-                "button",
-                {
-                  type: "button",
-                  onClick: () => setSelectedTime(time),
-                  className: `py-3 px-1 rounded-lg text-sm font-medium border-2 transition-all ${isSelected ? "bg-[#D6DE26] text-[#334455] border-[#D6DE26] font-bold shadow-sm" : "bg-white text-[#334455] border-[#334455]/10 hover:bg-[#D6DE26]/20 hover:border-[#D6DE26]/50"}`,
-                  children: time
-                },
-                index
-              );
-            }) })
-          ] }),
+          /* @__PURE__ */ jsxs(
+            "div",
+            {
+              className: `transition-all duration-500 ${selectedDate ? "opacity-100" : "opacity-50 pointer-events-none blur-sm"}`,
+              children: [
+                /* @__PURE__ */ jsxs("p", { className: "text-base text-[#334455] mb-4 font-bold flex items-center gap-2", children: [
+                  /* @__PURE__ */ jsx("span", { className: "bg-[#334455] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm", children: "2" }),
+                  "時間を選ぶ",
+                  /* @__PURE__ */ jsx(Clock, { size: 18, className: "text-[#334455]/50" })
+                ] }),
+                /* @__PURE__ */ jsx("div", { className: "grid grid-cols-2 sm:grid-cols-4 gap-3", children: TIME_SLOTS.map((time, index) => {
+                  const isSelected = selectedTime === time;
+                  return /* @__PURE__ */ jsx(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => setSelectedTime(time),
+                      className: `py-3 px-1 rounded-lg text-sm font-medium border-2 transition-all ${isSelected ? "bg-[#D6DE26] text-[#334455] border-[#D6DE26] font-bold shadow-sm" : "bg-white text-[#334455] border-[#334455]/10 hover:bg-[#D6DE26]/20 hover:border-[#D6DE26]/50"}`,
+                      children: time
+                    },
+                    index
+                  );
+                }) })
+              ]
+            }
+          ),
           selectedDate && selectedTime && /* @__PURE__ */ jsxs("div", { className: "mt-8 p-6 bg-[#009DE0]/5 border-2 border-[#009DE0] rounded-xl flex flex-col md:flex-row items-center justify-center gap-4 animate-fade-in", children: [
             /* @__PURE__ */ jsx(CheckCircle2, { size: 32, className: "text-[#009DE0]" }),
             /* @__PURE__ */ jsxs("div", { className: "text-center md:text-left", children: [
               /* @__PURE__ */ jsx("p", { className: "text-sm text-[#334455]/70 font-bold mb-1", children: "選択中の日時" }),
               /* @__PURE__ */ jsxs("span", { className: "text-[#334455] font-bold text-xl", children: [
                 /* @__PURE__ */ jsx("span", { className: "text-[#009DE0]", children: selectedDate }),
-                " の ",
+                " の",
+                " ",
                 /* @__PURE__ */ jsx("span", { className: "text-[#009DE0]", children: selectedTime })
               ] })
             ] })
@@ -198,62 +206,138 @@ function ConsultationForm() {
         /* @__PURE__ */ jsxs("div", { className: "space-y-8 px-2", children: [
           /* @__PURE__ */ jsxs("div", { className: "grid md:grid-cols-2 gap-8", children: [
             /* @__PURE__ */ jsxs("div", { className: "group", children: [
-              /* @__PURE__ */ jsxs("label", { htmlFor: "name", className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors", children: [
-                /* @__PURE__ */ jsx(User, { size: 20, className: "text-[#009DE0]" }),
-                "お名前 ",
-                /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
-              ] }),
-              /* @__PURE__ */ jsx("input", { type: "text", name: "name", id: "name", required: true, placeholder: "例：佐藤 太郎", className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none transition-all shadow-sm" })
+              /* @__PURE__ */ jsxs(
+                "label",
+                {
+                  htmlFor: "name",
+                  className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors",
+                  children: [
+                    /* @__PURE__ */ jsx(User, { size: 20, className: "text-[#009DE0]" }),
+                    "お名前 ",
+                    /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsx(
+                "input",
+                {
+                  type: "text",
+                  name: "name",
+                  id: "name",
+                  required: true,
+                  placeholder: "例：佐藤 太郎",
+                  className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none transition-all shadow-sm"
+                }
+              )
             ] }),
             /* @__PURE__ */ jsxs("div", { className: "group", children: [
-              /* @__PURE__ */ jsxs("label", { htmlFor: "grade", className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors", children: [
-                /* @__PURE__ */ jsx(GraduationCap, { size: 20, className: "text-[#009DE0]" }),
-                "学年 ",
-                /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
-              ] }),
+              /* @__PURE__ */ jsxs(
+                "label",
+                {
+                  htmlFor: "grade",
+                  className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors",
+                  children: [
+                    /* @__PURE__ */ jsx(GraduationCap, { size: 20, className: "text-[#009DE0]" }),
+                    "学年 ",
+                    /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
+                  ]
+                }
+              ),
               /* @__PURE__ */ jsxs("div", { className: "relative", children: [
-                /* @__PURE__ */ jsxs("select", { name: "grade", id: "grade", required: true, defaultValue: "", className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none appearance-none cursor-pointer shadow-sm", children: [
-                  /* @__PURE__ */ jsx("option", { value: "", disabled: true, children: "選択してください" }),
-                  /* @__PURE__ */ jsx("option", { value: "中1", children: "中学1年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "中2", children: "中学2年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "中3", children: "中学3年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "高1", children: "高校1年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "高2", children: "高校2年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "高3", children: "高校3年生" }),
-                  /* @__PURE__ */ jsx("option", { value: "その他", children: "その他" })
-                ] }),
+                /* @__PURE__ */ jsxs(
+                  "select",
+                  {
+                    name: "grade",
+                    id: "grade",
+                    required: true,
+                    defaultValue: "",
+                    className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none appearance-none cursor-pointer shadow-sm",
+                    children: [
+                      /* @__PURE__ */ jsx("option", { value: "", disabled: true, children: "選択してください" }),
+                      /* @__PURE__ */ jsx("option", { value: "中1", children: "中学1年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "中2", children: "中学2年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "中3", children: "中学3年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "高1", children: "高校1年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "高2", children: "高校2年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "高3", children: "高校3年生" }),
+                      /* @__PURE__ */ jsx("option", { value: "その他", children: "その他" })
+                    ]
+                  }
+                ),
                 /* @__PURE__ */ jsx("div", { className: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#334455]/50", children: /* @__PURE__ */ jsx("svg", { className: "fill-current h-5 w-5", viewBox: "0 0 20 20", children: /* @__PURE__ */ jsx("path", { d: "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" }) }) })
               ] })
             ] })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "group", children: [
-            /* @__PURE__ */ jsxs("label", { htmlFor: "email", className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors", children: [
-              /* @__PURE__ */ jsx(Mail, { size: 20, className: "text-[#009DE0]" }),
-              "メールアドレス ",
-              /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
-            ] }),
-            /* @__PURE__ */ jsx("input", { type: "email", name: "email", id: "email", required: true, placeholder: "example@email.com", className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none transition-all shadow-sm" })
+            /* @__PURE__ */ jsxs(
+              "label",
+              {
+                htmlFor: "email",
+                className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors",
+                children: [
+                  /* @__PURE__ */ jsx(Mail, { size: 20, className: "text-[#009DE0]" }),
+                  "メールアドレス ",
+                  /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "input",
+              {
+                type: "email",
+                name: "email",
+                id: "email",
+                required: true,
+                placeholder: "example@email.com",
+                className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none transition-all shadow-sm"
+              }
+            )
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "group", children: [
-            /* @__PURE__ */ jsxs("label", { htmlFor: "message", className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors", children: [
-              /* @__PURE__ */ jsx(MessageSquare, { size: 20, className: "text-[#009DE0]" }),
-              "今の悩み・相談したいこと ",
-              /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
-            ] }),
-            /* @__PURE__ */ jsx("textarea", { name: "message", id: "message", rows: "5", required: true, placeholder: "「数学のテストが30点台で...」など、簡単で構いませんのでご記入ください。", className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none resize-y transition-all shadow-sm" })
+            /* @__PURE__ */ jsxs(
+              "label",
+              {
+                htmlFor: "message",
+                className: "flex items-center gap-2 text-sm font-bold text-[#334455] mb-2 group-focus-within:text-[#009DE0] transition-colors",
+                children: [
+                  /* @__PURE__ */ jsx(MessageSquare, { size: 20, className: "text-[#009DE0]" }),
+                  "今の悩み・相談したいこと ",
+                  /* @__PURE__ */ jsx("span", { className: "text-[#EA5514] text-xs ml-1", children: "*必須" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "textarea",
+              {
+                name: "message",
+                id: "message",
+                rows: "5",
+                required: true,
+                placeholder: "「数学のテストが30点台で...」など、簡単で構いませんのでご記入ください。",
+                className: "w-full px-4 py-4 rounded-xl bg-[#F8FAFC] border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none resize-y transition-all shadow-sm"
+              }
+            )
           ] })
         ] }),
         submitStatus === "error" && /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 bg-red-50 text-red-600 p-6 rounded-xl text-base border-2 border-red-100 animate-pulse", children: [
           /* @__PURE__ */ jsx(AlertCircle, { size: 24, className: "flex-shrink-0" }),
           /* @__PURE__ */ jsx("p", { className: "font-bold", children: errorMessage })
         ] }),
-        /* @__PURE__ */ jsx("div", { className: "pt-6", children: /* @__PURE__ */ jsx("button", { type: "submit", disabled: isSubmitting, className: `w-full font-bold py-5 rounded-full shadow-xl transition-all duration-300 flex justify-center items-center text-xl gap-3 ${isSubmitting ? "bg-gray-300 cursor-not-allowed text-white shadow-none" : "bg-gradient-to-r from-[#009DE0] to-[#008ac4] hover:from-[#008ac4] hover:to-[#0078b0] text-white hover:shadow-2xl hover:-translate-y-1"}`, children: isSubmitting ? /* @__PURE__ */ jsxs(Fragment, { children: [
-          /* @__PURE__ */ jsx(Loader2, { className: "animate-spin", size: 28 }),
-          "送信中..."
-        ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
-          /* @__PURE__ */ jsx(Send, { size: 24 }),
-          "この内容で予約を申し込む"
-        ] }) }) })
+        /* @__PURE__ */ jsx("div", { className: "pt-6", children: /* @__PURE__ */ jsx(
+          "button",
+          {
+            type: "submit",
+            disabled: isSubmitting,
+            className: `w-full font-bold py-5 rounded-full shadow-xl transition-all duration-300 flex justify-center items-center text-xl gap-3 ${isSubmitting ? "bg-gray-300 cursor-not-allowed text-white shadow-none" : "bg-gradient-to-r from-[#009DE0] to-[#008ac4] hover:from-[#008ac4] hover:to-[#0078b0] text-white hover:shadow-2xl hover:-translate-y-1"}`,
+            children: isSubmitting ? /* @__PURE__ */ jsxs(Fragment, { children: [
+              /* @__PURE__ */ jsx(Loader2, { className: "animate-spin", size: 28 }),
+              "送信中..."
+            ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
+              /* @__PURE__ */ jsx(Send, { size: 24 }),
+              "この内容で予約を申し込む"
+            ] })
+          }
+        ) })
       ] })
     ] })
   ] });
