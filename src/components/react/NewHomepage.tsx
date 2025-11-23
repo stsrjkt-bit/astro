@@ -732,11 +732,18 @@ export default function NewHomepage() {
                 </Reveal>
 
                 <Reveal delay={200}>
-                    <div className="flex flex-col md:flex-row gap-4 justify-center mt-10">
-                         {/* Application Button */}
+                    <div className="flex flex-col md:flex-row gap-4 justify-center mt-10 flex-wrap">
+                         {/* Free Trial Button */}
                         <a href="#" className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]">
                             <Mail size={20} />
-                            無料体験・相談に申し込む
+                            無料体験に申し込む
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </a>
+
+                        {/* Consultation Button */}
+                        <a href="#" className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]">
+                            <MessageCircle size={20} />
+                            学習相談に申し込む
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </a>
 
