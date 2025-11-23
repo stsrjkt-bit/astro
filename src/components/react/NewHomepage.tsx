@@ -178,11 +178,11 @@ export default function NewHomepage() {
   // Removed navLinks
 
   const galleryImages = [
-    { src: "https://lh3.googleusercontent.com/d/1fA4R4476PQrHyip-NootpyjEO9V6umGe=s0", alt: "明るく清潔感のある教室全体の様子" },
+    { src: "https://lh3.googleusercontent.com/d/1YZemnybxdBF7zgX4bGrQvnvTYCKqWmlM=s0", alt: "明るく清潔感のある教室全体の様子" }, // 入口（本棚）
     { src: "https://lh3.googleusercontent.com/d/18WWMFN5jCNy_k5eM8x6bDSDo9qJI2OKr=s0", alt: "集中できる自習スペース" },
     { src: "https://lh3.googleusercontent.com/d/1dYZaS_o8O3IrbwioJlWPkJcEbgT7b-VZ=s0", alt: "1対1の個別指導を行うデスク" },
-    { src: "https://lh3.googleusercontent.com/d/1YZemnybxdBF7zgX4bGrQvnvTYCKqWmlM=s0", alt: "豊富な参考書が並ぶ本棚" },
     { src: "https://lh3.googleusercontent.com/d/1NEyLD4KY4MIpD8E8pJF58BGt37qavNEI=s0", alt: "オンライン学習・AI教材用のタブレット端末" },
+    { src: "https://lh3.googleusercontent.com/d/1fA4R4476PQrHyip-NootpyjEO9V6umGe=s0", alt: "先生の指導風景" }, // 先生の机と青いパネル
   ];
 
   return (
@@ -602,7 +602,7 @@ export default function NewHomepage() {
                   <img 
                     src={img.src} 
                     alt={img.alt}
-                    className="w-full h-full object-cover group-hover/image:scale-105 transition-transform duration-1000 ease-out"
+                    className="w-full h-full object-cover group-hover/image:scale-105 transition-transform duration-1000 ease-out brightness-110 saturate-125 contrast-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-[#334455]/30 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
