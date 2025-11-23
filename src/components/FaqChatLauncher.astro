@@ -14,9 +14,21 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
   <!-- チャット本体（iframe） -->
   <div
     id="faq-chat-iframe-wrapper"
-    class="w-full h-[min(100vh-4rem,720px)] sm:w-[min(100vw-2rem,420px)] sm:h-[min(70vh,560px)] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 bg-white overflow-hidden transition-all duration-200 ease-out translate-y-2 opacity-0 pointer-events-none"
+    class="relative w-full h-[min(100vh-4rem,720px)] sm:w-[min(100vw-2rem,420px)] sm:h-[min(70vh,560px)] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 bg-white overflow-hidden transition-all duration-200 ease-out translate-y-2 opacity-0 pointer-events-none"
     aria-hidden="true"
   >
+    <button
+      id="faq-chat-close"
+      type="button"
+      aria-label="チャットを閉じる"
+      class="absolute top-2 right-2 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white border border-slate-200 shadow-md text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
     <iframe src={faqChatUrl} title="さとう数理塾 よくある質問チャット" class="w-full h-full border-0" loading="lazy"
     ></iframe>
   </div>
@@ -43,6 +55,7 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
   document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('faq-chat-toggle');
     const wrapper = document.getElementById('faq-chat-iframe-wrapper');
+    const closeBtn = document.getElementById('faq-chat-close');
 
     if (toggle && wrapper) {
       let isOpen = false;
@@ -66,6 +79,13 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
         isOpen = !isOpen;
         applyState();
       });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          isOpen = false;
+          applyState();
+        });
+      }
     }
   });
 </script>
