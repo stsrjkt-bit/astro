@@ -38,6 +38,8 @@ const useScrollPosition = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
@@ -59,14 +61,16 @@ const Reveal = ({
   className?: string;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          if (ref.current) observer.unobserve(ref.current);
         }
       },
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
@@ -96,6 +100,12 @@ const Reveal = ({
 
 // --- PC用 ドットナビゲーション ---
 const DotNavigation = ({ activeSection }: { activeSection: string }) => {
+  // SSR時はnullを返す、または非表示にする (クライアントでのみ機能するため)
+  // hydration errorを防ぐため、初期状態は非表示または固定値にするが、
+  // ここではCSSで hidden md:flex となっているので、DOM構造があればOK
+  // ただし activeSection の状態がクライアントとサーバーでずれる可能性があるため注意
+  // 一旦そのままレンダリングする
+
   return (
     <div className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
       {SECTIONS.map((section) => (
@@ -165,6 +175,8 @@ export default function NewHomepage() {
 
   // 現在のセクションを検知する処理
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 3; // 画面の1/3まで来たら切り替え
 
@@ -332,7 +344,11 @@ export default function NewHomepage() {
           >
             <div
               className="animate-bounce text-[#009DE0]/50 p-4 cursor-pointer hover:text-[#009DE0] transition-colors flex flex-col items-center gap-2"
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                }
+              }}
             >
               <span className="text-[10px] tracking-widest uppercase text-[#009DE0]">Scroll</span>
               <ArrowRight className="transform rotate-90" size={20} />
