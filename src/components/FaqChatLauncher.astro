@@ -9,7 +9,7 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
 ---
 
 <div
-  class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end gap-3 px-2 sm:px-0 pointer-events-none"
+  class="fixed inset-x-0 bottom-0 z-50 flex flex-col items-stretch sm:items-end px-2 sm:px-0 sm:pb-20 pointer-events-none"
 >
   <!-- チャット本体（iframe） -->
   <div
@@ -20,23 +20,27 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
     <iframe src={faqChatUrl} title="さとう数理塾 よくある質問チャット" class="w-full h-full border-0" loading="lazy"
     ></iframe>
   </div>
-
-  <!-- 起動ボタン -->
-  <button
-    id="faq-chat-toggle"
-    type="button"
-    class="self-end inline-flex items-center gap-2 rounded-full bg-white/95 border border-slate-200 shadow-xl px-4 py-2.5 text-sm font-semibold text-slate-800 hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-150 pointer-events-auto"
-  >
-    <span class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-white">
-      <svg aria-hidden="true" viewBox="0 0 24 24" class="w-4 h-4">
-        <path
-          d="M5 4h14a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1H9.5L6 19.5V15H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
-          fill="currentColor"></path>
-      </svg>
-    </span>
-    <span class="whitespace-nowrap"> よくある質問 </span>
-  </button>
 </div>
+
+<!-- 起動ボタン（右下固定） -->
+<button
+  id="faq-chat-toggle"
+  type="button"
+  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full bg-white border-2 border-[#009DE0] text-[#009DE0] font-bold text-sm sm:text-base shadow-lg hover:bg-[#F0F7FF] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 pointer-events-auto"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="w-5 h-5"
+    aria-hidden="true"
+  >
+    <path
+      fill="currentColor"
+      d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"
+    />
+  </svg>
+  <span class="whitespace-nowrap">よくある質問</span>
+</button>
 
 <script>
   // 右下ボタン → iframe の開閉を制御
