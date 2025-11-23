@@ -1,0 +1,12 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import MathNigatePage from '~/components/react/MathNigatePage';
+
+const metadata = {
+  title: '数学が苦手な高校生へ - さとう数理塾',
+};
+---
+
+<Layout metadata={metadata}>
+  <MathNigatePage client:load />
+</Layout>

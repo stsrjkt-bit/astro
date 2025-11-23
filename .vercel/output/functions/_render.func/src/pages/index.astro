@@ -1,0 +1,13 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import NewHomepage from '~/components/react/NewHomepage';
+
+const metadata = {
+  title: 'さとう数理塾 - 沼津・理系特化型の個別指導',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <NewHomepage client:load />
+</Layout>
