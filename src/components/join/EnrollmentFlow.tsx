@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
+import { CtaButton } from '../react/CtaButton';
 
 // データ定義
 const steps = [
   {
     number: 1,
     title: '無料体験のお申込み',
-    button: { label: '無料体験のお申込み', url: 'https://forms.gle/qYAiJi3Un4PMDLbc7' },
+    button: { label: '無料体験のお申込み', url: 'https://forms.gle/qYAiJi3Un4PMDLbc7', variant: 'primary' as const },
     checklist: ['無料体験フォームを送信した', '受付メールが届いた'],
   },
   {
     number: 2,
     title: 'ご利用の手引を読む',
-    button: { label: 'ご利用の手引を読む', url: '/guide' },
+    button: { label: 'ご利用の手引を読む', url: '/guide', variant: 'outline' as const },
     checklist: ['ご利用の手引を読んだ'],
   },
   {
@@ -23,7 +24,7 @@ const steps = [
   {
     number: 4,
     title: '入塾のお申込み',
-    button: { label: '入塾のお申込み', url: 'https://forms.gle/irFCFdf3qEEuR6Ay9' },
+    button: { label: '入塾のお申込み', url: 'https://forms.gle/irFCFdf3qEEuR6Ay9', variant: 'accent' as const },
     checklist: ['入塾フォームを送信した', '入塾フォームの受付メールが届いた'],
   },
   {
@@ -99,7 +100,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ text, isChecked, onToggle
 interface Step {
   number: number;
   title: string;
-  button: { label: string; url: string } | null;
+  button: { label: string; url: string; variant?: 'primary' | 'accent' | 'outline' } | null;
   checklist: string[];
 }
 
@@ -180,34 +181,33 @@ const StepCard: React.FC<{ step: Step }> = ({ step }) => {
         {/* アクションボタン */}
         {step.button && (
           <div className="mb-6 ml-0 md:ml-16">
-            <a
+            <CtaButton
               href={step.button.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow transition-all duration-200 text-sm md:text-base w-full md:w-auto cursor-pointer no-underline
-                ${
-                  isCompleted
-                    ? 'bg-slate-300 text-white cursor-default shadow-none pointer-events-none'
-                    : 'bg-gradient-to-r from-[#009DE0] to-[#008ac4] text-white hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5'
-                }`}
-            >
-              {step.button.label}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
+              label={step.button.label}
+              variant={step.button.variant}
+              className={`w-full md:w-auto ${
+                isCompleted ? 'bg-slate-300 text-white cursor-default shadow-none pointer-events-none border-none' : ''
+              }`}
+              target={step.button.url.startsWith('http') ? '_blank' : undefined}
+              rel={step.button.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              }
+            />
           </div>
         )}
 

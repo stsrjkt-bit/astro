@@ -13,6 +13,8 @@ import {
   ChevronDown,
   Mail,
 } from 'lucide-react';
+import { CtaButton } from './CtaButton';
+import { LineButton } from './LineButton';
 
 // --- ブランドカラー定義 (Tailwindのクラス置換用メモ) ---
 // Primary (Sky Blue): #009DE0
@@ -844,37 +846,29 @@ export default function NewHomepage() {
             <Reveal delay={200}>
               <div className="flex flex-col md:flex-row gap-4 justify-center mt-10 flex-wrap">
                 {/* Free Trial Button */}
-                <a
-                  href="#"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
-                >
-                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
-                  <Mail size={20} />
-                  無料体験に申し込む
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+                <CtaButton
+                  href="https://forms.gle/qYAiJi3Un4PMDLbc7"
+                  label="無料体験に申し込む"
+                  variant="primary"
+                  className="min-w-[280px] px-8 py-4 text-base md:text-lg"
+                  icon={<Mail size={20} />}
+                />
 
                 {/* Consultation Button */}
-                <a
+                <CtaButton
                   href="#"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
-                >
-                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
-                  <MessageCircle size={20} />
-                  学習相談に申し込む
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </a>
+                  label="学習相談に申し込む"
+                  variant="outline"
+                  className="min-w-[280px] px-8 py-4 text-base md:text-lg"
+                  icon={<MessageCircle size={20} />}
+                />
 
                 {/* LINE Button */}
-                <a
+                <LineButton
                   href="https://lin.ee/blKCpXC"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] text-white rounded-full shadow-lg hover:bg-[#05b04d] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
-                >
-                  <MessageCircle size={20} className="fill-white text-[#06C755]" />
-                  LINEで気軽に質問する
-                </a>
+                  label="LINEで気軽に質問する"
+                  className="min-w-[280px] px-8 py-4 text-base md:text-lg"
+                />
               </div>
             </Reveal>
           </div>
