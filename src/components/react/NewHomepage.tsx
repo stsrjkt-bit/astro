@@ -605,10 +605,6 @@ export default function NewHomepage() {
                     className="w-full h-full object-cover group-hover/image:scale-105 transition-transform duration-1000 ease-out brightness-110 saturate-125 contrast-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-[#334455]/30 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-[#334455]/90 to-transparent p-6 opacity-0 group-hover/image:opacity-100 transition-opacity duration-500 flex items-end translate-y-4 group-hover/image:translate-y-0 ease-out">
-                    <p className="text-white text-sm font-medium tracking-wide">{img.alt}</p>
-                  </div>
                 </div>
               ))}
               <div className="flex-shrink-0 w-6 md:w-1"></div>
