@@ -17,8 +17,7 @@ const { metadata, noindex } = Astro.props;
 ---
 
 <Layout metadata={metadata} noindex={noindex}>
-  <slot name="announcement">
-  </slot>
+  <slot name="announcement" />
   <slot name="header">
     <Header {...headerData} isSticky showRssFeed showToggleTheme />
   </slot>
