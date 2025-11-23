@@ -100,7 +100,7 @@ export default function App() {
           <h1 className="flex items-center">
             <a href="/" className="block w-32 md:w-40 transition-opacity hover:opacity-80">
               <img
-                src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo"
+                src="/images/sato-juku-logo.png"
                 alt="さとう数理塾"
                 className="w-full h-auto object-contain"
                 width={160}
@@ -465,7 +465,7 @@ export default function App() {
           <div className="max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
             <div className="mb-4 w-32 md:w-40">
               <img
-                src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo"
+                src="/images/sato-juku-logo.png"
                 alt="さとう数理塾"
                 className="w-full h-auto object-contain opacity-80"
                 width={160}
