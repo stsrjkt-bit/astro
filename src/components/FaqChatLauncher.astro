@@ -36,7 +36,7 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
 
 <!-- 起動ボタン（右下固定） -->
 <button
-  id="faq-chat-toggle"
+  id="faq-chat-launcher"
   type="button"
   class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full bg-white border-2 border-[#009DE0] text-[#009DE0] font-bold text-sm sm:text-base shadow-lg hover:bg-[#F0F7FF] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 pointer-events-auto"
 >
@@ -53,11 +53,11 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
   // 右下ボタン → iframe の開閉を制御
   // Astro ClientRouter (View Transitions) 対応: astro:page-load イベントで初期化
   document.addEventListener('astro:page-load', () => {
-    const toggle = document.getElementById('faq-chat-toggle');
+    const launcherBtn = document.getElementById('faq-chat-launcher');
     const wrapper = document.getElementById('faq-chat-iframe-wrapper');
     const closeBtn = document.getElementById('faq-chat-close');
 
-    if (toggle && wrapper) {
+    if (launcherBtn && wrapper) {
       let isOpen = false;
 
       const applyState = () => {
@@ -65,17 +65,21 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
           wrapper.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
           wrapper.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
           wrapper.removeAttribute('aria-hidden');
+          // ボタンを非表示
+          launcherBtn.classList.add('hidden');
         } else {
           wrapper.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
           wrapper.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
           wrapper.setAttribute('aria-hidden', 'true');
+          // ボタンを表示
+          launcherBtn.classList.remove('hidden');
         }
       };
 
       // 初期状態は閉じる
       applyState();
 
-      toggle.addEventListener('click', () => {
+      launcherBtn.addEventListener('click', () => {
         isOpen = !isOpen;
         applyState();
       });
