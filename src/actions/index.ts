@@ -4,18 +4,18 @@ import { Resend } from 'resend';
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
-const FROM_EMAIL = 'onboarding@resend.dev'; 
-const ADMIN_EMAIL = 'stsrjk@gmail.com'; 
+const FROM_EMAIL = 'onboarding@resend.dev';
+const ADMIN_EMAIL = 'stsrjk@gmail.com';
 
 export const server = {
   sendConsultation: defineAction({
     accept: 'form',
     input: z.object({
-      name: z.string().min(1, { message: "お名前を入力してください" }),
-      email: z.string().email({ message: "正しいメールアドレスを入力してください" }),
-      grade: z.string().min(1, { message: "学年を選択してください" }),
-      message: z.string().min(5, { message: "ご相談内容は5文字以上で入力してください" }),
-      reservationDate: z.string().min(1, { message: "予約日時が選択されていません" }),
+      name: z.string().min(1, { message: 'お名前を入力してください' }),
+      email: z.string().email({ message: '正しいメールアドレスを入力してください' }),
+      grade: z.string().min(1, { message: '学年を選択してください' }),
+      message: z.string().min(5, { message: 'ご相談内容は5文字以上で入力してください' }),
+      reservationDate: z.string().min(1, { message: '予約日時が選択されていません' }),
     }),
     handler: async (input) => {
       try {
@@ -23,7 +23,7 @@ export const server = {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: ADMIN_EMAIL,
-          reply_to: input.email,
+          replyTo: input.email,
           subject: `【予約あり】学習相談: ${input.name}様 (${input.reservationDate})`,
           html: `
             <h2>Webサイトから学習相談の予約が入りました</h2>
@@ -43,7 +43,7 @@ export const server = {
         await resend.emails.send({
           from: FROM_EMAIL,
           to: input.email,
-          reply_to: ADMIN_EMAIL,
+          replyTo: ADMIN_EMAIL,
           subject: `【さとう数理塾】無料相談のご予約を承りました`,
           html: `
             <p>${input.name} 様</p>
