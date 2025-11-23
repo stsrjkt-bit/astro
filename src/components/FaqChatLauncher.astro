@@ -39,7 +39,8 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
 
 <script>
   // 右下ボタン → iframe の開閉を制御
-  if (typeof window !== 'undefined') {
+  // Astro ClientRouter (View Transitions) 対応: astro:page-load イベントで初期化
+  document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('faq-chat-toggle');
     const wrapper = document.getElementById('faq-chat-iframe-wrapper');
 
@@ -66,5 +67,5 @@ const faqChatUrl = 'https://juku-faq.vercel.app/';
         applyState();
       });
     }
-  }
+  });
 </script>
