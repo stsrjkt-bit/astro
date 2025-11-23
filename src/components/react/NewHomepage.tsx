@@ -768,7 +768,9 @@ export default function NewHomepage() {
               <div className="flex flex-col justify-center space-y-4">
                 <Reveal delay={200}>
                   <a
-                    href="#"
+                    href="https://calendar.google.com/calendar/u/0/embed?src=f927cc21f73c5d1b2a2ff1cd51ad58da3288ca06760c437b5e477ec43e87f4da@group.calendar.google.com&ctz=Asia/Tokyo&hl=ja&mode=MONTH&wkst=2&showTitle=0&showTabs=0&showPrint=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group flex items-center justify-between p-6 border border-[#009DE0]/20 bg-white hover:border-[#009DE0] hover:shadow-md transition-all duration-300 transform hover:-translate-x-1 relative overflow-hidden rounded-lg shadow-sm"
                   >
                     <div className="flex items-center gap-4">
@@ -790,7 +792,9 @@ export default function NewHomepage() {
 
                 <Reveal delay={300}>
                   <a
-                    href="#"
+                    href="https://www.google.com/maps?q=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B2%BC%E6%B4%A5%E5%B8%82%E6%B2%A2%E7%94%B0%E7%94%BA1-3+%E7%89%A7%E5%8E%9F%E3%83%93%E3%83%AB102"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group flex items-center justify-between p-6 border border-[#009DE0]/20 bg-white hover:border-[#009DE0] hover:shadow-md transition-all duration-300 transform hover:-translate-x-1 relative overflow-hidden rounded-lg shadow-sm"
                   >
                     <div className="flex items-center gap-4">
