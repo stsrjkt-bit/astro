@@ -10,7 +10,7 @@ import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
@@ -25,7 +25,9 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'server',
-  adapter: vercel({}),
+  adapter: vercel({
+    imageService: true,
+  }),
 
   integrations: [
     tailwind({
