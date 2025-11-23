@@ -608,7 +608,7 @@ export default function ScienceMajorPage() {
 
                 {/* Consultation Button */}
                 <a
-                  href="#"
+                  href="/counseling"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
                 >
                   {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}

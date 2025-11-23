@@ -1,0 +1,12 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import ConsultationForm from '~/components/ConsultationForm';
+
+const metadata = {
+  title: '無料学習相談予約 | さとう数理塾',
+};
+---
+
+<PageLayout metadata={metadata} noindex={true}>
+  <ConsultationForm client:load />
+</PageLayout>
