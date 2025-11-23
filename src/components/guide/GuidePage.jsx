@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, CheckCircle2, FileText, AlertCircle, Phone } from 'lucide-react';
 
 // --- ブランドカラー定義 ---
