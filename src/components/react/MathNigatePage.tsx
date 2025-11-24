@@ -170,91 +170,139 @@ export default function MathNigatePage() {
 
       {/* Main Content (was <main> in original, now div to fit inside Layout) */}
       <div className="w-full overflow-hidden">
-        {/* ===========================================
-          HERO SECTION (Parents)
-          ===========================================
-        */}
-        <section id="hero" className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <div
-              className={`w-full h-full transition-opacity duration-[2000ms] ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
-            >
-              {/* 保護者・勉強・相談イメージの画像 */}
-              <img
-                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop"
-                alt="勉強を見守るイメージ"
-                className="w-full h-[120%] object-cover opacity-[0.1] grayscale origin-center"
-                style={{ transform: loaded ? 'scale(1.05)' : 'scale(1.0)', transition: 'transform 10s ease-out' }}
-              />
-            </div>
+      {/* ===========================================
+        HERO SECTION (Parents)
+        ===========================================
+      */}
+      {/* スマホでの高さ調整: min-h-[85vh] だと長すぎる場合があるので、
+        コンテンツ量に合わせて調整しつつ、min-h-[600px]などで最低高さを確保します。
+        flex items-center で上下中央寄せにしています。
+      */}
+      <section id="hero" className="relative w-full min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden">
+        
+        {/* 背景画像エリア */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className={`w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop"
+              alt="勉強を見守るイメージ"
+              className="w-full h-full md:h-[120%] object-cover opacity-[0.1] grayscale origin-center"
+              style={{
+                transform: loaded ? 'scale(1.05)' : 'scale(1.0)',
+                transition: 'transform 10s ease-out',
+              }}
+            />
           </div>
+        </div>
 
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/80 to-[#F8FAFC]/40"></div>
+        {/* グラデーションオーバーレイ */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/90 to-[#F8FAFC]/40"></div>
 
-          <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 pt-20">
-            <div className="max-w-3xl text-left">
-              <div
-                className={`transition-all duration-1000 delay-300 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
-              >
-                <div className="inline-block mb-6 md:mb-8">
-                  <p className="text-[#009DE0] text-sm md:text-base tracking-[0.15em] font-bold border-l-4 border-[#D6DE26] pl-3 py-1">
-                    保護者の方へ
-                  </p>
-                </div>
+        {/* コンテンツエリア */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-20 md:pt-20">
+          <div className="max-w-3xl text-left">
+            
+            {/* ラベル部分 */}
+            <div
+              className={`transition-all duration-1000 delay-300 ${
+                loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+              }`}
+            >
+              <div className="inline-block mb-6 md:mb-8">
+                <p className="text-[#009DE0] text-sm md:text-base tracking-[0.15em] font-bold border-l-4 border-[#D6DE26] pl-3 py-1">
+                  保護者の方へ
+                </p>
               </div>
+            </div>
 
-              <div
-                className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
-              >
-                <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl leading-tight md:leading-snug text-[#334455] mb-8 drop-shadow-sm tracking-tight">
+            {/* 見出し部分（ここを重点的に修正） */}
+            <div
+              className={`transition-all duration-1000 delay-500 ${
+                loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+              }`}
+            >
+              <h2 className="font-serif text-[#334455] mb-6 md:mb-8 drop-shadow-sm tracking-tight">
+                {/* スマホ (text-3xl): 少し大きめにしてインパクトを出す
+                   PC (md:text-5xl): 従来通り
+                   leading: スマホでは少し広め(relaxed)にとって読みやすく
+                */}
+                <span className="text-3xl md:text-5xl leading-relaxed md:leading-snug block">
                   「数学が心配...」
-                  <br className="md:hidden" />
+                </span>
+
+                {/* スマホ調整のポイント:
+                   文節ごとに改行を入れるのではなく、
+                   スマホでは「その不安は、適切なアプローチで必ず変えられます。」と
+                   自然に流すか、あるいは意味の塊ごとに block 表示にします。
+                */}
+                <span className="text-2xl md:text-5xl leading-relaxed md:leading-snug mt-4 md:mt-0 block md:inline">
                   その不安は、
-                  <br />
-                  <span className="text-[#009DE0] relative inline-block mr-2">
-                    適切なアプローチ
+                  {/* PCのみ改行を入れる */}
+                  <br className="hidden md:block" />
+                  
+                  <span className="inline-block relative">
+                    <span className="text-[#009DE0] relative z-10 font-bold">
+                      適切なアプローチ
+                    </span>
+                    {/* アンダーラインSVG */}
                     <svg
-                      className="absolute w-full h-2 md:h-3 -bottom-1 left-0 text-[#D6DE26]/40 -z-10"
+                      className="absolute w-full h-2 md:h-3 bottom-0.5 left-0 text-[#D6DE26]/60 -z-10"
                       viewBox="0 0 100 10"
                       preserveAspectRatio="none"
                     >
                       <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                     </svg>
                   </span>
-                  で必ず変えられます。
-                </h2>
-                <p className="text-[#334455]/80 text-base md:text-lg leading-loose mb-10 max-w-2xl">
-                  お子様の数学の点数を見て、将来の進路を諦めかけてはいませんか？
-                  <br />
-                  高校数学は一度つまずくと挽回が難しい教科ですが、
-                  <br className="hidden md:block" />
-                  原因を特定し、正しい順序で学び直せば、必ず自信を取り戻せます。
-                  <br />
-                  まずは保護者の方の「どうしたらいいの？」を、私たちにお聞かせください。
-                </p>
-              </div>
+                  {/* 「で必ず変えられます」が不自然に切れないように、nowrap指定をするか、自然に任せる */}
+                  <span className="inline-block">で必ず変えられます。</span>
+                </span>
+              </h2>
 
-              <div
-                className={`transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
-              >
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="#contact"
-                    className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
-                  >
-                    無料体験・学習相談を予約する <ArrowRight size={16} />
-                  </a>
-                  <a
-                    href="#worry"
-                    className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-white text-[#334455] border border-[#334455]/10 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50 transition-all"
-                  >
-                    詳しく読む <ChevronDown size={16} />
-                  </a>
-                </div>
+              {/* 本文エリア */}
+              <p className="text-[#334455]/80 text-base md:text-lg leading-7 md:leading-loose mb-10 max-w-2xl">
+                {/* スマホでは改行タグ <br> を無効化 (hidden md:block) して、
+                  画面幅いっぱい使って自然に折り返させます。
+                  これにより「諦めかけて / はいませんか？」のような不自然な切れ方を防ぎます。
+                */}
+                お子様の数学の点数を見て、将来の進路を諦めかけてはいませんか？
+                <br className="hidden md:block" />
+                高校数学は一度つまずくと挽回が難しい教科ですが、
+                <br className="hidden md:block" />
+                原因を特定し、正しい順序で学び直せば、必ず自信を取り戻せます。
+                <br className="hidden md:block" />
+                まずは保護者の方の「どうしたらいいの？」を、当塾にお聞かせください。
+              </p>
+            </div>
+
+            {/* ボタンエリア */}
+            <div
+              className={`transition-all duration-1000 delay-700 ${
+                loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+              }`}
+            >
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="#contact"
+                  className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
+                >
+                  無料体験・学習相談を予約する 
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a
+                  href="#worry"
+                  className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-white text-[#334455] border border-[#334455]/10 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50 transition-all"
+                >
+                  詳しく読む <ChevronDown size={16} />
+                </a>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
         <MobileTableOfContents />
 
