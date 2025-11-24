@@ -7,11 +7,12 @@ const metadata = {
   description: 'さとう数理塾をご利用いただくにあたってのルールとお願いをまとめたものです。',
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
 };
 ---
 
 <Layout metadata={metadata}>
+  <meta slot="head" name="robots" content="noindex,follow" />
   <GuidePage client:load />
 </Layout>
