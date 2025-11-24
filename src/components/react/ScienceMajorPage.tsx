@@ -237,7 +237,6 @@ export default function ScienceMajorPage() {
           ===========================================
         */}
         <section id="hero" className="relative w-full min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden">
-          
           {/* 背景画像エリア */}
           <div className="absolute inset-0 z-0">
             <div
@@ -250,44 +249,61 @@ export default function ScienceMajorPage() {
                 src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop"
                 alt="理系学習のイメージ"
                 className="w-full h-full md:h-[120%] object-cover opacity-[0.1] origin-center"
-                style={{ 
-                  transform: loaded ? 'scale(1.05)' : 'scale(1.0)', 
-                  transition: 'transform 10s ease-out' 
+                style={{
+                  transform: loaded ? 'scale(1.05)' : 'scale(1.0)',
+                  transition: 'transform 10s ease-out',
                 }}
               />
             </div>
           </div>
 
           {/* --- 幾何学的な背景装飾レイヤー (MathNigatePageと統一) --- */}
-          <div className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-[2000ms] ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-[2000ms] ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          >
             {/* 1. 方眼紙風ドットグリッド */}
-            <div 
-              className="absolute inset-0 opacity-[0.06]" 
-              style={{ 
-                backgroundImage: 'radial-gradient(#009DE0 1px, transparent 1px)', 
-                backgroundSize: '32px 32px' 
-              }} 
+            <div
+              className="absolute inset-0 opacity-[0.06]"
+              style={{
+                backgroundImage: 'radial-gradient(#009DE0 1px, transparent 1px)',
+                backgroundSize: '32px 32px',
+              }}
             />
 
             {/* 2. 右上の大きなふんわり円 (青) */}
-            <div className={`absolute -top-20 -right-20 md:-top-32 md:-right-32 w-[60vw] h-[60vw] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-br from-[#009DE0]/20 to-transparent blur-[60px] md:blur-[100px] mix-blend-multiply transition-transform duration-[3000ms] ease-out ${loaded ? 'translate-y-0 scale-100' : '-translate-y-10 scale-90'}`}></div>
-            
+            <div
+              className={`absolute -top-20 -right-20 md:-top-32 md:-right-32 w-[60vw] h-[60vw] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-br from-[#009DE0]/20 to-transparent blur-[60px] md:blur-[100px] mix-blend-multiply transition-transform duration-[3000ms] ease-out ${loaded ? 'translate-y-0 scale-100' : '-translate-y-10 scale-90'}`}
+            ></div>
+
             {/* 3. 左中ほどのアクセント (黄色) */}
-            <div className={`absolute top-1/2 -left-20 md:-left-32 w-[50vw] h-[50vw] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-tr from-[#D6DE26]/30 to-transparent blur-[50px] md:blur-[80px] mix-blend-multiply transition-transform duration-[3000ms] delay-300 ease-out ${loaded ? 'translate-x-0' : '-translate-x-10'}`}></div>
+            <div
+              className={`absolute top-1/2 -left-20 md:-left-32 w-[50vw] h-[50vw] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-tr from-[#D6DE26]/30 to-transparent blur-[50px] md:blur-[80px] mix-blend-multiply transition-transform duration-[3000ms] delay-300 ease-out ${loaded ? 'translate-x-0' : '-translate-x-10'}`}
+            ></div>
 
             {/* 4. 幾何学オブジェクト: 六角形（化学構造式イメージ） */}
             <div className="absolute top-[20%] right-[10%] md:right-[20%] opacity-20 hidden sm:block">
               <svg width="120" height="120" viewBox="0 0 100 100" className="animate-[spin_60s_linear_infinite]">
-                <path d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z" stroke="#334455" strokeWidth="1" fill="none" />
-                <path d="M50 5 L50 55 M93.3 30 L50 55 M6.7 30 L50 55" stroke="#334455" strokeWidth="1" fill="none" opacity="0.5"/>
+                <path
+                  d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
+                  stroke="#334455"
+                  strokeWidth="1"
+                  fill="none"
+                />
+                <path
+                  d="M50 5 L50 55 M93.3 30 L50 55 M6.7 30 L50 55"
+                  stroke="#334455"
+                  strokeWidth="1"
+                  fill="none"
+                  opacity="0.5"
+                />
               </svg>
             </div>
 
             {/* 5. 幾何学オブジェクト: サイン波（物理・数学イメージ） */}
             <div className="absolute bottom-[25%] right-[5%] md:right-[10%] opacity-20">
-               <svg width="150" height="60" viewBox="0 0 150 60">
-                  <path d="M0 30 Q 37.5 0, 75 30 T 150 30" stroke="#009DE0" strokeWidth="2" fill="none" />
-               </svg>
+              <svg width="150" height="60" viewBox="0 0 150 60">
+                <path d="M0 30 Q 37.5 0, 75 30 T 150 30" stroke="#009DE0" strokeWidth="2" fill="none" />
+              </svg>
             </div>
           </div>
 
@@ -297,7 +313,6 @@ export default function ScienceMajorPage() {
           {/* コンテンツエリア */}
           <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-20 md:pt-20">
             <div className="max-w-3xl text-left">
-              
               {/* ラベル部分 */}
               <div
                 className={`transition-all duration-1000 delay-300 ${
@@ -367,7 +382,7 @@ export default function ScienceMajorPage() {
                     href="#contact"
                     className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
                   >
-                    無料体験・学習相談を予約する 
+                    無料体験・学習相談を予約する
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a
