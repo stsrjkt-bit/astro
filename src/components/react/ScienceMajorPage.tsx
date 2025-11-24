@@ -233,30 +233,91 @@ export default function ScienceMajorPage() {
 
       <div className="w-full overflow-hidden">
         {/* ===========================================
-          HERO SECTION
+          HERO SECTION (Rikei / High School Students)
           ===========================================
         */}
-        <section id="hero" className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
+        <section id="hero" className="relative w-full min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden">
+          {/* 背景画像エリア */}
           <div className="absolute inset-0 z-0">
             <div
-              className={`w-full h-full transition-opacity duration-[2000ms] ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-full transition-opacity duration-[2000ms] ease-in-out ${
+                loaded ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               {/* 理系・実験・学習イメージ */}
               <img
                 src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop"
                 alt="理系学習のイメージ"
-                className="w-full h-[120%] object-cover opacity-[0.1] origin-center"
-                style={{ transform: loaded ? 'scale(1.05)' : 'scale(1.0)', transition: 'transform 10s ease-out' }}
+                className="w-full h-full md:h-[120%] object-cover opacity-[0.1] origin-center"
+                style={{
+                  transform: loaded ? 'scale(1.05)' : 'scale(1.0)',
+                  transition: 'transform 10s ease-out',
+                }}
               />
             </div>
           </div>
 
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/80 to-[#F8FAFC]/40"></div>
+          {/* --- 幾何学的な背景装飾レイヤー (MathNigatePageと統一) --- */}
+          <div
+            className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-[2000ms] ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          >
+            {/* 1. 方眼紙風ドットグリッド */}
+            <div
+              className="absolute inset-0 opacity-[0.06]"
+              style={{
+                backgroundImage: 'radial-gradient(#009DE0 1px, transparent 1px)',
+                backgroundSize: '32px 32px',
+              }}
+            />
 
-          <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 pt-20">
+            {/* 2. 右上の大きなふんわり円 (青) */}
+            <div
+              className={`absolute -top-20 -right-20 md:-top-32 md:-right-32 w-[60vw] h-[60vw] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-br from-[#009DE0]/20 to-transparent blur-[60px] md:blur-[100px] mix-blend-multiply transition-transform duration-[3000ms] ease-out ${loaded ? 'translate-y-0 scale-100' : '-translate-y-10 scale-90'}`}
+            ></div>
+
+            {/* 3. 左中ほどのアクセント (黄色) */}
+            <div
+              className={`absolute top-1/2 -left-20 md:-left-32 w-[50vw] h-[50vw] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-tr from-[#D6DE26]/30 to-transparent blur-[50px] md:blur-[80px] mix-blend-multiply transition-transform duration-[3000ms] delay-300 ease-out ${loaded ? 'translate-x-0' : '-translate-x-10'}`}
+            ></div>
+
+            {/* 4. 幾何学オブジェクト: 六角形（化学構造式イメージ） */}
+            <div className="absolute top-[20%] right-[10%] md:right-[20%] opacity-20 hidden sm:block">
+              <svg width="120" height="120" viewBox="0 0 100 100" className="animate-[spin_60s_linear_infinite]">
+                <path
+                  d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
+                  stroke="#334455"
+                  strokeWidth="1"
+                  fill="none"
+                />
+                <path
+                  d="M50 5 L50 55 M93.3 30 L50 55 M6.7 30 L50 55"
+                  stroke="#334455"
+                  strokeWidth="1"
+                  fill="none"
+                  opacity="0.5"
+                />
+              </svg>
+            </div>
+
+            {/* 5. 幾何学オブジェクト: サイン波（物理・数学イメージ） */}
+            <div className="absolute bottom-[25%] right-[5%] md:right-[10%] opacity-20">
+              <svg width="150" height="60" viewBox="0 0 150 60">
+                <path d="M0 30 Q 37.5 0, 75 30 T 150 30" stroke="#009DE0" strokeWidth="2" fill="none" />
+              </svg>
+            </div>
+          </div>
+
+          {/* グラデーションオーバーレイ */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/90 to-[#F8FAFC]/40"></div>
+
+          {/* コンテンツエリア */}
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-20 md:pt-20">
             <div className="max-w-3xl text-left">
+              {/* ラベル部分 */}
               <div
-                className={`transition-all duration-1000 delay-300 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+                className={`transition-all duration-1000 delay-300 ${
+                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+                }`}
               >
                 <div className="inline-block mb-6 md:mb-8">
                   <p className="text-[#009DE0] text-sm md:text-base tracking-[0.15em] font-bold border-l-4 border-[#D6DE26] pl-3 py-1">
@@ -265,44 +326,64 @@ export default function ScienceMajorPage() {
                 </div>
               </div>
 
+              {/* 見出し部分（スマホ最適化済み・明朝体へ修正） */}
               <div
-                className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+                className={`transition-all duration-1000 delay-500 ${
+                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+                }`}
               >
-                <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl leading-tight md:leading-snug text-[#334455] mb-8 drop-shadow-sm tracking-tight">
-                  <span className="text-[#009DE0] relative inline-block mr-2">
-                    数学・理科
-                    <svg
-                      className="absolute w-full h-2 md:h-3 -bottom-1 left-0 text-[#D6DE26]/40 -z-10"
-                      viewBox="0 0 100 10"
-                      preserveAspectRatio="none"
-                    >
-                      <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
-                    </svg>
+                {/* font-serif を復活させました */}
+                <h2 className="font-serif font-bold text-[#334455] mb-8 drop-shadow-sm tracking-tight">
+                  {/* 1行目: 数学・理科を軸に、 */}
+                  <span className="text-3xl md:text-5xl leading-relaxed md:leading-snug block">
+                    <span className="relative inline-block mr-2">
+                      <span className="text-[#009DE0] relative z-10">数学・理科</span>
+                      {/* アンダーラインSVG: 文字に近づけた位置を維持 (bottom-0.5) */}
+                      <svg
+                        className="absolute w-full h-2 md:h-3 bottom-0.5 left-0 text-[#D6DE26]/60 -z-10"
+                        viewBox="0 0 100 10"
+                        preserveAspectRatio="none"
+                      >
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                      </svg>
+                    </span>
+                    を軸に、
                   </span>
-                  を軸に、
-                  <br />
-                  理系進学をめざすあなたへ。
+
+                  {/* 2行目: 理系進学をめざすあなたへ。 */}
+                  <span className="text-2xl md:text-5xl leading-relaxed md:leading-snug mt-3 md:mt-0 block">
+                    {/* PCでのみ改行を入れる */}
+                    <br className="hidden md:block" />
+                    理系進学をめざすあなたへ。
+                  </span>
                 </h2>
-                <p className="text-[#334455]/80 text-base md:text-lg leading-loose mb-10 max-w-2xl">
+
+                {/* 本文エリア */}
+                <p className="text-[#334455]/80 text-base md:text-lg leading-7 md:leading-loose mb-10 max-w-2xl">
+                  {/* スマホでは改行タグを無効化し、自然な折り返しに任せる */}
                   理系大学への進学は、将来の選択肢を大きく広げます。
-                  <br />
+                  <br className="hidden md:block" />
                   しかし、数学IIIや物理・化学など、乗り越えるべきハードルが高いのも事実です。
-                  <br />
+                  <br className="hidden md:block" />
                   さとう数理塾は、あなたの「理系に行きたい」という気持ちを、
                   <br className="hidden md:block" />
                   確実な学力と自信に変えるための個別指導塾です。
                 </p>
               </div>
 
+              {/* ボタンエリア */}
               <div
-                className={`transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+                className={`transition-all duration-1000 delay-700 ${
+                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+                }`}
               >
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="#contact"
-                    className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
+                    className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
                   >
-                    無料体験・学習相談を予約する <ArrowRight size={16} />
+                    無料体験・学習相談を予約する
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a
                     href="#vision"
