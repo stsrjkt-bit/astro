@@ -120,12 +120,18 @@ const DotNavigation = ({ activeSection }: { activeSection: string }) => {
 // アイコンのマッピング
 const getIcon = (id: string) => {
   switch (id) {
-    case 'vision': return <HelpCircle size={18} className="text-[#009DE0]" />;
-    case 'requirements': return <MapPin size={18} className="text-[#009DE0]" />;
-    case 'support': return <Lightbulb size={18} className="text-[#009DE0]" />;
-    case 'cases': return <CheckCircle2 size={18} className="text-[#009DE0]" />;
-    case 'contact': return <MessageCircle size={18} className="text-[#009DE0]" />;
-    default: return <ChevronRight size={18} className="text-[#009DE0]" />;
+    case 'vision':
+      return <HelpCircle size={18} className="text-[#009DE0]" />;
+    case 'requirements':
+      return <MapPin size={18} className="text-[#009DE0]" />;
+    case 'support':
+      return <Lightbulb size={18} className="text-[#009DE0]" />;
+    case 'cases':
+      return <CheckCircle2 size={18} className="text-[#009DE0]" />;
+    case 'contact':
+      return <MessageCircle size={18} className="text-[#009DE0]" />;
+    default:
+      return <ChevronRight size={18} className="text-[#009DE0]" />;
   }
 };
 
@@ -135,7 +141,7 @@ const MobileTableOfContents = () => {
     <div className="md:hidden w-full relative overflow-hidden">
       {/* 背景装飾: ブランドカラーを使った淡いグラデーション */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#009DE0]/5 via-[#F8FAFC] to-[#D6DE26]/10 pointer-events-none" />
-      
+
       {/* 上下のボーダーもグラデーションで表現 */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
@@ -144,9 +150,7 @@ const MobileTableOfContents = () => {
         {/* タイトル周り: 装飾ラインを入れて華やかに */}
         <div className="flex items-center justify-center gap-3 mb-6">
           <span className="h-[2px] w-8 bg-gradient-to-r from-transparent to-[#009DE0]"></span>
-          <p className="text-xs font-bold tracking-[0.2em] text-[#009DE0] uppercase">
-            Page Menu
-          </p>
+          <p className="text-xs font-bold tracking-[0.2em] text-[#009DE0] uppercase">Page Menu</p>
           <span className="h-[2px] w-8 bg-gradient-to-l from-transparent to-[#009DE0]"></span>
         </div>
 
@@ -167,9 +171,7 @@ const MobileTableOfContents = () => {
                     0{SECTIONS.indexOf(section)}
                   </span>
                   {/* 日本語ラベル */}
-                  <span className="text-sm font-bold text-[#334455]">
-                    {section.label}
-                  </span>
+                  <span className="text-sm font-bold text-[#334455]">{section.label}</span>
                 </div>
 
                 {/* アイコンサークル */}
