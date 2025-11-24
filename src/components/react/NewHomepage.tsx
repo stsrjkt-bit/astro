@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   MessageCircle,
   GraduationCap,
-  ChevronDown,
   Mail,
   Info,
   Lightbulb,
