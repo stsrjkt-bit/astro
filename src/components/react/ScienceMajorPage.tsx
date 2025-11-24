@@ -5,7 +5,11 @@ import {
   Calculator,
   ArrowRight,
   ChevronDown,
+  ChevronRight,
+  MapPin,
   CheckCircle2,
+  HelpCircle,
+  Lightbulb,
   MessageCircle,
   GraduationCap,
   BrainCircuit,
@@ -113,22 +117,69 @@ const DotNavigation = ({ activeSection }: { activeSection: string }) => {
   );
 };
 
+// アイコンのマッピング
+const getIcon = (id: string) => {
+  switch (id) {
+    case 'vision': return <HelpCircle size={18} className="text-[#009DE0]" />;
+    case 'requirements': return <MapPin size={18} className="text-[#009DE0]" />;
+    case 'support': return <Lightbulb size={18} className="text-[#009DE0]" />;
+    case 'cases': return <CheckCircle2 size={18} className="text-[#009DE0]" />;
+    case 'contact': return <MessageCircle size={18} className="text-[#009DE0]" />;
+    default: return <ChevronRight size={18} className="text-[#009DE0]" />;
+  }
+};
+
 // --- スマホ用 目次リスト (共通) ---
 const MobileTableOfContents = () => {
   return (
-    <div className="md:hidden px-6 py-8 bg-white/50 border-y border-[#009DE0]/10 backdrop-blur-sm">
-      <p className="text-xs text-[#334455]/50 tracking-widest uppercase font-bold mb-4 text-center">- Page Menu -</p>
-      <div className="grid grid-cols-2 gap-3">
-        {SECTIONS.slice(1).map((section) => (
-          <a
-            key={section.id}
-            href={`#${section.id}`}
-            className="flex items-center justify-between p-3 bg-white rounded-lg border border-[#009DE0]/10 shadow-sm text-sm font-medium text-[#334455] active:scale-95 transition-transform"
-          >
-            {section.label}
-            <ChevronDown size={14} className="text-[#009DE0] -rotate-90" />
-          </a>
-        ))}
+    <div className="md:hidden w-full relative overflow-hidden">
+      {/* 背景装飾: ブランドカラーを使った淡いグラデーション */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#009DE0]/5 via-[#F8FAFC] to-[#D6DE26]/10 pointer-events-none" />
+      
+      {/* 上下のボーダーもグラデーションで表現 */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
+
+      <div className="relative px-5 py-8">
+        {/* タイトル周り: 装飾ラインを入れて華やかに */}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="h-[2px] w-8 bg-gradient-to-r from-transparent to-[#009DE0]"></span>
+          <p className="text-xs font-bold tracking-[0.2em] text-[#009DE0] uppercase">
+            Page Menu
+          </p>
+          <span className="h-[2px] w-8 bg-gradient-to-l from-transparent to-[#009DE0]"></span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {SECTIONS.slice(1).map((section) => {
+            return (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className="group relative flex items-center justify-between p-3.5 rounded-xl shadow-sm transition-all duration-300 bg-white text-[#334455] hover:shadow-md hover:shadow-[#009DE0]/5 active:scale-95 border border-slate-100"
+              >
+                {/* 左端アクセントバー (ホバー時に表示) - 全項目共通にしました */}
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-2/3 bg-[#D6DE26] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div className="flex flex-col">
+                  {/* 英語ラベル（装飾用） */}
+                  <span className="text-[10px] uppercase tracking-wider font-bold mb-0.5 text-[#009DE0]/70">
+                    0{SECTIONS.indexOf(section)}
+                  </span>
+                  {/* 日本語ラベル */}
+                  <span className="text-sm font-bold text-[#334455]">
+                    {section.label}
+                  </span>
+                </div>
+
+                {/* アイコンサークル */}
+                <div className="flex items-center justify-center w-8 h-8 rounded-full transition-transform group-hover:scale-110 bg-[#F8FAFC] group-hover:bg-[#009DE0]/10">
+                  {getIcon(section.id)}
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
