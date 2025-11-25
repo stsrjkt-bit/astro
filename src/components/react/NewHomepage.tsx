@@ -78,7 +78,15 @@ const DecorativeBlob = ({
 );
 
 // --- スクロール連動アニメーション用コンポーネント ---
-const Reveal = ({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) => {
+const Reveal = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -162,7 +170,9 @@ const DotNavigation = ({ activeSection }: { activeSection: string }) => {
           </span>
           <div
             className={`w-3 h-3 rounded-full transition-all duration-500 border-2 border-[#009DE0] shadow-sm ${
-              activeSection === section.id ? 'bg-[#009DE0] scale-125 border-transparent' : 'bg-white hover:bg-[#009DE0]/20'
+              activeSection === section.id
+                ? 'bg-[#009DE0] scale-125 border-transparent'
+                : 'bg-white hover:bg-[#009DE0]/20'
             }`}
           />
         </a>
@@ -524,7 +534,10 @@ export default function NewHomepage() {
       {/* ===========================================
           NEW HERO SECTION (Top) - Egg Hatching
          =========================================== */}
-      <section id="top" className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF]">
+      <section
+        id="top"
+        className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF]"
+      >
         {/* 背景のグラデーション装飾 */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] bg-gradient-to-b from-[#BAE6FD] to-transparent rounded-full opacity-70 blur-3xl animate-blob" />
@@ -555,7 +568,11 @@ export default function NewHomepage() {
               </span>
 
               {/* 2. ロゴ画像表示 */}
-              <img src="/images/sato-math-logo.png" alt="さとう数理塾のロゴ" className="h-16 md:h-24 w-auto object-contain mt-2" />
+              <img
+                src="/images/sato-math-logo.png"
+                alt="さとう数理塾のロゴ"
+                className="h-16 md:h-24 w-auto object-contain mt-2"
+              />
             </h1>
 
             {/* 装飾ライン */}
@@ -640,12 +657,17 @@ export default function NewHomepage() {
       {/* ===========================================
           OLD HERO SECTION (Moved to Concept)
          =========================================== */}
-      <section id="concept" className="relative w-full min-h-[90vh] md:min-h-[100vh] flex items-center overflow-hidden bg-white">
+      <section
+        id="concept"
+        className="relative w-full min-h-[90vh] md:min-h-[100vh] flex items-center overflow-hidden bg-white"
+      >
         {/* 背景画像エリア */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div
             className="w-full h-full"
-            style={{ transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? window.innerHeight : 0)) * 0.4}px)` }}
+            style={{
+              transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? window.innerHeight : 0)) * 0.4}px)`,
+            }}
           >
             <img
               src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop"
@@ -679,7 +701,9 @@ export default function NewHomepage() {
                 </span>
                 をあきらめない
                 <br />
-                <span className="text-2xl md:text-4xl text-[#334455] font-medium mt-4 block">高校生のための個別指導塾</span>
+                <span className="text-2xl md:text-4xl text-[#334455] font-medium mt-4 block">
+                  高校生のための個別指導塾
+                </span>
               </h2>
 
               {/* サブコピー */}
@@ -703,7 +727,10 @@ export default function NewHomepage() {
           {/* 背景装飾 */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl z-[-1]">
             <DecorativeBlob color="bg-[#D6DE26]" className="top-0 right-0 opacity-20 w-96 h-96" />
-            <DecorativeBlob color="bg-[#009DE0]" className="bottom-0 left-0 opacity-20 w-96 h-96 animation-delay-2000" />
+            <DecorativeBlob
+              color="bg-[#009DE0]"
+              className="bottom-0 left-0 opacity-20 w-96 h-96 animation-delay-2000"
+            />
           </div>
 
           <Reveal>
@@ -939,7 +966,10 @@ export default function NewHomepage() {
                   {['東北大学', '東京理科大学', '芝浦工業大学', '立命館大学'].map((school, i) => (
                     <li key={i} className="flex items-center justify-between border-b border-white/20 pb-3 group">
                       <span className="font-medium text-lg">{school}</span>
-                      <CheckCircle2 size={16} className="text-[#009DE0] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <CheckCircle2
+                        size={16}
+                        className="text-[#009DE0] opacity-0 group-hover:opacity-100 transition-opacity"
+                      />
                     </li>
                   ))}
                   <li className="text-xs text-right text-white/50 mt-2">など</li>
@@ -959,7 +989,10 @@ export default function NewHomepage() {
                   {['沼津東高校', '沼津西高校', '韮山高校', '三島北高校'].map((school, i) => (
                     <li key={i} className="flex items-center justify-between border-b border-white/20 pb-3 group">
                       <span className="font-medium text-lg">{school}</span>
-                      <CheckCircle2 size={16} className="text-[#D6DE26] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <CheckCircle2
+                        size={16}
+                        className="text-[#D6DE26] opacity-0 group-hover:opacity-100 transition-opacity"
+                      />
                     </li>
                   ))}
                   <li className="text-xs text-right text-white/50 mt-2">など</li>
@@ -1119,7 +1152,10 @@ export default function NewHomepage() {
       {/* ===========================================
           CONTACT / CTA
          =========================================== */}
-      <section id="contact" className="py-24 md:py-32 bg-gradient-to-br from-[#009DE0] to-[#007BB0] text-white relative overflow-hidden">
+      <section
+        id="contact"
+        className="py-24 md:py-32 bg-gradient-to-br from-[#009DE0] to-[#007BB0] text-white relative overflow-hidden"
+      >
         {/* 背景装飾 */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
         <DecorativeBlob color="bg-white" className="top-0 right-0 opacity-10 w-[600px] h-[600px] mix-blend-overlay" />
