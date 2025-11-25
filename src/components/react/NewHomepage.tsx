@@ -1207,7 +1207,7 @@ export default function NewHomepage() {
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                   <path d="M12 2.5C7.2 2.5 3 5.8 3 9.8C3 12.3 4.5 14.5 6.8 15.7C7.6 16.1 7.2 17.6 7 18.2C6.9 18.6 6.8 19.3 7.4 19.4C7.9 19.5 8.7 19.1 10.3 18C10.3 18 10.3 18 10.3 18C10.9 18.1 11.4 18.1 12 18.1C16.8 18.1 21 14.8 21 10.8C21 6.8 16.8 2.5 12 2.5Z" />
                 </svg>
-                <span className="text-lg">LINEで気軽に質問する</span>
+                <span className="text-lg">LINEで質問する</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
