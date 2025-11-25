@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Explicit reset for html and body to prevent any browser default margins */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 @layer utilities {
   .bg-page {
     background-color: var(--aw-color-bg-page);

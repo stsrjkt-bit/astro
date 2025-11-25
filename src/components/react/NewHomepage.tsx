@@ -484,7 +484,7 @@ export default function NewHomepage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden m-0 p-0">
       {/* アニメーション用スタイル定義 */}
       <style>{`
         @keyframes float {
