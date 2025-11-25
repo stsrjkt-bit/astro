@@ -484,7 +484,7 @@ export default function NewHomepage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden m-0 p-0">
       {/* アニメーション用スタイル定義 */}
       <style>{`
         @keyframes float {
@@ -536,7 +536,7 @@ export default function NewHomepage() {
          =========================================== */}
       <section
         id="top"
-        className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF]"
+        className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF] -mt-[2px] pt-[2px]"
       >
         {/* 背景のグラデーション装飾 */}
         <div className="absolute inset-0 overflow-hidden">
