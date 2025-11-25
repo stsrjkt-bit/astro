@@ -484,7 +484,7 @@ export default function NewHomepage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0]">
+    <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden">
       {/* アニメーション用スタイル定義 */}
       <style>{`
         @keyframes float {
@@ -540,8 +540,8 @@ export default function NewHomepage() {
       >
         {/* 背景のグラデーション装飾 */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] bg-gradient-to-b from-[#BAE6FD] to-transparent rounded-full opacity-70 blur-3xl animate-blob" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-gradient-to-t from-[#E0F2FE] to-transparent rounded-full opacity-70 blur-3xl animate-blob animation-delay-2000" />
+          <div className="absolute top-[-20%] right-[5%] w-[50vw] h-[50vw] bg-gradient-to-b from-[#BAE6FD] to-transparent rounded-full opacity-70 blur-3xl animate-blob" />
+          <div className="absolute bottom-[-20%] left-[5%] w-[40vw] h-[40vw] bg-gradient-to-t from-[#E0F2FE] to-transparent rounded-full opacity-70 blur-3xl animate-blob animation-delay-2000" />
         </div>
 
         {/* 幾何学的なグリッドライン */}
