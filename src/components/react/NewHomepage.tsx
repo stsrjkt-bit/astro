@@ -536,12 +536,12 @@ export default function NewHomepage() {
          =========================================== */}
       <section
         id="top"
-        className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF]"
+        className="relative w-full h-[100vh] flex items-center justify-center overflow-x-hidden bg-[#F0F9FF]"
       >
         {/* 背景のグラデーション装飾 */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] bg-gradient-to-b from-[#BAE6FD] to-transparent rounded-full opacity-70 blur-3xl animate-blob" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-gradient-to-t from-[#E0F2FE] to-transparent rounded-full opacity-70 blur-3xl animate-blob animation-delay-2000" />
+          <div className="absolute top-[-20%] right-0 w-[60vw] h-[60vw] bg-gradient-to-b from-[#BAE6FD] to-transparent rounded-full opacity-70 blur-3xl animate-blob" />
+          <div className="absolute bottom-[-20%] left-0 w-[50vw] h-[50vw] bg-gradient-to-t from-[#E0F2FE] to-transparent rounded-full opacity-70 blur-3xl animate-blob animation-delay-2000" />
         </div>
 
         {/* 幾何学的なグリッドライン */}
