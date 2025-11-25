@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 /* Explicit reset for html and body to prevent any browser default margins */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
