@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>横スクロール調査スクリプト</title>
+</head>
+<body>
+    <h1>横スクロール調査スクリプト</h1>
+    <p>以下のスクリプトをブラウザのコンソールで実行してください：</p>
+    
+    <h2>1. 基本チェック（scrollWidth vs innerWidth）</h2>
+    <pre><code>console.log('documentElement.scrollWidth:', document.documentElement.scrollWidth);
+console.log('window.innerWidth:', window.innerWidth);
+console.log('差分:', document.documentElement.scrollWidth - window.innerWidth, 'px');</code></pre>
+
+    <h2>2. 全要素の横幅チェック</h2>
+    <pre><code>// すべての要素の横幅をチェックし、ビューポートからはみ出ている要素を検出
+const allElements = document.querySelectorAll('*');
+const overflowElements = [];
+const viewportWidth = window.innerWidth;
+
+allElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const computedStyle = window.getComputedStyle(el);
+    
+    // 要素の右端がビューポートからはみ出ているかチェック
+    if (rect.right > viewportWidth) {
+        overflowElements.push({
+            element: el,
+            tag: el.tagName,
+            classes: el.className,
+            right: rect.right,
+            overflow: rect.right - viewportWidth,
+            width: rect.width,
+            position: computedStyle.position,
+            left: rect.left
+        });
+    }
+});
+
+// オーバーフロー量でソート（大きい順）
+overflowElements.sort((a, b) => b.overflow - a.overflow);
+
+console.log('=== ビューポートからはみ出ている要素 ===');
+console.log('ビューポート幅:', viewportWidth, 'px');
+console.log('はみ出ている要素数:', overflowElements.length);
+console.log('');
+
+overflowElements.slice(0, 10).forEach((item, index) => {
+    console.log(`${index + 1}. ${item.tag} ${item.classes ? '.' + item.classes.split(' ').join('.') : ''}`);
+    console.log(`   位置: ${item.position}`);
+    console.log(`   left: ${item.left.toFixed(2)}px, right: ${item.right.toFixed(2)}px`);
+    console.log(`   width: ${item.width.toFixed(2)}px`);
+    console.log(`   はみ出し量: ${item.overflow.toFixed(2)}px`);
+    console.log('   要素:', item.element);
+    console.log('');
+});</code></pre>
+
+    <h2>3. アウトライン表示（視覚的確認）</h2>
+    <pre><code>// すべての要素に赤い枠線を追加
+document.querySelectorAll('*').forEach(el => {
+    el.style.outline = '1px solid red';
+});</code></pre>
+
+    <h2>4. 特定要素のチェック</h2>
+    <pre><code>// FAQチャットランチャーのチェック
+const faqLauncher = document.getElementById('faq-chat-launcher');
+const faqWrapper = document.getElementById('faq-chat-iframe-wrapper');
+if (faqLauncher) {
+    console.log('=== FAQランチャー ===');
+    console.log('位置:', faqLauncher.getBoundingClientRect());
+    console.log('スタイル:', window.getComputedStyle(faqLauncher));
+}
+if (faqWrapper) {
+    console.log('=== FAQラッパー ===');
+    console.log('位置:', faqWrapper.getBoundingClientRect());
+    console.log('スタイル:', window.getComputedStyle(faqWrapper));
+}
+
+// ギャラリーセクションのチェック
+const gallery = document.getElementById('gallery');
+if (gallery) {
+    console.log('=== ギャラリー ===');
+    const scrollContainer = gallery.querySelector('[class*="overflow-x"]');
+    if (scrollContainer) {
+        console.log('スクロールコンテナ:', scrollContainer.getBoundingClientRect());
+        console.log('子要素:');
+        scrollContainer.querySelectorAll('div').forEach((child, i) => {
+            if (i < 5) {
+                const rect = child.getBoundingClientRect();
+                console.log(`  ${i + 1}. left: ${rect.left.toFixed(2)}, right: ${rect.right.toFixed(2)}, width: ${rect.width.toFixed(2)}`);
+            }
+        });
+    }
+}</code></pre>
+
+    <h2>5. Body/HTML の overflow チェック</h2>
+    <pre><code>console.log('=== HTML/Body のサイズ ===');
+console.log('html.scrollWidth:', document.documentElement.scrollWidth);
+console.log('html.clientWidth:', document.documentElement.clientWidth);
+console.log('html.offsetWidth:', document.documentElement.offsetWidth);
+console.log('body.scrollWidth:', document.body.scrollWidth);
+console.log('body.clientWidth:', document.body.clientWidth);
+console.log('body.offsetWidth:', document.body.offsetWidth);
+console.log('window.innerWidth:', window.innerWidth);</code></pre>
+</body>
+</html>
