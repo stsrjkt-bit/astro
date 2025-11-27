@@ -727,8 +727,6 @@ export default function NewHomepage() {
         </div>
       </section>
 
-      <MobileTableOfContents />
-
       {/* ===========================================
           共感・問題提起 (EMPATHY) - レイアウト修正版
          =========================================== */}
@@ -821,6 +819,8 @@ export default function NewHomepage() {
           </Reveal>
         </div>
       </section>
+
+      <MobileTableOfContents />
 
       {/* ===========================================
           ABOUT & FEATURES
