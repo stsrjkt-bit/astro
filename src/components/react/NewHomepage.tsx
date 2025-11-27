@@ -767,7 +767,8 @@ export default function NewHomepage() {
                   </h3>
 
                   <p className="text-base md:text-lg text-[#334455]/70 font-medium leading-relaxed">
-                    「このまま何もしなければ、この子の将来の選択肢が狭まってしまうかもしれない」—— 学力を立て直すきっかけは、たいていそんな心配から生まれます。
+                    「このまま何もしなければ、この子の将来の選択肢が狭まってしまうかもしれない」——
+                    学力を立て直すきっかけは、たいていそんな心配から生まれます。
                   </p>
 
                   <p className="text-base md:text-lg text-[#334455]/70 font-medium leading-relaxed">
