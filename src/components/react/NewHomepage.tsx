@@ -546,7 +546,7 @@ export default function NewHomepage() {
          =========================================== */}
       <section
         id="top"
-        className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF] -mt-[2px] pt-[2px]"
+        className="relative w-full h-[80vh] md:h-[100vh] flex items-center justify-center overflow-hidden bg-[#F0F9FF] -mt-[2px] pt-[2px]"
       >
         {/* 背景のグラデーション装飾 */}
         <div className="absolute inset-0 overflow-hidden">
