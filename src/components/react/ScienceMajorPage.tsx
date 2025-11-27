@@ -334,26 +334,24 @@ export default function ScienceMajorPage() {
               >
                 {/* font-serif を復活させました */}
                 <h2 className="font-serif font-bold text-[#334455] mb-8 drop-shadow-sm tracking-tight">
-                  {/* 1行目: 数学・理科を軸に、 */}
-                  <span className="text-3xl md:text-5xl leading-relaxed md:leading-snug block">
-                    <span className="relative inline-block mr-2">
-                      <span className="text-[#009DE0] relative z-10">数学・理科</span>
-                      {/* アンダーラインSVG: 文字に近づけた位置を維持 (bottom-0.5) */}
+                  {/* 1行目: 数学・理科を軸に、 - PCでより存在感を出す */}
+                  <span className="text-3xl md:text-[3.25rem] leading-relaxed md:leading-tight block">
+                    <span className="relative inline-block mr-1 md:mr-2">
+                      <span className="text-[#009DE0] relative z-10 font-extrabold">数学・理科</span>
+                      {/* アンダーラインSVG: 太さを増して安定感を出す */}
                       <svg
-                        className="absolute w-full h-2 md:h-3 bottom-0.5 left-0 text-[#D6DE26]/60 -z-10"
+                        className="absolute w-full h-2.5 md:h-4 bottom-0 md:bottom-0.5 left-0 text-[#D6DE26]/70 -z-10"
                         viewBox="0 0 100 10"
                         preserveAspectRatio="none"
                       >
-                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="10" fill="none" />
                       </svg>
                     </span>
                     を軸に、
                   </span>
 
-                  {/* 2行目: 理系進学をめざすあなたへ。 */}
-                  <span className="text-2xl md:text-5xl leading-relaxed md:leading-snug mt-3 md:mt-0 block">
-                    {/* PCでのみ改行を入れる */}
-                    <br className="hidden md:block" />
+                  {/* 2行目: 理系進学をめざすあなたへ。 - 1行目と一体感を持たせる */}
+                  <span className="text-2xl md:text-[2.75rem] leading-relaxed md:leading-tight mt-2 md:mt-1 block">
                     理系進学をめざすあなたへ。
                   </span>
                 </h2>
