@@ -759,6 +759,14 @@ export default function NewHomepage() {
                   </h3>
 
                   <p className="text-base md:text-lg text-[#334455]/70 font-medium leading-relaxed">
+                    「このまま何もしなければ、この子の将来の選択肢が
+                    <br className="hidden md:block" />
+                    狭まってしまうかもしれない」——
+                    <br className="hidden md:block" />
+                    学力を立て直すきっかけは、たいていそんな心配から生まれます。
+                  </p>
+
+                  <p className="text-base md:text-lg text-[#334455]/70 font-medium leading-relaxed">
                     中学まではしっかり点が取れていたのに、高校に入ってからのテストで、数学の点数や順位が思うように伸びない。
                   </p>
                 </div>
