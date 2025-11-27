@@ -203,6 +203,16 @@ const getIcon = (id: string) => {
   }
 };
 
+// --- MENU用セクション（「当塾の想い」を除外した6つ） ---
+const MENU_SECTIONS = [
+  { id: 'about', label: '当塾について' },
+  { id: 'features', label: '3つの特徴' },
+  { id: 'achievements', label: '合格実績' },
+  { id: 'gallery', label: '教室の様子' },
+  { id: 'access', label: 'アクセス' },
+  { id: 'contact', label: 'お問い合わせ' },
+];
+
 // --- スマホ用 目次リスト ---
 const MobileTableOfContents = () => {
   return (
@@ -216,7 +226,7 @@ const MobileTableOfContents = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3">
-          {SECTIONS.slice(1).map((section) => (
+          {MENU_SECTIONS.map((section, index) => (
             <a
               key={section.id}
               href={`#${section.id}`}
@@ -224,7 +234,7 @@ const MobileTableOfContents = () => {
             >
               <div className="flex flex-col">
                 <span className="text-[10px] uppercase tracking-wider font-bold mb-0.5 text-[#009DE0]/60">
-                  0{SECTIONS.indexOf(section)}
+                  0{index + 1}
                 </span>
                 <span className="text-sm font-bold text-[#334455]">{section.label}</span>
               </div>
