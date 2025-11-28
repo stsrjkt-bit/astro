@@ -12,7 +12,7 @@ import {
   Calendar,
   Sparkles,
   Gift,
-  School
+  School,
 } from 'lucide-react';
 
 // --- EmailJS 設定 (本番用) ---
@@ -28,7 +28,7 @@ const TEMPLATE_ID_TRIAL = 'template_uhgfgbf';
 const getUpcomingMonths = () => {
   const options = [];
   const today = new Date();
-  
+
   for (let i = 0; i < 2; i++) {
     const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
     options.push(`${d.getFullYear()}年${d.getMonth() + 1}月`);
@@ -43,7 +43,7 @@ function TrialForm() {
   const [submitStatus, setSubmitStatus] = useState(null); // null, 'success', 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [isEmailJsLoaded, setIsEmailJsLoaded] = useState(false);
-  
+
   // フォームの状態
   const [trialMonths, setTrialMonths] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('');
@@ -51,7 +51,7 @@ function TrialForm() {
   // EmailJSスクリプトの動的読み込み
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
     script.async = true;
     script.onload = () => {
       setIsEmailJsLoaded(true);
@@ -82,28 +82,23 @@ function TrialForm() {
 
     // フォームデータから値を取得
     const formData = new FormData(e.currentTarget);
-    
+
     // EmailJSに渡すパラメータを構築
     const templateParams = {
       // フォームの入力項目
-      month: selectedMonth,                 // 体験希望月（Stateから）
-      name: formData.get('name'),           // お名前
-      grade: formData.get('grade'),         // 学年
-      email: formData.get('email'),         // メールアドレス
+      month: selectedMonth, // 体験希望月（Stateから）
+      name: formData.get('name'), // お名前
+      grade: formData.get('grade'), // 学年
+      email: formData.get('email'), // メールアドレス
       message: formData.get('message') || 'なし', // ご質問・ご要望
     };
 
     try {
       // EmailJSによる送信（自動返信 + BCC管理者通知）
       // window.emailjs を使用
-      await window.emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID_TRIAL,
-        templateParams,
-        {
-          publicKey: PUBLIC_KEY,
-        }
-      );
+      await window.emailjs.send(SERVICE_ID, TEMPLATE_ID_TRIAL, templateParams, {
+        publicKey: PUBLIC_KEY,
+      });
 
       // 成功時の処理
       setSubmitStatus('success');
@@ -125,7 +120,11 @@ function TrialForm() {
         <div className="w-20 h-20 md:w-24 md:h-24 bg-[#009DE0]/10 text-[#009DE0] rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
           <CheckCircle2 size={40} strokeWidth={1.5} className="md:w-12 md:h-12" />
         </div>
-        <h3 className="text-xl md:text-3xl font-bold text-[#334455] mb-4 font-serif">お申込み<br className="md:hidden" />ありがとうございました</h3>
+        <h3 className="text-xl md:text-3xl font-bold text-[#334455] mb-4 font-serif">
+          お申込み
+          <br className="md:hidden" />
+          ありがとうございました
+        </h3>
         <p className="text-[#334455]/80 leading-relaxed mb-6 md:mb-8 text-base md:text-lg">
           無料体験授業のお申込みを受け付けました。
           <br />
@@ -138,9 +137,7 @@ function TrialForm() {
             <Calendar size={16} className="text-[#009DE0]" />
             体験希望月
           </p>
-          <p className="text-lg md:text-xl text-[#009DE0] font-bold">
-            {selectedMonth}
-          </p>
+          <p className="text-lg md:text-xl text-[#009DE0] font-bold">{selectedMonth}</p>
         </div>
         <br />
         <button
@@ -158,7 +155,7 @@ function TrialForm() {
       {/* ヘッダー背景装飾 */}
       <div className="absolute top-0 left-0 w-full h-48 md:h-64 bg-gradient-to-br from-[#009DE0]/10 to-transparent pointer-events-none"></div>
       <div className="absolute top-[-30px] right-[-30px] w-40 h-40 md:w-64 md:h-64 bg-[#D6DE26]/10 rounded-full blur-2xl md:blur-3xl pointer-events-none"></div>
-      
+
       {/* お得なバッジ装飾 */}
       <div className="absolute top-3 right-3 md:top-8 md:right-8 animate-bounce-slow z-20">
         <div className="bg-gradient-to-r from-[#D6DE26] to-[#c0c918] text-[#334455] font-black text-[10px] md:text-sm px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-lg transform rotate-3 flex items-center gap-1 border-2 border-white whitespace-nowrap">
@@ -175,11 +172,15 @@ function TrialForm() {
             無料体験のお申込み
             <span className="block h-1 w-16 md:w-24 bg-gradient-to-r from-[#009DE0] to-[#D6DE26] mx-auto mt-3 rounded-full"></span>
           </h2>
-          
+
           {/* 説明文エリア */}
           <div className="bg-white/80 backdrop-blur-sm border border-[#009DE0]/20 rounded-xl p-4 md:p-6 max-w-xl mx-auto shadow-sm">
             <p className="text-[#334455]/90 text-sm md:text-base leading-relaxed font-medium text-left md:text-center">
-              さとう数理塾の授業を<span className="text-[#009DE0] font-bold border-b-2 border-[#D6DE26] whitespace-nowrap">実際の通塾と同じ形</span>でお試しいただけます。
+              さとう数理塾の授業を
+              <span className="text-[#009DE0] font-bold border-b-2 border-[#D6DE26] whitespace-nowrap">
+                実際の通塾と同じ形
+              </span>
+              でお試しいただけます。
             </p>
             <div className="mt-3 md:mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-center gap-2 md:gap-4 text-xs md:text-sm text-[#334455]/70">
               <span className="flex items-center gap-1.5 bg-[#F8FAFC] px-2 py-1 rounded-lg w-full sm:w-auto">
@@ -193,7 +194,6 @@ function TrialForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
-          
           {/* セクション1: 体験月選択 */}
           <div className="bg-white p-5 md:p-8 rounded-xl md:rounded-2xl border border-[#334455]/5 shadow-sm relative overflow-hidden group hover:border-[#009DE0]/30 transition-colors">
             <div className="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-[#D6DE26]"></div>
@@ -286,7 +286,7 @@ function TrialForm() {
                 </div>
               </div>
             </div>
-            
+
             <div className="group">
               <label
                 htmlFor="email"
@@ -304,7 +304,7 @@ function TrialForm() {
                 className="w-full px-4 py-3.5 md:py-4 rounded-lg md:rounded-xl bg-white border-2 border-[#334455]/10 focus:bg-white focus:border-[#009DE0] outline-none transition-all shadow-sm text-base"
               />
             </div>
-            
+
             <div className="group">
               <label
                 htmlFor="message"
