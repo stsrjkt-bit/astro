@@ -452,7 +452,7 @@ const HabitSection = () => {
             </p>
             <h2 className="font-serif text-2xl md:text-4xl font-bold text-[#334455] leading-relaxed md:leading-normal">
               <span className="inline decoration-clone bg-gradient-to-b from-transparent from-[60%] to-[#D6DE26]/60 to-[60%] px-1 rounded-sm">
-                「通うことで習慣になる」個別指導
+                「通うことで習慣になる」<br className="md:hidden" />個別指導
               </span>
             </h2>
           </div>
