@@ -14,10 +14,9 @@ import {
   Sparkles,
 } from 'lucide-react';
 
-// ★★★ EmailJS設定（修正済み） ★★★
+// ★★★ EmailJS設定 ★★★
 const SERVICE_ID = 'service_n0c0j1h';
-const TEMPLATE_ID_ADMIN = 'template_uhgfgbf'; // 自分への通知（リスト上）
-const TEMPLATE_ID_USER = 'template_rtp1cpn'; // お客様への自動返信（リスト下）
+const TEMPLATE_ID_USER = 'template_rtp1cpn'; // お客様への自動返信（BCC で管理者にも届く）
 const PUBLIC_KEY = '75aPkLl0nC7hPtQUs';
 // ★★★★★★★★★★★★★★★★★★★★★★
 
@@ -96,10 +95,7 @@ export default function ConsultationForm() {
     };
 
     try {
-      // 1. 自分（管理者）へ通知メール送信
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID_ADMIN, templateParams);
-
-      // 2. お客様へ自動返信メール送信
+      // お客様への自動返信メール送信（BCC で管理者にも届く前提）
       await emailjs.send(SERVICE_ID, TEMPLATE_ID_USER, templateParams);
 
       setSubmitStatus('success');
