@@ -433,10 +433,7 @@ const HatchingEgg = () => {
 // --- ★学習習慣セクション (Topページ挿入用) ---
 const HabitSection = () => {
   return (
-    <section
-      id="habit"
-      className="py-20 md:py-32 bg-[#F8FAFC] border-y border-[#334455]/5 relative overflow-hidden"
-    >
+    <section id="habit" className="py-20 md:py-32 bg-[#F8FAFC] border-y border-[#334455]/5 relative overflow-hidden">
       {/* 背景装飾 */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 -left-20 w-96 h-96 bg-[#009DE0]/5 rounded-full blur-3xl"></div>
@@ -452,7 +449,9 @@ const HabitSection = () => {
             </p>
             <h2 className="font-serif text-2xl md:text-4xl font-bold text-[#334455] leading-relaxed md:leading-normal">
               <span className="inline decoration-clone bg-gradient-to-b from-transparent from-[60%] to-[#D6DE26]/60 to-[60%] px-1 rounded-sm">
-                「通うことで習慣になる」<br className="md:hidden" />個別指導
+                「通うことで習慣になる」
+                <br className="md:hidden" />
+                個別指導
               </span>
             </h2>
           </div>
@@ -460,15 +459,12 @@ const HabitSection = () => {
 
         {/* 2カラム本体 */}
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-          
           {/* 左：高校生・保護者の声 */}
           <Reveal delay={200}>
             <div className="space-y-8 h-full flex flex-col justify-center">
               <div className="flex items-center gap-3">
                 <div className="h-[2px] w-8 bg-[#334455]/20"></div>
-                <p className="text-sm font-bold text-[#334455]/60 tracking-wide">
-                  よくいただくお悩み
-                </p>
+                <p className="text-sm font-bold text-[#334455]/60 tracking-wide">よくいただくお悩み</p>
               </div>
 
               {/* 高校生の声 */}
@@ -478,17 +474,18 @@ const HabitSection = () => {
                   <div className="w-10 h-10 rounded-full bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0]">
                     <Smartphone size={20} />
                   </div>
-                  <p className="text-base font-bold text-[#334455]">
-                    高校生の声
-                  </p>
+                  <p className="text-base font-bold text-[#334455]">高校生の声</p>
                 </div>
                 <ul className="space-y-4">
                   {[
                     '部活から帰るとヘトヘトで、机に向かう前に寝てしまう',
                     '今日こそやろうと思うけれど、気づけばスマホで一日が終わる',
-                    '一度サボると「今さらやっても…」と思って動けなくなる'
+                    '一度サボると「今さらやっても…」と思って動けなくなる',
                   ].map((text, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed">
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
+                    >
                       <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#009DE0]/40 shrink-0" />
                       {text}
                     </li>
@@ -503,17 +500,18 @@ const HabitSection = () => {
                   <div className="w-10 h-10 rounded-full bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514]">
                     <AlertCircle size={20} />
                   </div>
-                  <p className="text-base font-bold text-[#334455]">
-                    保護者さまの声
-                  </p>
+                  <p className="text-base font-bold text-[#334455]">保護者さまの声</p>
                 </div>
                 <ul className="space-y-4">
                   {[
                     '「勉強しなさい」と言うたびに、家の空気がピリッとしてしまう',
                     'スマホやゲームを全部やめさせるのも違う気がしてモヤモヤする',
-                    'どこまで親が口を出してよいのか、線引きが難しい'
+                    'どこまで親が口を出してよいのか、線引きが難しい',
                   ].map((text, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed">
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
+                    >
                       <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#EA5514]/40 shrink-0" />
                       {text}
                     </li>
@@ -531,15 +529,17 @@ const HabitSection = () => {
               <div className="absolute top-4 right-4 text-xs font-bold text-[#334455] bg-[#D6DE26] px-3 py-1 rounded-full shadow-sm z-10">
                 Solution
               </div>
-              
+
               <div className="mb-8">
                 <p className="text-xs font-bold text-[#009DE0] tracking-wide mb-3 flex items-center gap-2">
                   <CheckCircle2 size={16} />
                   さとう数理塾の「答え」
                 </p>
                 <h3 className="text-xl md:text-2xl font-bold text-[#334455] leading-relaxed">
-                  「時間・場所・やること」を固定して<br/>
-                  <span className="bg-gradient-to-r from-[#D6DE26]/40 to-transparent pr-4">意志の力に頼らない習慣</span>を作ります。
+                  「時間・場所・やること」を固定して
+                  <br />
+                  <span className="bg-gradient-to-r from-[#D6DE26]/40 to-transparent pr-4">意志の力に頼らない習慣</span>
+                  を作ります。
                 </h3>
               </div>
 
@@ -550,9 +550,7 @@ const HabitSection = () => {
                     <Clock size={24} />
                   </div>
                   <div>
-                    <p className="font-bold text-[#334455] text-lg mb-2">
-                      平日18:50〜21:50の「夜の勉強スロット」
-                    </p>
+                    <p className="font-bold text-[#334455] text-lg mb-2">平日18:50〜21:50の「夜の勉強スロット」</p>
                     <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
                       この時間はいつ来てもOK。週1でも週5でも、通う回数が増えても月謝は同じ「回数自由・定額制」です。
                     </p>
@@ -565,9 +563,7 @@ const HabitSection = () => {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <p className="font-bold text-[#334455] text-lg mb-2">
-                      家でも学校でもない「半こもり空間」
-                    </p>
+                    <p className="font-bold text-[#334455] text-lg mb-2">家でも学校でもない「半こもり空間」</p>
                     <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
                       個別ブースで周りの視線を気にせず集中。分からないところだけ、塾長が1対1でフォローします。
                     </p>
@@ -595,7 +591,7 @@ const HabitSection = () => {
                 <div className="bg-[#F8FAFC] rounded-lg p-4 inline-block w-full">
                   <p className="text-sm text-[#334455]/80 leading-relaxed">
                     「うちの子の場合、どんな通い方が合いそう？」
-                    <br className="md:hidden"/>
+                    <br className="md:hidden" />
                     といったご相談は
                     <a
                       href="/counseling"
