@@ -1,379 +1,598 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>さとう数理塾 (@sato_suuri) • 私立進学校の理系サポート</title>
-    
+
     <!-- Google tag (gtag.js) - GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7GL0JEEMD"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
 
       gtag('config', 'G-F7GL0JEEMD');
     </script>
-    
+
     <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <!-- Tailwind CSS (プレビュー用) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 800: '#1e293b' },
-                        insta: { blue: '#0095f6', darkBlue: '#00376b' }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              slate: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 800: '#1e293b' },
+              insta: { blue: '#0095f6', darkBlue: '#00376b' },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
     </script>
     <style>
-        /* スクロールバー非表示 */
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        /* スムーズスクロール */
-        html { scroll-behavior: smooth; }
+      /* スクロールバー非表示 */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* スムーズスクロール */
+      html {
+        scroll-behavior: smooth;
+      }
     </style>
 
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '827225263558043');
-    fbq('track', 'PageView');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '827225263558043');
+      fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=827225263558043&ev=PageView&noscript=1"
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=827225263558043&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-</head>
-<body class="bg-white text-[#262626] font-sans antialiased">
+  </head>
+  <body class="bg-white text-[#262626] font-sans antialiased">
+    <main class="min-h-screen pb-16">
+      <!-- ヘッダー -->
+      <header
+        class="sticky top-0 z-50 bg-white border-b border-[#dbdbdb] h-14 flex items-center px-4 justify-between shadow-sm sm:shadow-none"
+      >
+        <div class="flex items-center gap-4">
+          <!-- 戻るアイコンにリンクを追加 (URL修正) -->
+          <a href="https://www.stsrjk.com/" class="text-[#262626] hover:opacity-60 transition-opacity">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+          </a>
+          <div class="font-bold text-lg">sato_suuri_juku</div>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-6 h-6 text-[#262626] cursor-pointer"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </header>
 
-  <main class="min-h-screen pb-16">
-    
-    <!-- ヘッダー -->
-    <header class="sticky top-0 z-50 bg-white border-b border-[#dbdbdb] h-14 flex items-center px-4 justify-between shadow-sm sm:shadow-none">
-      <div class="flex items-center gap-4">
-        <!-- 戻るアイコンにリンクを追加 (URL修正) -->
-        <a href="https://www.stsrjk.com/" class="text-[#262626] hover:opacity-60 transition-opacity">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-          </svg>
-        </a>
-        <div class="font-bold text-lg">sato_suuri_juku</div>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-[#262626] cursor-pointer">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-      </svg>
-    </header>
-
-    <div class="max-w-md mx-auto bg-white">
-      
-      <!-- プロフィールセクション -->
-      <section class="px-4 py-4">
-        <div class="flex items-center justify-between mb-4">
-          <!-- プロフィール画像 -->
-          <div class="relative cursor-pointer">
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-[2px] bg-gradient-to-tr from-[#f09433] via-[#bc1888] to-[#2cc3d5]">
-              <div class="w-full h-full rounded-full bg-white p-[2px]">
-                <div class="w-full h-full rounded-full bg-slate-100 flex items-center justify-center text-slate-400 overflow-hidden">
-                   <!-- ロゴプレースホルダー -->
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12">
-                    <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
-                  </svg>
+      <div class="max-w-md mx-auto bg-white">
+        <!-- プロフィールセクション -->
+        <section class="px-4 py-4">
+          <div class="flex items-center justify-between mb-4">
+            <!-- プロフィール画像 -->
+            <div class="relative cursor-pointer">
+              <div
+                class="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-[2px] bg-gradient-to-tr from-[#f09433] via-[#bc1888] to-[#2cc3d5]"
+              >
+                <div class="w-full h-full rounded-full bg-white p-[2px]">
+                  <div
+                    class="w-full h-full rounded-full bg-slate-100 flex items-center justify-center text-slate-400 overflow-hidden"
+                  >
+                    <!-- ロゴプレースホルダー -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12">
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- スタッツ風表示 -->
+            <div class="flex-1 flex justify-around pl-4 text-center">
+              <div class="cursor-pointer">
+                <div class="font-bold text-lg">理系</div>
+                <div class="text-xs text-gray-500">専門</div>
+              </div>
+              <div class="cursor-pointer">
+                <div class="font-bold text-lg">1対1</div>
+                <div class="text-xs text-gray-500">個別</div>
+              </div>
+              <div class="cursor-pointer">
+                <div class="font-bold text-lg">沼津</div>
+                <div class="text-xs text-gray-500">教室</div>
+              </div>
+            </div>
           </div>
-          
-          <!-- スタッツ風表示 -->
-          <div class="flex-1 flex justify-around pl-4 text-center">
-            <div class="cursor-pointer">
-              <div class="font-bold text-lg">理系</div>
-              <div class="text-xs text-gray-500">専門</div>
-            </div>
-            <div class="cursor-pointer">
-              <div class="font-bold text-lg">1対1</div>
-              <div class="text-xs text-gray-500">個別</div>
-            </div>
-            <div class="cursor-pointer">
-              <div class="font-bold text-lg">沼津</div>
-              <div class="text-xs text-gray-500">教室</div>
-            </div>
-          </div>
-        </div>
 
-        <!-- 自己紹介テキスト -->
-        <div class="mb-4">
-          <h1 class="font-bold text-sm mb-1">さとう数理塾｜私立進学校の理系サポート（日大三島・暁秀など）</h1>
-          <p class="text-sm whitespace-pre-line leading-relaxed">📍 静岡県沼津市の小さな理系専門塾です。
-🎓 日大三島・暁秀など、私立進学校の高校生（数学・理科）をサポートしています。
-👨‍🏫 AI教材と対話で、「わかったつもり」をそのままにしない指導です。
-.
-テスト結果や三者面談の話をきっかけに、
-「このままで理系や進学は大丈夫かな？」と感じ始めた保護者さま向けのご案内ページです。
-
-「このまま何もしなければ、この子の将来の選択肢が
-狭まってしまうかもしれない」——
-学力を立て直すきっかけは、たいていそんな心配から生まれます。
-
-LINEでのご相談・冬の無料体験はこちら👇
-<!-- URL修正 -->
-<a href="https://www.stsrjk.com/" class="text-[#00376b] font-medium">www.stsrjk.com</a>
-          </p>
-        </div>
-
-        <!-- アクションボタン (縦3列構成に変更) -->
-        <div class="flex flex-col gap-2 text-sm font-semibold mb-6">
-          <!-- 1. LINE相談 (onclick: Meta + GA4) -->
-          <a href="https://lin.ee/blKCpXC" onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });" target="_blank" rel="noopener noreferrer" class="w-full bg-[#0095f6] text-white py-1.5 rounded-lg text-center hover:bg-[#00376b] transition-colors active:opacity-70">
-            LINEで相談
-          </a>
-          <!-- 2. 冬の無料体験 (onclick: Meta + GA4) -->
-          <a href="https://forms.gle/qYAiJi3Un4PMDLbc7" onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });" target="_blank" rel="noopener noreferrer" class="w-full bg-[#efefef] text-black py-1.5 rounded-lg text-center hover:bg-[#dbdbdb] transition-colors active:opacity-70">
-            冬の無料体験
-          </a>
-          <!-- 3. HPを見る (URL修正 + onclick: Meta + GA4) -->
-          <a href="https://www.stsrjk.com/" onclick="fbq('track', 'ViewContent'); gtag('event', 'view_homepage', { source: 'insta_lp' });" data-track="homepage" class="w-full bg-white border border-slate-300 text-slate-500 py-1.5 rounded-lg text-center hover:bg-slate-50 transition-colors active:opacity-70">
-            さとう数理塾のホームページを見る
-          </a>
-        </div>
-
-        <!-- ハイライト -->
-        <div class="flex gap-4 overflow-x-auto pb-2 mb-2 scrollbar-hide px-1">
-          <!-- 1. LINE相談（アンカーリンク） -->
-          <a href="#line-guide" class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer group">
-            <div class="w-16 h-16 rounded-full border-[2px] border-[#0095f6] p-[2px]">
-              <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-2xl group-active:bg-slate-200 transition-colors">💬</div>
-            </div>
-            <span class="text-xs truncate w-16 text-center font-medium text-[#0095f6]">LINE相談</span>
-          </a>
-
-          <!-- 他のハイライト -->
-          <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
-            <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
-              <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">🏫</div>
-            </div>
-            <span class="text-xs truncate w-16 text-center">日大三島生</span>
-          </div>
-          <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
-            <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
-              <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">🎓</div>
-            </div>
-            <span class="text-xs truncate w-16 text-center">暁秀生</span>
-          </div>
-          <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
-            <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
-              <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">🗓️</div>
-            </div>
-            <span class="text-xs truncate w-16 text-center">高1・12月</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- タブ -->
-      <div class="flex border-t border-[#dbdbdb] h-11 items-center justify-around text-gray-400">
-        <div class="h-full flex items-center border-t border-black text-black px-10 cursor-pointer -mt-[1px]">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-          </svg>
-        </div>
-        <div class="h-full flex items-center px-10 cursor-pointer hover:text-gray-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-          </svg>
-        </div>
-      </div>
-
-      <!-- グリッド投稿エリア -->
-      <div class="grid grid-cols-3 gap-0.5 sm:gap-1">
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">😰</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">日大三島生<br>数学の評定が不安</div></div></div>
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">📚</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">暁秀生<br>課題が多すぎて大変</div></div></div>
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">📉</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">理系に進みたい<br>けど今の成績が心配</div></div></div>
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">🎓</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">内部進学はしたい<br>けど学部は妥協したくない</div></div></div>
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">🏫</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">他塾・予備校に<br>通っても点が変わらない</div></div></div>
-        <div class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"><div><div class="text-2xl mb-1">💪</div><div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">冬休みの課題を<br>実力アップに変えたい</div></div></div>
-      </div>
-
-      <!-- LINE相談ガイド（ハイライトからの飛び先） -->
-      <div id="line-guide" class="scroll-mt-20 mt-6 px-4">
-        <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-2xl">💬</span>
-            <h3 class="font-bold text-sm text-[#0095f6]">LINE相談で聞けること</h3>
-          </div>
-          <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-            塾長が直接、今の状況に合わせたアドバイスをお返しします。
-          </p>
-          <ul class="text-sm space-y-2 mb-5 text-[#262626]">
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>「今の成績で理系に進んでも大丈夫？」の診断</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>日大三島・暁秀の進度に合わせた冬の学習法</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>「物理は難しい？」などの不安や、志望校の相談</span>
-            </li>
-          </ul>
-          
-          <div class="text-center">
-            <a href="https://lin.ee/blKCpXC" target="_blank" rel="noopener noreferrer" onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });" class="inline-block w-full bg-[#06c755] text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm shadow-sm">
-              LINEで友だち追加して相談する
-            </a>
-            <p class="text-[10px] text-gray-500 mt-2">
-              ※自動応答ではなく、塾長が手動でお返事します。<br>
-              ※しつこい勧誘は一切ありませんのでご安心ください。
+          <!-- 自己紹介テキスト -->
+          <div class="mb-4">
+            <h1 class="font-bold text-sm mb-1">さとう数理塾｜私立進学校の理系サポート（日大三島・暁秀など）</h1>
+            <p class="text-sm whitespace-pre-line leading-relaxed">
+              📍 静岡県沼津市の小さな理系専門塾です。 🎓
+              日大三島・暁秀など、私立進学校の高校生（数学・理科）をサポートしています。 👨‍🏫
+              AI教材と対話で、「わかったつもり」をそのままにしない指導です。 . テスト結果や三者面談の話をきっかけに、
+              「このままで理系や進学は大丈夫かな？」と感じ始めた保護者さま向けのご案内ページです。
+              「このまま何もしなければ、この子の将来の選択肢が 狭まってしまうかもしれない」——
+              学力を立て直すきっかけは、たいていそんな心配から生まれます。 LINEでのご相談・冬の無料体験はこちら👇
+              <!-- URL修正 -->
+              <a href="https://www.stsrjk.com/" class="text-[#00376b] font-medium">www.stsrjk.com</a>
             </p>
           </div>
-        </div>
-      </div>
 
-      <!-- 下部のフィード風詳細説明 (Q&A 3つ) -->
-      <div class="mt-8 px-4 pb-12 space-y-6">
-        <div class="text-xs text-gray-400 font-medium mb-2 uppercase tracking-wide">Suggested for you</div>
-
-        <!-- Q&A 1 -->
-        <article>
-          <div class="flex items-center gap-2 mb-2">
-             <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">塾</div>
-             <span class="text-sm font-semibold">sato_suuri_juku</span>
-             <span class="text-xs text-gray-400">• Follow</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span> 
-                高1の12月、この成績で理系は現実的？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-                <span class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold">A</span>
-                通知表とテストを持ってきていただき、「理系を選ぶならどこまで必要か」を一緒に整理します。日大三島・暁秀それぞれのカリキュラムを踏まえて、この冬にやるべきことをお伝えします。
-            </p>
-          </div>
-          <div class="flex gap-4 mb-2">
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 hover:text-red-500 cursor-pointer hover:fill-red-500 transition-colors">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-             </svg>
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 cursor-pointer hover:text-gray-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 12m-3 3h6m-6-6h6" />
-             </svg>
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 cursor-pointer transform -rotate-45 -mt-1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-             </svg>
-          </div>
-          <div class="text-sm">
-            <span class="font-semibold">sato_suuri_juku</span> 
-            <span class="text-gray-600">日大三島・暁秀のカリキュラムを前提に、「今の成績から理系を目指すなら何を優先するか」を一緒に考えます。</span>
-            <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #沼津塾 #理系</div>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">2 HOURS AGO</div>
-        </article>
-
-        <!-- Q&A 2 -->
-         <article class="pt-4 border-t border-gray-100">
-          <div class="flex items-center gap-2 mb-2">
-             <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">塾</div>
-             <span class="text-sm font-semibold">sato_suuri_juku</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span> 
-                すでに塾や予備校に通っています。併用して大丈夫？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-                <span class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold">A</span>
-                はい、大丈夫です。映像授業や集団塾の内容を前提にしながら、数学・理科のつまずきを整理したい、という形で通われている方が多いです。いま通っている塾や予備校を変える必要はありません。
-            </p>
-          </div>
-          <div class="text-sm">
-             <span class="font-semibold">sato_suuri_juku</span> <span class="text-[#262626]">「理系は無理かも…」と感じている高校生でも大丈夫です。いったんこの冬に状況を整理してから、具体的な志望校や合格への道筋を一緒に考えていきましょう。</span>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">5 HOURS AGO</div>
-        </article>
-
-        <!-- Q&A 3 -->
-         <article class="pt-4 border-t border-gray-100">
-          <div class="flex items-center gap-2 mb-2">
-             <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500">塾</div>
-             <span class="text-sm font-semibold">sato_suuri_juku</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span> 
-                まだ塾を探している途中です。まずは相談だけしてもいいでしょうか？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-                <span class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold">A</span>
-                はい、大丈夫です。今の成績や学校の状況をうかがいながら、「この冬はどこまでやるべきか」「理系を目指すなら何を優先するか」を一緒に整理する場としてご利用いただけます。その場で通うかどうかを決めていただく必要はありませんし、こちらから無理に勧誘することもしていません。
-            </p>
-          </div>
-          <div class="text-sm">
-             <span class="font-semibold">sato_suuri_juku</span> <span class="text-[#262626]">まずは状況を一緒に整理してから、「塾に通うべきかどうか」も含めて考えていきます。</span>
-             <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #学習相談 #理系進学</div>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">8 HOURS AGO</div>
-        </article>
-      </div>
-
-      <!-- クロージングセクション (New!) -->
-      <div class="mt-8 px-4">
-        <div class="text-center mb-8">
-          <h2 class="text-lg font-bold mb-4">ここまで読んでくださった保護者さまへ</h2>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            どれか1つでも「あ、うちのことかも」と感じたら、<br>
-            この冬のうちに一度だけでも状況を整理しておくと、あとがぐっと楽になります。<br><br>
-            ご家庭に合った形で動き出せるよう、次の2つの入口をご用意しています。
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <!-- Action 1: LINE -->
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
-            <h3 class="font-bold text-[#0095f6] mb-2 text-base">① LINEで状況を相談する</h3>
-            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-              「日大三島高1／数学が不安です」など、ひと言メッセージからでも大丈夫です。<br>
-              こちらからしつこく勧誘することはありません。
-            </p>
-            <a href="https://lin.ee/blKCpXC" target="_blank" rel="noopener noreferrer" onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });" class="block w-full bg-[#0095f6] text-white text-center font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+          <!-- アクションボタン (縦3列構成に変更) -->
+          <div class="flex flex-col gap-2 text-sm font-semibold mb-6">
+            <!-- 1. LINE相談 (onclick: Meta + GA4) -->
+            <a
+              href="https://lin.ee/blKCpXC"
+              onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full bg-[#0095f6] text-white py-1.5 rounded-lg text-center hover:bg-[#00376b] transition-colors active:opacity-70"
+            >
               LINEで相談
             </a>
+            <!-- 2. 冬の無料体験 (onclick: Meta + GA4) -->
+            <a
+              href="https://forms.gle/qYAiJi3Un4PMDLbc7"
+              onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full bg-[#efefef] text-black py-1.5 rounded-lg text-center hover:bg-[#dbdbdb] transition-colors active:opacity-70"
+            >
+              冬の無料体験
+            </a>
+            <!-- 3. HPを見る (URL修正 + onclick: Meta + GA4) -->
+            <a
+              href="https://www.stsrjk.com/"
+              onclick="fbq('track', 'ViewContent'); gtag('event', 'view_homepage', { source: 'insta_lp' });"
+              data-track="homepage"
+              class="w-full bg-white border border-slate-300 text-slate-500 py-1.5 rounded-lg text-center hover:bg-slate-50 transition-colors active:opacity-70"
+            >
+              さとう数理塾のホームページを見る
+            </a>
           </div>
 
-          <!-- Action 2: Free Trial -->
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-            <h3 class="font-bold text-slate-800 mb-2 text-base">② 冬の無料体験に申し込む</h3>
-            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-              実際の教室の雰囲気や、勉強の進め方を見てから、<br>
-              通うかどうかをゆっくり決めていただけます。
-            </p>
-            <a href="https://forms.gle/qYAiJi3Un4PMDLbc7" target="_blank" rel="noopener noreferrer" onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });" class="block w-full bg-white border border-slate-300 text-slate-800 text-center font-bold py-3 rounded-lg hover:bg-slate-100 transition-colors shadow-sm">
-              冬の無料体験に申し込む
+          <!-- ハイライト -->
+          <div class="flex gap-4 overflow-x-auto pb-2 mb-2 scrollbar-hide px-1">
+            <!-- 1. LINE相談（アンカーリンク） -->
+            <a href="#line-guide" class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer group">
+              <div class="w-16 h-16 rounded-full border-[2px] border-[#0095f6] p-[2px]">
+                <div
+                  class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-2xl group-active:bg-slate-200 transition-colors"
+                >
+                  💬
+                </div>
+              </div>
+              <span class="text-xs truncate w-16 text-center font-medium text-[#0095f6]">LINE相談</span>
             </a>
+
+            <!-- 他のハイライト -->
+            <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
+              <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
+                <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">
+                  🏫
+                </div>
+              </div>
+              <span class="text-xs truncate w-16 text-center">日大三島生</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
+              <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
+                <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">
+                  🎓
+                </div>
+              </div>
+              <span class="text-xs truncate w-16 text-center">暁秀生</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 min-w-[64px] cursor-pointer">
+              <div class="w-16 h-16 rounded-full border border-gray-200 p-1">
+                <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-xl shadow-sm">
+                  🗓️
+                </div>
+              </div>
+              <span class="text-xs truncate w-16 text-center">高1・12月</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- タブ -->
+        <div class="flex border-t border-[#dbdbdb] h-11 items-center justify-around text-gray-400">
+          <div class="h-full flex items-center border-t border-black text-black px-10 cursor-pointer -mt-[1px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
+              />
+            </svg>
+          </div>
+          <div class="h-full flex items-center px-10 cursor-pointer hover:text-gray-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- グリッド投稿エリア -->
+        <div class="grid grid-cols-3 gap-0.5 sm:gap-1">
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">😰</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                日大三島生<br />数学の評定が不安
+              </div>
+            </div>
+          </div>
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">📚</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                暁秀生<br />課題が多すぎて大変
+              </div>
+            </div>
+          </div>
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">📉</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                理系に進みたい<br />けど今の成績が心配
+              </div>
+            </div>
+          </div>
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">🎓</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                内部進学はしたい<br />けど学部は妥協したくない
+              </div>
+            </div>
+          </div>
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">🏫</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                他塾・予備校に<br />通っても点が変わらない
+              </div>
+            </div>
+          </div>
+          <div
+            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center"
+          >
+            <div>
+              <div class="text-2xl mb-1">💪</div>
+              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
+                冬休みの課題を<br />実力アップに変えたい
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LINE相談ガイド（ハイライトからの飛び先） -->
+        <div id="line-guide" class="scroll-mt-20 mt-6 px-4">
+          <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">💬</span>
+              <h3 class="font-bold text-sm text-[#0095f6]">LINE相談で聞けること</h3>
+            </div>
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              塾長が直接、今の状況に合わせたアドバイスをお返しします。
+            </p>
+            <ul class="text-sm space-y-2 mb-5 text-[#262626]">
+              <li class="flex items-start gap-2">
+                <span class="text-[#0095f6] font-bold">✓</span>
+                <span>「今の成績で理系に進んでも大丈夫？」の診断</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#0095f6] font-bold">✓</span>
+                <span>日大三島・暁秀の進度に合わせた冬の学習法</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#0095f6] font-bold">✓</span>
+                <span>「物理は難しい？」などの不安や、志望校の相談</span>
+              </li>
+            </ul>
+
+            <div class="text-center">
+              <a
+                href="https://lin.ee/blKCpXC"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
+                class="inline-block w-full bg-[#06c755] text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm shadow-sm"
+              >
+                LINEで友だち追加して相談する
+              </a>
+              <p class="text-[10px] text-gray-500 mt-2">
+                ※自動応答ではなく、塾長が手動でお返事します。<br />
+                ※しつこい勧誘は一切ありませんのでご安心ください。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 下部のフィード風詳細説明 (Q&A 3つ) -->
+        <div class="mt-8 px-4 pb-12 space-y-6">
+          <div class="text-xs text-gray-400 font-medium mb-2 uppercase tracking-wide">Suggested for you</div>
+
+          <!-- Q&A 1 -->
+          <article>
+            <div class="flex items-center gap-2 mb-2">
+              <div
+                class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500"
+              >
+                塾
+              </div>
+              <span class="text-sm font-semibold">sato_suuri_juku</span>
+              <span class="text-xs text-gray-400">• Follow</span>
+            </div>
+            <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
+              <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
+                高1の12月、この成績で理系は現実的？
+              </h3>
+              <p class="text-sm text-gray-700 leading-relaxed">
+                <span
+                  class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
+                  >A</span
+                >
+                通知表とテストを持ってきていただき、「理系を選ぶならどこまで必要か」を一緒に整理します。日大三島・暁秀それぞれのカリキュラムを踏まえて、この冬にやるべきことをお伝えします。
+              </p>
+            </div>
+            <div class="flex gap-4 mb-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7 hover:text-red-500 cursor-pointer hover:fill-red-500 transition-colors"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7 cursor-pointer hover:text-gray-600"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 20.25c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z"
+                />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 12m-3 3h6m-6-6h6" />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-7 h-7 cursor-pointer transform -rotate-45 -mt-1"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                />
+              </svg>
+            </div>
+            <div class="text-sm">
+              <span class="font-semibold">sato_suuri_juku</span>
+              <span class="text-gray-600"
+                >日大三島・暁秀のカリキュラムを前提に、「今の成績から理系を目指すなら何を優先するか」を一緒に考えます。</span
+              >
+              <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #沼津塾 #理系</div>
+            </div>
+            <div class="text-[10px] text-gray-500 mt-1 uppercase">2 HOURS AGO</div>
+          </article>
+
+          <!-- Q&A 2 -->
+          <article class="pt-4 border-t border-gray-100">
+            <div class="flex items-center gap-2 mb-2">
+              <div
+                class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500"
+              >
+                塾
+              </div>
+              <span class="text-sm font-semibold">sato_suuri_juku</span>
+            </div>
+            <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
+              <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
+                すでに塾や予備校に通っています。併用して大丈夫？
+              </h3>
+              <p class="text-sm text-gray-700 leading-relaxed">
+                <span
+                  class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
+                  >A</span
+                >
+                はい、大丈夫です。映像授業や集団塾の内容を前提にしながら、数学・理科のつまずきを整理したい、という形で通われている方が多いです。いま通っている塾や予備校を変える必要はありません。
+              </p>
+            </div>
+            <div class="text-sm">
+              <span class="font-semibold">sato_suuri_juku</span>
+              <span class="text-[#262626]"
+                >「理系は無理かも…」と感じている高校生でも大丈夫です。いったんこの冬に状況を整理してから、具体的な志望校や合格への道筋を一緒に考えていきましょう。</span
+              >
+            </div>
+            <div class="text-[10px] text-gray-500 mt-1 uppercase">5 HOURS AGO</div>
+          </article>
+
+          <!-- Q&A 3 -->
+          <article class="pt-4 border-t border-gray-100">
+            <div class="flex items-center gap-2 mb-2">
+              <div
+                class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500"
+              >
+                塾
+              </div>
+              <span class="text-sm font-semibold">sato_suuri_juku</span>
+            </div>
+            <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
+              <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+                <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
+                まだ塾を探している途中です。まずは相談だけしてもいいでしょうか？
+              </h3>
+              <p class="text-sm text-gray-700 leading-relaxed">
+                <span
+                  class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
+                  >A</span
+                >
+                はい、大丈夫です。今の成績や学校の状況をうかがいながら、「この冬はどこまでやるべきか」「理系を目指すなら何を優先するか」を一緒に整理する場としてご利用いただけます。その場で通うかどうかを決めていただく必要はありませんし、こちらから無理に勧誘することもしていません。
+              </p>
+            </div>
+            <div class="text-sm">
+              <span class="font-semibold">sato_suuri_juku</span>
+              <span class="text-[#262626]"
+                >まずは状況を一緒に整理してから、「塾に通うべきかどうか」も含めて考えていきます。</span
+              >
+              <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #学習相談 #理系進学</div>
+            </div>
+            <div class="text-[10px] text-gray-500 mt-1 uppercase">8 HOURS AGO</div>
+          </article>
+        </div>
+
+        <!-- クロージングセクション (New!) -->
+        <div class="mt-8 px-4">
+          <div class="text-center mb-8">
+            <h2 class="text-lg font-bold mb-4">ここまで読んでくださった保護者さまへ</h2>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              どれか1つでも「あ、うちのことかも」と感じたら、<br />
+              この冬のうちに一度だけでも状況を整理しておくと、あとがぐっと楽になります。<br /><br />
+              ご家庭に合った形で動き出せるよう、次の2つの入口をご用意しています。
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Action 1: LINE -->
+            <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
+              <h3 class="font-bold text-[#0095f6] mb-2 text-base">① LINEで状況を相談する</h3>
+              <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                「日大三島高1／数学が不安です」など、ひと言メッセージからでも大丈夫です。<br />
+                こちらからしつこく勧誘することはありません。
+              </p>
+              <a
+                href="https://lin.ee/blKCpXC"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
+                class="block w-full bg-[#0095f6] text-white text-center font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm"
+              >
+                LINEで相談
+              </a>
+            </div>
+
+            <!-- Action 2: Free Trial -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+              <h3 class="font-bold text-slate-800 mb-2 text-base">② 冬の無料体験に申し込む</h3>
+              <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                実際の教室の雰囲気や、勉強の進め方を見てから、<br />
+                通うかどうかをゆっくり決めていただけます。
+              </p>
+              <a
+                href="https://forms.gle/qYAiJi3Un4PMDLbc7"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });"
+                class="block w-full bg-white border border-slate-300 text-slate-800 text-center font-bold py-3 rounded-lg hover:bg-slate-100 transition-colors shadow-sm"
+              >
+                冬の無料体験に申し込む
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
-
-  </main>
-</body>
+    </main>
+  </body>
 </html>
