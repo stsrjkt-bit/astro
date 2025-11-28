@@ -682,10 +682,9 @@ export default function MathNigatePage() {
               <div className="flex flex-col md:flex-row gap-4 justify-center mt-10 flex-wrap">
                 {/* Free Trial Button */}
                 <a
-                  href="#"
+                  href="/trial"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
                 >
-                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
                   <Mail size={20} />
                   無料体験に申し込む
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
