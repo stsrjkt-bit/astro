@@ -1383,7 +1383,7 @@ export default function NewHomepage() {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch md:items-center">
               {/* 無料体験 Button */}
               <a
-                href="/join"
+                href="/trial"
                 className="group flex items-center justify-center gap-3 px-8 py-5 bg-white text-[#009DE0] rounded-full font-bold shadow-xl hover:bg-[#f8fafc] hover:scale-105 transition-all min-w-[300px]"
               >
                 <Mail size={24} />
