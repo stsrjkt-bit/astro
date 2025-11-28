@@ -26,6 +26,9 @@ import {
   Sparkles,
   Lightbulb,
   Star,
+  Smartphone,
+  AlertCircle,
+  Footprints,
 } from 'lucide-react';
 
 // --- ブランドカラー定義 ---
@@ -427,6 +430,192 @@ const HatchingEgg = () => {
   );
 };
 
+// --- ★学習習慣セクション (Topページ挿入用) ---
+const HabitSection = () => {
+  return (
+    <section
+      id="habit"
+      className="py-20 md:py-32 bg-[#F8FAFC] border-y border-[#334455]/5 relative overflow-hidden"
+    >
+      {/* 背景装飾 */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-20 -left-20 w-96 h-96 bg-[#009DE0]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 -right-20 w-96 h-96 bg-[#D6DE26]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <Reveal>
+          {/* セクション見出し */}
+          <div className="text-center mb-16 md:mb-20">
+            <p className="text-xs md:text-sm font-bold tracking-[0.25em] text-[#009DE0] uppercase mb-3">
+              Study Habit Support
+            </p>
+            <h2 className="font-serif text-2xl md:text-4xl font-bold text-[#334455] leading-relaxed md:leading-normal">
+              <span className="inline decoration-clone bg-gradient-to-b from-transparent from-[60%] to-[#D6DE26]/60 to-[60%] px-1 rounded-sm">
+                「通うことで習慣になる」個別指導
+              </span>
+            </h2>
+          </div>
+        </Reveal>
+
+        {/* 2カラム本体 */}
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+          
+          {/* 左：高校生・保護者の声 */}
+          <Reveal delay={200}>
+            <div className="space-y-8 h-full flex flex-col justify-center">
+              <div className="flex items-center gap-3">
+                <div className="h-[2px] w-8 bg-[#334455]/20"></div>
+                <p className="text-sm font-bold text-[#334455]/60 tracking-wide">
+                  よくいただくお悩み
+                </p>
+              </div>
+
+              {/* 高校生の声 */}
+              <div className="bg-white rounded-2xl border border-[#334455]/10 shadow-sm p-8 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#009DE0]"></div>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-10 h-10 rounded-full bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0]">
+                    <Smartphone size={20} />
+                  </div>
+                  <p className="text-base font-bold text-[#334455]">
+                    高校生の声
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    '部活から帰るとヘトヘトで、机に向かう前に寝てしまう',
+                    '今日こそやろうと思うけれど、気づけばスマホで一日が終わる',
+                    '一度サボると「今さらやっても…」と思って動けなくなる'
+                  ].map((text, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed">
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#009DE0]/40 shrink-0" />
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 保護者の声 */}
+              <div className="bg-[#F8FAFC] rounded-2xl border border-[#334455]/5 shadow-inner p-8 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#EA5514]"></div>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-10 h-10 rounded-full bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514]">
+                    <AlertCircle size={20} />
+                  </div>
+                  <p className="text-base font-bold text-[#334455]">
+                    保護者さまの声
+                  </p>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    '「勉強しなさい」と言うたびに、家の空気がピリッとしてしまう',
+                    'スマホやゲームを全部やめさせるのも違う気がしてモヤモヤする',
+                    'どこまで親が口を出してよいのか、線引きが難しい'
+                  ].map((text, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed">
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#EA5514]/40 shrink-0" />
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* 右：塾としての答え（しくみ） */}
+          <Reveal delay={400}>
+            <div className="flex flex-col h-full bg-white rounded-3xl border-2 border-[#009DE0]/10 shadow-xl shadow-[#009DE0]/5 p-8 md:p-10 relative overflow-hidden">
+              {/* 装飾タグ */}
+              <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#D6DE26] rotate-45 transform"></div>
+              <div className="absolute top-4 right-4 text-xs font-bold text-[#334455] bg-[#D6DE26] px-3 py-1 rounded-full shadow-sm z-10">
+                Solution
+              </div>
+              
+              <div className="mb-8">
+                <p className="text-xs font-bold text-[#009DE0] tracking-wide mb-3 flex items-center gap-2">
+                  <CheckCircle2 size={16} />
+                  さとう数理塾の「答え」
+                </p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#334455] leading-relaxed">
+                  「時間・場所・やること」を固定して<br/>
+                  <span className="bg-gradient-to-r from-[#D6DE26]/40 to-transparent pr-4">意志の力に頼らない習慣</span>を作ります。
+                </h3>
+              </div>
+
+              <div className="space-y-8 flex-1">
+                {/* Point 1 */}
+                <div className="flex gap-5 group">
+                  <div className="mt-1 w-12 h-12 rounded-2xl bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Clock size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#334455] text-lg mb-2">
+                      平日18:50〜21:50の「夜の勉強スロット」
+                    </p>
+                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                      この時間はいつ来てもOK。週1でも週5でも、通う回数が増えても月謝は同じ「回数自由・定額制」です。
+                    </p>
+                  </div>
+                </div>
+
+                {/* Point 2 */}
+                <div className="flex gap-5 group">
+                  <div className="mt-1 w-12 h-12 rounded-2xl bg-[#D6DE26]/20 flex items-center justify-center text-[#8C9400] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#334455] text-lg mb-2">
+                      家でも学校でもない「半こもり空間」
+                    </p>
+                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                      個別ブースで周りの視線を気にせず集中。分からないところだけ、塾長が1対1でフォローします。
+                    </p>
+                  </div>
+                </div>
+
+                {/* Point 3 */}
+                <div className="flex gap-5 group">
+                  <div className="mt-1 w-12 h-12 rounded-2xl bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Footprints size={24} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#334455] text-lg mb-2">
+                      席についた瞬間に「今日やること」が決まっている
+                    </p>
+                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                      AI教材の続きからすぐ始められるので、迷う時間がありません。学校教材や参考書の使用もOKです。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ミニCTA */}
+              <div className="mt-10 pt-8 border-t border-[#334455]/10 text-center">
+                <div className="bg-[#F8FAFC] rounded-lg p-4 inline-block w-full">
+                  <p className="text-sm text-[#334455]/80 leading-relaxed">
+                    「うちの子の場合、どんな通い方が合いそう？」
+                    <br className="md:hidden"/>
+                    といったご相談は
+                    <a
+                      href="/counseling"
+                      className="inline-flex items-center ml-1 text-[#009DE0] font-bold border-b border-[#009DE0] hover:text-[#008ac4] hover:border-[#008ac4] transition-colors gap-1"
+                    >
+                      学習相談フォーム
+                      <ArrowRight size={14} />
+                    </a>
+                    へどうぞ。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- メインコンポーネント ---
 export default function NewHomepage() {
   const [loaded, setLoaded] = useState(false);
@@ -816,6 +1005,11 @@ export default function NewHomepage() {
           </Reveal>
         </div>
       </section>
+
+      {/* ===========================================
+          学習習慣セクション (HABIT)
+         =========================================== */}
+      <HabitSection />
 
       <MobileTableOfContents />
 
