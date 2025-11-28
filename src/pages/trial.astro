@@ -1,0 +1,13 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import App from '~/components/TrialFormPage.jsx';
+
+const metadata = {
+  title: '無料体験のお申込み | さとう数理塾',
+  description: 'さとう数理塾の授業を、実際の通塾と同じ形でお試しいただける無料体験のお申込みページです。',
+};
+---
+
+<PageLayout metadata={metadata} noindex={true}>
+  <App client:load />
+</PageLayout>
