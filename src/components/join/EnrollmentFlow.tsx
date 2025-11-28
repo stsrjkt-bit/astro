@@ -5,7 +5,7 @@ const steps = [
   {
     number: 1,
     title: '無料体験のお申込み',
-    button: { label: '無料体験のお申込み', url: 'https://forms.gle/qYAiJi3Un4PMDLbc7' },
+    button: { label: '無料体験のお申込み', url: '/trial' },
     checklist: ['無料体験フォームを送信した', '受付メールが届いた'],
   },
   {
