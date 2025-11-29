@@ -39,6 +39,7 @@ const { language, textDirection } = I18N;
 
     <!-- Meta Pixel Code -->
     <script is:inline>
+      /* eslint-disable */
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
@@ -57,6 +58,7 @@ const { language, textDirection } = I18N;
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      /* eslint-enable */
 
       fbq('init', '827225263558043');
 
