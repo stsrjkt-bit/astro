@@ -14,6 +14,7 @@ import {
   Gift,
   School,
 } from 'lucide-react';
+import { trackMetaEvent } from '~/utils/metaPixel';
 
 // --- EmailJS 設定 (本番用) ---
 const SERVICE_ID = 'service_n0c0j1h';
@@ -102,6 +103,10 @@ function TrialForm() {
 
       // 成功時の処理
       setSubmitStatus('success');
+      trackMetaEvent('Lead', {
+        type: 'trial_form_submit',
+        pageType: 'trial',
+      });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error('EmailJS Error:', error);

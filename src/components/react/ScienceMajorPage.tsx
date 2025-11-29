@@ -18,6 +18,7 @@ import {
   BookOpen,
   Mail,
 } from 'lucide-react';
+import { trackMetaEvent } from '~/utils/metaPixel';
 
 // --- ブランドカラー定義 (共通) ---
 // Primary (Sky Blue): #009DE0
@@ -379,6 +380,13 @@ export default function ScienceMajorPage() {
                   <a
                     href="#contact"
                     className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
+                    onClick={() => {
+                      trackMetaEvent('Contact', {
+                        type: 'scroll_to_contact',
+                        pageType: 'rikei',
+                        position: 'hero',
+                      });
+                    }}
                   >
                     無料体験・学習相談を予約する
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -731,6 +739,13 @@ export default function ScienceMajorPage() {
                 <a
                   href="/trial"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                  onClick={() => {
+                    trackMetaEvent('Lead', {
+                      type: 'trial_cta',
+                      pageType: 'rikei',
+                      position: 'contact_section',
+                    });
+                  }}
                 >
                   <Mail size={20} />
                   無料体験に申し込む
@@ -741,6 +756,13 @@ export default function ScienceMajorPage() {
                 <a
                   href="/counseling"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                  onClick={() => {
+                    trackMetaEvent('Contact', {
+                      type: 'counseling_cta',
+                      pageType: 'rikei',
+                      position: 'contact_section',
+                    });
+                  }}
                 >
                   {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
                   <MessageCircle size={20} />
@@ -754,6 +776,13 @@ export default function ScienceMajorPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] text-white rounded-full shadow-lg hover:bg-[#05b04d] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                  onClick={() => {
+                    trackMetaEvent('Contact', {
+                      type: 'line',
+                      pageType: 'rikei',
+                      position: 'contact_section',
+                    });
+                  }}
                 >
                   <MessageCircle size={20} className="fill-white text-[#06C755]" />
                   <span>LINEで気軽に質問する</span>

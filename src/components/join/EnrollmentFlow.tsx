@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { trackMetaEvent } from '~/utils/metaPixel';
 
 // データ定義
 const steps = [
@@ -190,6 +191,15 @@ const StepCard: React.FC<{ step: Step }> = ({ step }) => {
                     ? 'bg-slate-300 text-white cursor-default shadow-none pointer-events-none'
                     : 'bg-gradient-to-r from-[#009DE0] to-[#008ac4] text-white hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5'
                 }`}
+              onClick={() => {
+                if (step.button?.url === '/trial') {
+                  trackMetaEvent('Lead', {
+                    type: 'trial_cta',
+                    pageType: 'join',
+                    position: `step${step.number}`,
+                  });
+                }
+              }}
             >
               {step.button.label}
               <svg
