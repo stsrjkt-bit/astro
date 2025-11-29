@@ -13,6 +13,7 @@ import {
   Clock,
   Sparkles,
 } from 'lucide-react';
+import { trackMetaEvent } from '~/utils/metaPixel';
 
 // ★★★ EmailJS設定 ★★★
 const SERVICE_ID = 'service_n0c0j1h';
@@ -99,6 +100,10 @@ export default function ConsultationForm() {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID_USER, templateParams);
 
       setSubmitStatus('success');
+      trackMetaEvent('Lead', {
+        type: 'counseling_form_submit',
+        pageType: 'counseling',
+      });
       e.target.reset();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
