@@ -3,11 +3,7 @@
 export type GAEventParams = Record<string, unknown>;
 
 // Google Analytics の gtag 関数の型定義
-type GtagFunction = (
-  command: 'event' | 'config' | 'set',
-  eventName: string,
-  params?: GAEventParams
-) => void;
+type GtagFunction = (command: 'event' | 'config' | 'set', eventName: string, params?: GAEventParams) => void;
 
 interface WindowWithGtag extends Window {
   gtag?: GtagFunction;
