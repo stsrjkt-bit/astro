@@ -39,12 +39,11 @@ const { language, textDirection } = I18N;
 
     <!-- Meta Pixel Code -->
     <script is:inline>
+      /* eslint-disable */
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
         };
         if (!f._fbq) f._fbq = n;
         n.push = n;
@@ -59,6 +58,7 @@ const { language, textDirection } = I18N;
       })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '827225263558043');
       fbq('track', 'PageView');
+      /* eslint-enable */
     </script>
     <noscript>
       <img
