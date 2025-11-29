@@ -39,11 +39,12 @@ const { language, textDirection } = I18N;
 
     <!-- Meta Pixel Code -->
     <script is:inline>
-      /* eslint-disable */
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
-          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
         };
         if (!f._fbq) f._fbq = n;
         n.push = n;
@@ -56,9 +57,33 @@ const { language, textDirection } = I18N;
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
       fbq('init', '827225263558043');
-      fbq('track', 'PageView');
-      /* eslint-enable */
+
+      // URLごとに一度だけPageViewを送る
+      let lastPathname = '';
+
+      const trackMetaPage = () => {
+        if (typeof window === 'undefined') return;
+
+        const path = window.location.pathname || '/';
+        if (path === lastPathname) return;
+        lastPathname = path;
+
+        // 共通 PageView
+        fbq('track', 'PageView');
+
+        // 重要ページは ViewContent も送信
+        if (path === '/join' || path === '/trial') {
+          fbq('track', 'ViewContent', { path });
+        }
+      };
+
+      // 初回ロード
+      trackMetaPage();
+
+      // AstroのSPA遷移用イベント
+      document.addEventListener('astro:page-load', trackMetaPage);
     </script>
     <noscript>
       <img
