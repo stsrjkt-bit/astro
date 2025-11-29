@@ -18,6 +18,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // --- ブランドカラー定義 (トップページと共通) ---
 // Primary (Sky Blue): #009DE0
@@ -341,6 +342,10 @@ export default function MathNigatePage() {
                         type: 'scroll_to_contact',
                         pageType: 'math_nigate',
                         position: 'hero',
+                      });
+                      trackGAEvent('hero_cta_click', {
+                        page_type: 'math_nigate',
+                        action: 'scroll_to_contact',
                       });
                     }}
                   >
@@ -698,6 +703,10 @@ export default function MathNigatePage() {
                       pageType: 'math_nigate',
                       position: 'contact_section',
                     });
+                    trackGAEvent('trial_cta_click', {
+                      page_type: 'math_nigate',
+                      position: 'contact_section',
+                    });
                   }}
                 >
                   <Mail size={20} />
@@ -713,6 +722,10 @@ export default function MathNigatePage() {
                     trackMetaEvent('Contact', {
                       type: 'counseling_cta',
                       pageType: 'math_nigate',
+                      position: 'contact_section',
+                    });
+                    trackGAEvent('counseling_cta_click', {
+                      page_type: 'math_nigate',
                       position: 'contact_section',
                     });
                   }}
@@ -733,6 +746,11 @@ export default function MathNigatePage() {
                     trackMetaEvent('Contact', {
                       type: 'line',
                       pageType: 'math_nigate',
+                      position: 'contact_section',
+                    });
+                    trackGAEvent('line_click', {
+                      type: 'line',
+                      page_type: 'math_nigate',
                       position: 'contact_section',
                     });
                   }}

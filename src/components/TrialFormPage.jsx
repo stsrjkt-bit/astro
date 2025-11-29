@@ -15,6 +15,7 @@ import {
   School,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // --- EmailJS 設定 (本番用) ---
 const SERVICE_ID = 'service_n0c0j1h';
@@ -106,6 +107,10 @@ function TrialForm() {
       trackMetaEvent('Lead', {
         type: 'trial_form_submit',
         pageType: 'trial',
+      });
+      trackGAEvent('trial_form_submit', {
+        page_location: window.location.pathname,
+        value: 1,
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {

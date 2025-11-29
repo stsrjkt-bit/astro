@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // データ定義
 const steps = [
@@ -196,6 +197,10 @@ const StepCard: React.FC<{ step: Step }> = ({ step }) => {
                   trackMetaEvent('Lead', {
                     type: 'trial_cta',
                     pageType: 'join',
+                    position: `step${step.number}`,
+                  });
+                  trackGAEvent('trial_cta_click', {
+                    page_type: 'join',
                     position: `step${step.number}`,
                   });
                 }
