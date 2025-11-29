@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // ★★★ EmailJS設定 ★★★
 const SERVICE_ID = 'service_n0c0j1h';
@@ -103,6 +104,10 @@ export default function ConsultationForm() {
       trackMetaEvent('Lead', {
         type: 'counseling_form_submit',
         pageType: 'counseling',
+      });
+      trackGAEvent('counseling_form_submit', {
+        page_location: window.location.pathname,
+        value: 1,
       });
       e.target.reset();
       window.scrollTo({ top: 0, behavior: 'smooth' });

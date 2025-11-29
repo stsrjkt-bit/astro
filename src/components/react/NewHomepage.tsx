@@ -31,6 +31,7 @@ import {
   Footprints,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // --- ブランドカラー定義 ---
 // Primary (Sky Blue): #009DE0
@@ -601,6 +602,10 @@ const HabitSection = () => {
                         trackMetaEvent('Contact', {
                           type: 'counseling_cta',
                           pageType: 'home',
+                          position: 'habit_section',
+                        });
+                        trackGAEvent('counseling_cta_click', {
+                          page_type: 'home',
                           position: 'habit_section',
                         });
                       }}
@@ -1399,6 +1404,10 @@ export default function NewHomepage() {
                     pageType: 'home',
                     position: 'contact_section',
                   });
+                  trackGAEvent('trial_cta_click', {
+                    page_type: 'home',
+                    position: 'contact_section',
+                  });
                 }}
               >
                 <Mail size={24} />
@@ -1414,6 +1423,10 @@ export default function NewHomepage() {
                   trackMetaEvent('Contact', {
                     type: 'counseling_cta',
                     pageType: 'home',
+                    position: 'contact_section',
+                  });
+                  trackGAEvent('counseling_cta_click', {
+                    page_type: 'home',
                     position: 'contact_section',
                   });
                 }}
@@ -1434,6 +1447,11 @@ export default function NewHomepage() {
                   trackMetaEvent('Contact', {
                     type: 'line',
                     pageType: 'home',
+                    position: 'contact_section',
+                  });
+                  trackGAEvent('line_click', {
+                    type: 'line',
+                    page_type: 'home',
                     position: 'contact_section',
                   });
                 }}

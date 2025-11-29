@@ -19,6 +19,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
+import { trackGAEvent } from '~/utils/ga4';
 
 // --- ブランドカラー定義 (共通) ---
 // Primary (Sky Blue): #009DE0
@@ -386,6 +387,10 @@ export default function ScienceMajorPage() {
                         pageType: 'rikei',
                         position: 'hero',
                       });
+                      trackGAEvent('hero_cta_click', {
+                        page_type: 'rikei',
+                        action: 'scroll_to_contact',
+                      });
                     }}
                   >
                     無料体験・学習相談を予約する
@@ -745,6 +750,10 @@ export default function ScienceMajorPage() {
                       pageType: 'rikei',
                       position: 'contact_section',
                     });
+                    trackGAEvent('trial_cta_click', {
+                      page_type: 'rikei',
+                      position: 'contact_section',
+                    });
                   }}
                 >
                   <Mail size={20} />
@@ -760,6 +769,10 @@ export default function ScienceMajorPage() {
                     trackMetaEvent('Contact', {
                       type: 'counseling_cta',
                       pageType: 'rikei',
+                      position: 'contact_section',
+                    });
+                    trackGAEvent('counseling_cta_click', {
+                      page_type: 'rikei',
                       position: 'contact_section',
                     });
                   }}
@@ -780,6 +793,11 @@ export default function ScienceMajorPage() {
                     trackMetaEvent('Contact', {
                       type: 'line',
                       pageType: 'rikei',
+                      position: 'contact_section',
+                    });
+                    trackGAEvent('line_click', {
+                      type: 'line',
+                      page_type: 'rikei',
                       position: 'contact_section',
                     });
                   }}
