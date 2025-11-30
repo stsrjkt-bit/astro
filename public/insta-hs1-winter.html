@@ -3,29 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>高1の冬、勉強する夜をひとつ増やす｜さとう数理塾</title>
+    <title>高1の冬・夜の分かれ道ラン | さとう数理塾</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <style>
-      body {
-        font-family: 'Noto Sans JP', sans-serif;
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7GL0JEEMD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
       }
-      .scroll-mt-20 {
-        scroll-margin-top: 5rem;
-      }
-    </style>
+      gtag('js', new Date());
+      gtag('config', 'G-F7GL0JEEMD');
+    </script>
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel -->
     <script>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -33,8 +24,7 @@
           n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
         };
         if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
+        n.push = n.loaded = !0;
         n.version = '2.0';
         n.queue = [];
         t = b.createElement(e);
@@ -46,578 +36,1003 @@
       fbq('init', '827225263558043');
       fbq('track', 'PageView');
     </script>
-    <noscript
-      ><img
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+      /* スムーススクロール */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background-color: #0f172a; /* 全体の背景色をダークネイビーに統一 */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        overflow-y: auto;
+        color: #cbd5e1; /* 基本テキスト色 */
+      }
+
+      /* ゲームコンテナ：スマホ比率を維持 */
+      #game-container {
+        width: 100%;
+        max-width: 400px;
+        height: 100vh;
+        max-height: 850px;
+        background: linear-gradient(to bottom, #0f172a, #1e293b, #334155);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        flex-shrink: 0; /* 縮小防止 */
+        z-index: 10;
+      }
+
+      /* プレイヤーの基本姿勢を常に左向き（反転）にする */
+      #player {
+        transform: scaleX(-1);
+      }
+
+      /* アニメーション定義 */
+      /* 常に左向き（scaleX(-1)）で走る */
+      @keyframes run {
+        0%,
+        100% {
+          transform: scaleX(-1) translateY(0);
+        }
+        50% {
+          transform: scaleX(-1) translateY(-3px);
+        }
+      }
+      .animate-run {
+        animation: run 0.4s infinite ease-in-out;
+      }
+
+      /* しゃがむアニメーション */
+      @keyframes crouch {
+        0% {
+          transform: scaleX(-1) translateY(0);
+        }
+        50% {
+          transform: scaleX(-1) translateY(4px) scale(0.96);
+        }
+        100% {
+          transform: scaleX(-1) translateY(0);
+        }
+      }
+      .animate-crouch {
+        animation: crouch 0.4s ease-out;
+      }
+
+      /* ダメージを受けて一回転して弾かれる演出（通常ダメージ） */
+      @keyframes spin-jump {
+        0% {
+          transform: scaleX(-1) translateY(0) rotate(0deg);
+          filter: none;
+        }
+        10% {
+          filter: sepia(1) hue-rotate(-50deg) saturate(5) drop-shadow(0 0 15px red);
+        }
+        30% {
+          transform: scaleX(-1) translateY(-60px) rotate(-100deg);
+          filter: none;
+        }
+        50% {
+          transform: scaleX(-1) translateY(-80px) rotate(-180deg);
+        }
+        70% {
+          transform: scaleX(-1) translateY(-60px) rotate(-260deg);
+        }
+        100% {
+          transform: scaleX(-1) translateY(0) rotate(-360deg);
+        }
+      }
+      .animate-spin-jump {
+        animation: spin-jump 0.8s ease-in-out;
+      }
+
+      /* 【追加】完全にダウンするアニメーション（ゲージ0のとき） */
+      @keyframes knockout {
+        0% {
+          transform: scaleX(-1) translateY(0) rotate(0deg);
+        }
+        30% {
+          transform: scaleX(-1) translateY(-40px) rotate(-45deg);
+        } /* 衝撃で少し浮く */
+        100% {
+          transform: scaleX(-1) translateY(10px) rotate(-90deg);
+          filter: grayscale(100%) opacity(0.8);
+        } /* 倒れて灰色になる */
+      }
+      .animate-knockout {
+        animation: knockout 0.8s forwards ease-in;
+      }
+
+      /* 自然な放物線ジャンプ */
+      @keyframes jump-arc {
+        0% {
+          bottom: 14rem;
+          animation-timing-function: ease-out;
+        }
+        50% {
+          bottom: 21rem;
+          animation-timing-function: ease-in;
+        }
+        100% {
+          bottom: 17rem;
+        }
+      }
+      .animate-jump-arc {
+        animation: jump-arc 0.8s forwards;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .star {
+        animation: twinkle 3s infinite ease-in-out;
+      }
+
+      @keyframes cloudMove {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+      .cloud {
+        animation: cloudMove 20s linear infinite;
+      }
+
+      /* トランジション用クラス */
+      .slide-bg {
+        transition: transform 1s ease-in-out;
+      }
+
+      .character-transition {
+        transition:
+          bottom 0.5s ease-out,
+          transform 0.3s;
+      }
+
+      /* 選択ボタンのスタイル */
+      .btn-game {
+        transition:
+          transform 0.1s,
+          background-color 0.2s;
+      }
+      .btn-game:active {
+        transform: scale(0.98);
+      }
+
+      /* 道路のスクロール演出用 */
+      .road-stripes {
+        background-image: linear-gradient(90deg, transparent 50%, #ffffff 50%);
+        background-size: 40px 100%;
+        animation: roadScroll 1s linear infinite;
+      }
+      @keyframes roadScroll {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: -40px 0;
+        }
+      }
+
+      /* ゲーム停止時はアニメーションを止める */
+      .paused .road-stripes,
+      .paused .cloud,
+      .paused .animate-run {
+        animation-play-state: paused;
+      }
+
+      /* ゲージのスタイル */
+      .energy-bar-bg {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 2px solid #475569;
+      }
+      .energy-bar-fill {
+        transition:
+          width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          background-color 0.3s;
+      }
+
+      /* LP用のスタイル追加 */
+      .lp-card {
+        background-color: rgba(30, 41, 59, 0.9); /* slate-800の透過 */
+        border: 1px solid #475569; /* slate-600 */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <img
         height="1"
         width="1"
         style="display: none"
         src="https://www.facebook.com/tr?id=827225263558043&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+      />
+    </noscript>
 
-    <!-- Google tag (gtag.js) - GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7GL0JEEMD"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-F7GL0JEEMD');
-    </script>
-  </head>
-  <body class="bg-white text-slate-800 antialiased pb-20">
-    <!-- Header (Simple) -->
-    <header
-      class="fixed top-0 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 z-50 h-14 flex items-center justify-center"
+    <!-- ゲーム画面全体 -->
+    <div id="game-container" class="text-white relative">
+      <!-- --- 背景レイヤー --- -->
+      <!-- 星空 -->
+      <div id="stars-layer" class="absolute inset-0 z-0 pointer-events-none">
+        <!-- JSで星を生成 -->
+      </div>
+
+      <!-- 月 -->
+      <div
+        class="absolute top-10 right-8 w-12 h-12 bg-yellow-100 rounded-full shadow-[0_0_20px_rgba(255,255,200,0.5)] z-0 opacity-80"
+      ></div>
+
+      <!-- 流れる雲 -->
+      <div class="cloud absolute top-20 left-0 w-24 h-8 bg-white opacity-10 rounded-full blur-md z-0"></div>
+      <div
+        class="cloud absolute top-32 left-1/2 w-32 h-10 bg-white opacity-10 rounded-full blur-md z-0"
+        style="animation-duration: 25s"
+      ></div>
+
+      <!-- 背景の街並み（スクロール演出用） -->
+      <div id="scrolling-bg" class="absolute inset-0 z-10 slide-bg flex items-end pb-56 w-[200%]">
+        <!-- 建物シルエット -->
+        <div class="w-full h-48 flex items-end opacity-40 text-slate-800">
+          <div class="w-10 h-24 bg-current mx-1"></div>
+          <div class="w-14 h-32 bg-current mx-1"></div>
+          <div class="w-8 h-16 bg-current mx-1"></div>
+          <div class="w-16 h-40 bg-current mx-1"></div>
+          <div class="w-12 h-20 bg-current mx-1"></div>
+          <div class="w-20 h-28 bg-current mx-1"></div>
+          <!-- 学校っぽい -->
+          <div class="w-8 h-12 bg-current mx-1"></div>
+          <div class="w-12 h-36 bg-current mx-1"></div>
+          <div class="w-16 h-24 bg-current mx-1"></div>
+          <div class="w-10 h-16 bg-current mx-1"></div>
+          <!-- 繰り返し -->
+          <div class="w-14 h-32 bg-current mx-1"></div>
+          <div class="w-8 h-16 bg-current mx-1"></div>
+          <div class="w-16 h-40 bg-current mx-1"></div>
+          <div class="w-12 h-20 bg-current mx-1"></div>
+        </div>
+      </div>
+
+      <!-- 地面/道路 -->
+      <div class="absolute bottom-0 w-full h-56 bg-slate-800 z-20 border-t-4 border-slate-600">
+        <div class="absolute top-4 w-full h-2 bg-slate-600 opacity-50 road-stripes"></div>
+      </div>
+
+      <!-- --- ゲームキャラクターレイヤー --- -->
+      <!-- キャラクター -->
+      <div
+        id="player"
+        class="absolute left-8 bottom-56 z-30 w-16 h-16 flex flex-col items-center justify-center character-transition animate-run"
+      >
+        <!-- シンプルな絵文字キャラ -->
+        <div class="text-5xl drop-shadow-lg filter">🏃</div>
+        <!-- 影 -->
+        <div class="w-10 h-2 bg-black opacity-30 rounded-full mt-[-5px] blur-sm"></div>
+      </div>
+
+      <!-- 目標物/装飾 -->
+      <div id="prop-layer" class="absolute right-[-100px] bottom-56 z-30 transition-all duration-1000">
+        <!-- JSで内容を書き換え -->
+      </div>
+
+      <!-- --- UIレイヤー --- -->
+
+      <!-- やる気ゲージ -->
+      <div class="absolute top-4 left-4 z-50 flex flex-col w-32">
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-[10px] text-slate-300 font-bold">MOTIVATION</span>
+        </div>
+        <div class="w-full h-3 rounded-full energy-bar-bg overflow-hidden relative">
+          <div
+            id="energy-fill"
+            class="energy-bar-fill h-full bg-green-400 w-full shadow-[0_0_10px_rgba(74,222,128,0.5)]"
+          ></div>
+        </div>
+      </div>
+
+      <!-- メッセージエリア (上部) -->
+      <div class="absolute top-4 right-4 left-40 z-40">
+        <!-- left-40でゲージと被らないように調整 -->
+        <div class="bg-slate-900/90 border border-slate-600 rounded-lg p-3 shadow-lg backdrop-blur-sm">
+          <div class="flex justify-between items-center mb-1">
+            <span class="text-xs text-blue-300 font-bold tracking-widest" id="time-display">18:30</span>
+            <span class="text-xs text-slate-400" id="stage-indicator">Stage 1/3</span>
+          </div>
+          <p id="story-text" class="text-xs leading-relaxed text-slate-100">
+            <!-- ここにシナリオテキストが入る -->
+          </p>
+        </div>
+      </div>
+
+      <!-- 選択ボタンエリア (下部) -->
+      <div id="action-area" class="absolute bottom-6 left-4 right-4 z-50 flex flex-col gap-3">
+        <button
+          id="btn-up"
+          onclick="makeChoice('study')"
+          class="btn-game bg-indigo-600 hover:bg-indigo-500 text-white py-4 px-4 rounded-xl shadow-lg border-b-4 border-indigo-800 flex items-center justify-between group"
+        >
+          <span class="font-bold text-sm text-left flex-1" id="text-up">選択肢A</span>
+          <span class="text-2xl ml-2 group-hover:-translate-y-1 transition-transform">🎓</span>
+        </button>
+
+        <button
+          id="btn-down"
+          onclick="makeChoice('phone')"
+          class="btn-game bg-slate-600 hover:bg-slate-500 text-white py-4 px-4 rounded-xl shadow-lg border-b-4 border-slate-800 flex items-center justify-between group"
+        >
+          <span class="font-bold text-sm text-left flex-1" id="text-down">選択肢B</span>
+          <span class="text-2xl ml-2 group-hover:rotate-12 transition-transform">📱</span>
+        </button>
+      </div>
+
+      <!-- --- オーバーレイ画面 --- -->
+
+      <!-- エンディング画面 -->
+      <div
+        id="ending-screen"
+        class="absolute inset-0 z-50 bg-slate-900/95 hidden flex-col items-center justify-center p-6 text-center overflow-y-auto"
+      >
+        <div class="w-full max-w-sm my-auto">
+          <div id="ending-icon" class="text-6xl mb-4"></div>
+          <h2 id="ending-title" class="text-2xl font-bold mb-4 text-white"></h2>
+          <div class="bg-slate-800/80 rounded-xl p-5 mb-6 text-left border border-slate-700">
+            <p id="ending-text" class="text-sm text-slate-300 leading-relaxed whitespace-pre-line"></p>
+          </div>
+
+          <!-- アクションボタンエリア（まとめて配置） -->
+          <div class="flex flex-col gap-3 w-full">
+            <!-- ゲームリトライボタン (全エンディング共通・上に配置) -->
+            <div id="retry-container" class="w-full">
+              <button
+                onclick="location.reload()"
+                class="btn-game w-full bg-slate-600 hover:bg-slate-500 text-white font-bold py-4 rounded-xl shadow-lg border-b-4 border-slate-800 text-center"
+              >
+                🎮 もう一度プレイする
+              </button>
+            </div>
+
+            <!-- 現実リトライボタン (条件付き表示・下に配置) -->
+            <div id="cta-container" class="hidden flex-col gap-2 animate-pulse-slow mb-1">
+              <a
+                href="#real-retry"
+                id="lp-btn-real-retry"
+                class="btn-game block w-full bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-bold text-sm py-3 rounded-xl shadow-lg border-b-4 border-fuchsia-700 text-center"
+              >
+                👟 現実をリトライしてみる
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+      ========================================
+      ここからLPセクション
+      ========================================
+    -->
+
+    <!-- 1. 現実モード入口セクション (ゲーム画面からのブリッジ) -->
+    <section
+      id="real-retry"
+      class="w-full bg-slate-900 py-16 px-4 flex justify-center items-center border-t border-slate-800"
     >
-      <a href="https://stsrjk.com/" class="text-sm font-bold tracking-wider text-slate-900"> SATO MATHEMATICS </a>
-    </header>
+      <div class="w-full max-w-md">
+        <!-- ゲーム風メッセージカード -->
+        <div class="lp-card rounded-xl p-6 md:p-8 text-center backdrop-blur-sm">
+          <!-- ゲームの主人公イラスト (絵文字) -->
+          <div class="flex justify-center mb-6 relative">
+            <div class="text-6xl drop-shadow-lg filter transform scale-x-[-1]">🏃</div>
+            <!-- 影 -->
+            <div class="w-12 h-2 bg-black opacity-30 rounded-full absolute bottom-0 blur-sm"></div>
+            <!-- きらきら -->
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              class="fill-yellow-300 absolute ml-12 -mt-2 animate-pulse"
+            >
+              <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+            </svg>
+          </div>
 
-    <main class="pt-14 max-w-md mx-auto w-full bg-white min-h-screen relative">
-      <!-- ▼ Bパターン：ここから変更（ファーストビュー） -->
-      <!-- ヒーローセクション：日常の延長線、静かな夜の雰囲気 -->
-      <section class="px-5 pt-8 pb-10">
-        <div class="relative w-full aspect-[4/3] bg-slate-100 mb-6 overflow-hidden rounded-2xl shadow-sm">
-          <!-- ※ 画像差し替え箇所：部活帰りや自習室など、落ち着いた雰囲気の画像を指定してください -->
-          <!-- 現在はプレースホルダーとして既存またはダミーを指定しています -->
-          <img
-            src="/hero-winter-b.jpg"
-            onerror="this.src='https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1000'"
-            alt="夜の自習室で勉強する様子"
-            class="w-full h-full object-cover opacity-90"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 text-white">
-            <p class="text-xs font-medium tracking-widest mb-1 opacity-90">WINTER 2025</p>
-            <p class="text-sm font-bold opacity-95">さとう数理塾 冬期講習</p>
+          <h2 class="text-sm md:text-base font-bold text-cyan-400 mb-6 tracking-wider">
+            夜のパターンを、ちょっとだけリトライする
+          </h2>
+          <p class="text-sm md:text-base text-slate-200 leading-relaxed">
+            今日みたいな夜を、現実でもちょっとだけアップデートしてみたい人へ。<br /><br />
+            部活もスマホも大事にしながら、勉強モードに切り替える“夜のパターン”を一緒に作ります。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 既存LP本文エリア (続き) -->
+    <section class="w-full bg-slate-950 py-12 px-4 flex justify-center">
+      <div class="w-full max-w-2xl text-slate-300">
+        <!-- 悩み共感セクション -->
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-white mb-4 border-l-4 border-indigo-500 pl-4">
+            高1の冬、こんなことありませんか？
+          </h3>
+          <ul class="space-y-3 mt-4 text-sm md:text-base">
+            <li class="flex items-start">
+              <span class="mr-2 text-indigo-400">✓</span>
+              部活で疲れて帰ると、どうしてもスマホを見てしまう
+            </li>
+            <li class="flex items-start">
+              <span class="mr-2 text-indigo-400">✓</span>
+              「あと5分」と思っているうちに、寝る時間になっている
+            </li>
+            <li class="flex items-start">
+              <span class="mr-2 text-indigo-400">✓</span>
+              テスト前だけ頑張るけど、終わるとすぐに元通り
+            </li>
+          </ul>
+        </div>
+
+        <!-- 解決策セクション -->
+        <div class="mb-12">
+          <h3 class="text-xl font-bold text-white mb-4 border-l-4 border-green-500 pl-4">
+            大事なのは「気合」より「パターン」
+          </h3>
+          <p class="text-sm md:text-base leading-relaxed mb-4">
+            毎日机に向かうのに、特別なやる気は必要ありません。<br />
+            必要なのは、家に帰ってから寝るまでの「自分だけの勝ちパターン」を作ることです。
+          </p>
+          <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+            <p class="text-center font-bold text-white mb-4">さとう数理塾の「夜の学習設計」</p>
+
+            <div class="flex justify-center items-stretch gap-2 md:gap-4 text-xs md:text-sm text-center">
+              <!-- Step 1 -->
+              <div
+                class="flex-1 bg-slate-700/50 p-3 rounded-xl border border-slate-600 flex flex-col items-center justify-start hover:bg-slate-700 transition-colors"
+              >
+                <div class="text-3xl md:text-4xl mb-2 drop-shadow-md">📊</div>
+                <div class="text-cyan-300 font-bold mb-1">Step 1</div>
+                <div class="leading-tight text-slate-200">今の時間の使い方を<br />見える化</div>
+              </div>
+
+              <!-- Arrow -->
+              <div class="flex items-center text-slate-500 text-lg">▶</div>
+
+              <!-- Step 2 -->
+              <div
+                class="flex-1 bg-slate-700/50 p-3 rounded-xl border border-slate-600 flex flex-col items-center justify-start hover:bg-slate-700 transition-colors"
+              >
+                <div class="text-3xl md:text-4xl mb-2 drop-shadow-md">👣</div>
+                <div class="text-cyan-300 font-bold mb-1">Step 2</div>
+                <div class="leading-tight text-slate-200">無理のない<br />動線作り</div>
+              </div>
+
+              <!-- Arrow -->
+              <div class="flex items-center text-slate-500 text-lg">▶</div>
+
+              <!-- Step 3 -->
+              <div
+                class="flex-1 bg-slate-700/50 p-3 rounded-xl border border-slate-600 flex flex-col items-center justify-start hover:bg-slate-700 transition-colors"
+              >
+                <div class="text-3xl md:text-4xl mb-2 drop-shadow-md">🤝</div>
+                <div class="text-cyan-300 font-bold mb-1">Step 3</div>
+                <div class="leading-tight text-slate-200">3日坊主を防ぐ<br />伴走サポート</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="mb-8">
-          <h1 class="text-[26px] font-bold leading-snug tracking-tight text-slate-900 mb-4">
-            高1、この冬は<br />
-            まだ間に合う。<br />
-            <span class="text-[#0095f6]">「勉強する夜」</span>をひとつ、<br />
-            増やしませんか。
-          </h1>
-          <p class="text-sm text-slate-600 leading-relaxed font-medium">
-            この冬に間に合うのは、偏差値の"逆転劇"ではなく、
-            <span class="bg-blue-50 text-slate-800 font-bold px-1">「勉強するのが当たり前になる夜」をつくること</span
-            >です。<br /><br />
-            さとう数理塾は、家ではだらけてしまう夜を 「塾に来たらスイッチが入る夜」に変える個別指導です。
-          </p>
-        </div>
+        <!-- CTAセクション -->
+        <div
+          class="text-center mt-8 p-6 bg-gradient-to-b from-slate-900 to-slate-950 rounded-xl border border-slate-800"
+        >
+          <p class="text-white font-bold mb-6">高1の冬、まずは1週間だけ“夜の過ごし方”をアップデートしてみませんか？</p>
 
-        <!-- CTA Buttons -->
-        <div class="space-y-3">
           <a
             href="https://stsrjk.com/trial"
             target="_blank"
             rel="noopener noreferrer"
-            onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });"
-            class="block w-full bg-slate-900 text-white text-center font-bold py-3.5 rounded-xl shadow-md hover:bg-slate-800 transition-colors relative overflow-hidden group"
+            id="lp-btn-trial"
+            class="block w-full max-w-sm mx-auto bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-bold py-4 rounded-full shadow-lg transition-transform hover:-translate-y-1 text-center"
           >
-            <span class="relative z-10">冬の無料体験に申し込む</span>
+            冬の無料体験に申し込む
           </a>
-          <a
-            href="https://lin.ee/blKCpXC"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
-            class="block w-full bg-white border border-[#06c755] text-[#06c755] text-center font-bold py-3.5 rounded-xl hover:bg-green-50 transition-colors"
-          >
-            LINEで塾長に相談する
-          </a>
+
+          <!-- 追加：サブCTAボタン -->
           <a
             href="https://stsrjk.com/"
             target="_blank"
             rel="noopener noreferrer"
-            onclick="fbq('track', 'ViewContent'); gtag('event', 'view_homepage', { source: 'insta_lp' });"
-            class="block w-full bg-slate-50 border border-slate-300 text-slate-600 text-center font-bold py-3.5 rounded-xl hover:bg-slate-100 hover:text-slate-800 transition-all flex items-center justify-center gap-2 group"
+            id="lp-btn-home"
+            class="block w-full max-w-sm mx-auto mt-4 bg-slate-700 hover:bg-slate-600 text-slate-50 font-bold py-4 rounded-full shadow-lg border-b-4 border-slate-900 transition-transform hover:-translate-y-1 text-center"
           >
-            <span>その前にホームページを見る</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4 group-hover:translate-x-1 transition-transform"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
+            ホームページで、塾のことをくわしく見る
           </a>
-        </div>
-      </section>
 
-      <!-- ▼ Bパターン：ここから変更（アンサーブロック） -->
-      <!-- コンセプト：問いに対する「答え」を明確に示す -->
-      <section class="px-5 py-10 bg-slate-50 border-y border-slate-100">
-        <div class="mb-6">
-          <h2 class="text-lg font-bold text-slate-900 leading-normal mb-4">
-            この冬の「きっかけ」は、<br />
-            <span class="border-b-4 border-blue-200">夜の居場所を変えること</span> です。
-          </h2>
-          <p class="text-sm text-slate-600 leading-7 mb-4">高１の保護者の方から、よくこんな悩みを聞きます。</p>
-          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-6">
-            <ul class="space-y-3 text-sm text-slate-700">
-              <li class="flex items-start gap-2">
-                <span class="text-blue-400 mt-1">▼</span>
-                <span>部活が終わると、家ではスマホばかりで机に向かわない</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-blue-400 mt-1">▼</span>
-                <span>テスト前だけ一瞬がんばるけど、すぐ元に戻ってしまう</span>
-              </li>
-            </ul>
-          </div>
-
-          <p class="text-sm text-slate-600 leading-7 mb-4">
-            「やる気」の問題にする前に、<br />
-            <strong>「環境」を変えてみませんか？</strong>
+          <p class="text-xs text-slate-500 mt-4">
+            ※ 無料体験は最長1ヶ月まで。まずは1週間分の「夜のパターン」づくりから始めます。<br />
+            ※ 無理な勧誘は一切ありません。あなたのペースで相談できます。
           </p>
-
-          <p class="text-sm text-slate-600 leading-7">
-            さとう数理塾がこの冬にお手伝いしたいのは、 『勉強をする夜のパターン』をひとつ作ることです。
-          </p>
-        </div>
-
-        <!-- 具体的な解決策リスト -->
-        <div class="space-y-4">
-          <div class="flex gap-4 items-start">
-            <div
-              class="w-10 h-10 shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg"
-            >
-              1
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-900 text-sm mb-1">「とりあえず塾に行く」を決める</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                週1回〜週5回通い放題の定額制。「この曜日の夜は塾」と決めるだけで、生活リズムが整います。
-              </p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div
-              class="w-10 h-10 shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg"
-            >
-              2
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-900 text-sm mb-1">来た瞬間、スイッチが入る</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                AI教材が「今日やるべきこと」を提示。席に座って迷う時間がゼロになります。
-              </p>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start">
-            <div
-              class="w-10 h-10 shrink-0 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg"
-            >
-              3
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-900 text-sm mb-1">日常の延長線で作る習慣</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                「塾に来たらスイッチが入る夜」を、この冬だけでも体験させてあげてください。
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8 p-4 bg-blue-50 rounded-lg text-center">
-          <p class="text-xs text-slate-700 leading-relaxed font-medium">
-            この「夜のパターン」が一度できると、<br />
-            高２・高３になったときの選択肢が、<br />
-            静かに、でも確実に増えていきます。
-          </p>
-        </div>
-      </section>
-
-      <!-- ▼ 提供されたコード部分：悩みグリッド（文脈に合わせて配置） -->
-      <section class="px-5 py-10">
-        <h2 class="text-center font-bold text-base mb-6">暁秀・日大三島生が<br />抱えている「冬の悩み」</h2>
-        <!-- Grid Layout from A Pattern -->
-        <div class="grid grid-cols-2 gap-3 mb-6">
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">😰</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                日大三島生<br />数学の評定が不安
-              </div>
-            </div>
-          </div>
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">📚</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                暁秀生<br />課題が多すぎて大変
-              </div>
-            </div>
-          </div>
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">📉</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                理系に進みたい<br />けど今の成績が心配
-              </div>
-            </div>
-          </div>
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">🎓</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                内部進学はしたい<br />けど学部は妥協したくない
-              </div>
-            </div>
-          </div>
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">🏫</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                他塾・予備校に<br />通っても点が変わらない
-              </div>
-            </div>
-          </div>
-          <div
-            class="aspect-square relative bg-slate-50 border border-gray-100 flex items-center justify-center p-2 text-center rounded-lg"
-          >
-            <div>
-              <div class="text-2xl mb-1">💪</div>
-              <div class="text-[10px] sm:text-xs font-bold leading-tight text-slate-800">
-                冬休みの課題を<br />実力アップに変えたい
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ▼ 補完セクション：塾の特徴（Bパターンの文脈「居場所づくり」に合わせて調整） -->
-      <section class="px-5 pb-12">
-        <div class="mb-8">
-          <h2 class="text-lg font-bold mb-4">さとう数理塾が<br />「夜の居場所」に選ばれる理由</h2>
-
-          <div class="space-y-6">
-            <!-- Feature 1 -->
-            <div>
-              <img
-                src="https://placehold.co/600x300/f1f5f9/475569?text=Study+Space"
-                alt="集中できる自習スペース"
-                class="w-full h-40 object-cover rounded-lg mb-3 shadow-sm"
-              />
-              <h3 class="font-bold text-[#0095f6] mb-1">01. 「いつでも行ける」通い放題プラン</h3>
-              <p class="text-sm text-slate-700 leading-relaxed">
-                「今日は部活が早く終わったから行こうかな」ができる定額制。家では誘惑が多い時間帯も、ここなら「みんなが勉強している」環境が待っています。
-              </p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div>
-              <img
-                src="https://placehold.co/600x300/f1f5f9/475569?text=AI+Learning"
-                alt="AIタブレット学習"
-                class="w-full h-40 object-cover rounded-lg mb-3 shadow-sm"
-              />
-              <h3 class="font-bold text-[#0095f6] mb-1">02. AIが苦手を特定、迷わず着手</h3>
-              <p class="text-sm text-slate-700 leading-relaxed">
-                席に着いたら、AIタブレットが「今やるべき問題」を出してくれます。「何を勉強しようかな…」と悩んでスマホを触ってしまう時間がなくなります。
-              </p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div>
-              <img
-                src="https://placehold.co/600x300/f1f5f9/475569?text=Personal+Support"
-                alt="個別指導の様子"
-                class="w-full h-40 object-cover rounded-lg mb-3 shadow-sm"
-              />
-              <h3 class="font-bold text-[#0095f6] mb-1">03. 暁秀・日大三島に特化</h3>
-              <p class="text-sm text-slate-700 leading-relaxed">
-                生徒さんから学校の進度や課題を直接聞き、それに合わせて柔軟に対応します。「学校の宿題を終わらせるために行く」という使い方も大歓迎です。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ▼ 提供されたコード部分：LINEガイド -->
-      <div id="line-guide" class="scroll-mt-20 px-4 mb-10">
-        <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="text-2xl">💬</span>
-            <h3 class="font-bold text-sm text-[#0095f6]">LINE相談で聞けること</h3>
-          </div>
-          <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-            塾長が直接、今の状況に合わせたアドバイスをお返しします。
-          </p>
-          <ul class="text-sm space-y-2 mb-5 text-[#262626]">
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>「今の成績で理系に進んでも大丈夫？」の診断</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>日大三島・暁秀の進度に合わせた冬の学習法</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-[#0095f6] font-bold">✓</span>
-              <span>「物理は難しい？」などの不安や、志望校の相談</span>
-            </li>
-          </ul>
-
-          <div class="text-center">
-            <a
-              href="https://lin.ee/blKCpXC"
-              target="_blank"
-              rel="noopener noreferrer"
-              onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
-              class="inline-block w-full bg-[#06c755] text-white font-bold py-2.5 rounded-lg hover:opacity-90 transition-opacity text-sm shadow-sm"
-            >
-              LINEで友だち追加して相談する
-            </a>
-            <p class="text-[10px] text-gray-500 mt-2">
-              ※自動応答ではなく、塾長が手動でお返事します。<br />
-              ※しつこい勧誘は一切ありませんのでご安心ください。
-            </p>
-          </div>
         </div>
       </div>
+    </section>
 
-      <!-- ▼ 提供されたコード部分：Insta Feed Q&A -->
-      <div class="px-4 pb-12 space-y-6">
-        <div class="text-xs text-gray-400 font-medium mb-2 uppercase tracking-wide">Suggested for you</div>
+    <script>
+      // --- ゲーム状態管理 ---
+      let currentState = {
+        sceneIndex: 0,
+        studyScore: 0,
+        phoneScore: 0,
+        lastChoice: null,
+        energy: 100,
+        isAnimating: false,
+        choices: [], // 選択履歴を保存 [0:'study', 1:'phone'...]
+      };
 
-        <!-- Q&A 1 -->
-        <article>
-          <div class="flex items-center gap-2 mb-2">
-            <!-- えんぴつくんアイコンのパスは環境に合わせて調整してください -->
-            <img
-              src="/enpitsu-kun.png"
-              onerror="this.src='https://placehold.co/32x32/orange/white?text=S'"
-              alt="えんぴつくん"
-              class="w-8 h-8 rounded-full object-cover"
-            />
-            <span class="text-sm font-semibold">sato_suuri_juku</span>
-            <span class="text-xs text-gray-400">• Follow</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-              <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
-              高1の12月、この成績で理系は現実的？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-              <span
-                class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
-                >A</span
-              >
-              通知表とテストを持ってきていただき、「理系を選ぶならどこまで必要か」を一緒に整理します。日大三島・暁秀それぞれのカリキュラムを踏まえて、この冬にやるべきことをお伝えします。
-            </p>
-          </div>
-          <!-- Instagram Actions (Visual only) -->
-          <div class="flex gap-4 mb-2 text-slate-800">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-7 h-7 hover:text-red-500 cursor-pointer"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-7 h-7"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 20.25c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9z"
-              />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 12m-3 3h6m-6-6h6" />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-7 h-7 transform -rotate-45 -mt-1"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-              />
-            </svg>
-          </div>
-          <div class="text-sm">
-            <span class="font-semibold">sato_suuri_juku</span>
-            <span class="text-gray-600"
-              >日大三島・暁秀のカリキュラムを前提に、「今の成績から理系を目指すなら何を優先するか」を一緒に考えます。</span
-            >
-            <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #沼津塾 #理系</div>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">2 HOURS AGO</div>
-        </article>
+      // --- シナリオデータ (3ステージ仕様に変更) ---
+      const scenarios = [
+        {
+          // Stage 1：18:30 駅〜帰り道
+          time: '18:30',
+          text: '部活が終わって駅に着いたところ。\nちょっとコンビニ寄りたい気もするし、早く家に帰って休みたい気もする夕方。',
+          bgProp: '🏫',
+          choices: {
+            study: {
+              label: '寄り道せず、まっすぐ家に向かう',
+              // reactionText は使用しないため削除または無視
+            },
+            phone: {
+              label: 'コンビニに寄って、ダラダラしながら帰る',
+            },
+          },
+        },
+        {
+          // Stage 2：20:00 自宅 (夕飯後)
+          time: '20:00',
+          text: '夕飯もお風呂も終わってひと息ついた時間。\nここから机に行くか、ソファやベッドでスマホにするか、分かれ道。',
+          bgProp: '🏠',
+          choices: {
+            study: {
+              label: 'とりあえず机の前に座って、今日やるところを開く',
+            },
+            phone: {
+              label: 'ソファやベッドで、ちょっとだけスマホを開く',
+            },
+          },
+        },
+        {
+          // Stage 3：22:30 寝る前
+          time: '22:30',
+          text: 'そろそろ寝る時間。\nここで今日を終わらせるか、もうひと踏ん張りするかで、明日の気分がだいぶ変わる。',
+          bgProp: '🌙',
+          choices: {
+            study: {
+              label: '今日やると決めてたところまでは、ちゃんと終わらせる',
+            },
+            phone: {
+              label: 'もう今日はあきらめて、スマホ見ながら寝る',
+            },
+          },
+        },
+      ];
 
-        <!-- Q&A 2 -->
-        <article class="pt-4 border-t border-gray-100">
-          <div class="flex items-center gap-2 mb-2">
-            <img
-              src="/enpitsu-kun.png"
-              onerror="this.src='https://placehold.co/32x32/orange/white?text=S'"
-              alt="えんぴつくん"
-              class="w-8 h-8 rounded-full object-cover"
-            />
-            <span class="text-sm font-semibold">sato_suuri_juku</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-              <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
-              すでに塾や予備校に通っています。併用して大丈夫？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-              <span
-                class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
-                >A</span
-              >
-              はい、大丈夫です。映像授業や集団塾の内容を前提にしながら、数学・理科のつまずきを整理したい、という形で通われている方が多いです。いま通っている塾や予備校を変える必要はありません。
-            </p>
-          </div>
-          <div class="text-sm">
-            <span class="font-semibold">sato_suuri_juku</span>
-            <span class="text-[#262626]"
-              >「理系は無理かも…」と感じている高校生でも大丈夫です。いったんこの冬に状況を整理してから、具体的な志望校や合格への道筋を一緒に考えていきましょう。</span
-            >
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">5 HOURS AGO</div>
-        </article>
+      // シーンごとの障害物パターン (シチュエーションに合わせて調整)
+      const obstaclePatterns = {
+        0: {
+          // 18:30 駅・コンビニ
+          study: { icon: '🏪', bottom: '14rem' }, // コンビニの誘惑を避ける
+          phone: { icon: '🍦', bottom: '13.8rem' }, // 買い食い（衝突）
+        },
+        1: {
+          // 20:00 リビング
+          study: { icon: '📺', bottom: '14rem' }, // テレビ・ソファの誘惑を避ける
+          phone: { icon: '🛋️', bottom: '14rem' }, // ソファに沈む（衝突）
+        },
+        2: {
+          // 22:30 寝る前
+          study: { icon: '💤', bottom: '15rem' }, // 睡魔を避ける
+          phone: { icon: '📱', bottom: '15rem' }, // スマホ寝落ち（衝突）
+        },
+      };
 
-        <!-- Q&A 3 -->
-        <article class="pt-4 border-t border-gray-100">
-          <div class="flex items-center gap-2 mb-2">
-            <img
-              src="/enpitsu-kun.png"
-              onerror="this.src='https://placehold.co/32x32/orange/white?text=S'"
-              alt="えんぴつくん"
-              class="w-8 h-8 rounded-full object-cover"
-            />
-            <span class="text-sm font-semibold">sato_suuri_juku</span>
-          </div>
-          <div class="bg-slate-50 rounded border border-gray-200 p-6 mb-3">
-            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
-              <span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded">Q</span>
-              まだ塾を探している途中です。まずは相談だけしてもいいでしょうか？
-            </h3>
-            <p class="text-sm text-gray-700 leading-relaxed">
-              <span
-                class="bg-white border border-gray-300 text-gray-800 text-[10px] px-1.5 py-0.5 rounded mr-1 font-bold"
-                >A</span
-              >
-              はい、大丈夫です。今の成績や学校の状況をうかがいながら、「この冬はどこまでやるべきか」「理系を目指すなら何を優先するか」を一緒に整理する場としてご利用いただけます。
-            </p>
-          </div>
-          <div class="text-sm">
-            <span class="font-semibold">sato_suuri_juku</span>
-            <span class="text-[#262626]"
-              >まずは状況を一緒に整理してから、「塾に通うべきかどうか」も含めて考えていきます。</span
-            >
-            <div class="text-[#00376b] mt-1 text-xs">#日大三島 #暁秀 #学習相談 #理系進学</div>
-          </div>
-          <div class="text-[10px] text-gray-500 mt-1 uppercase">8 HOURS AGO</div>
-        </article>
-      </div>
+      function showObstacle(sceneIndex, type) {
+        const pattern = obstaclePatterns[sceneIndex]?.[type];
+        if (!pattern) return;
 
-      <!-- ▼ クロージング（Bパターン：文言調整） -->
-      <div class="px-4 pb-20">
-        <div class="text-center mb-8">
-          <h2 class="text-lg font-bold mb-4">ここまで読んでくださった保護者さまへ</h2>
-          <p class="text-sm text-gray-700 leading-relaxed">
-            この冬に作った「夜の勉強パターン」は、<br />
-            高校３年間の、そして受験の大きな財産になります。<br /><br />
-            家では難しいその一歩を、<br />
-            さとう数理塾にお手伝いさせてください。
-          </p>
-        </div>
+        // 初期配置
+        els.propLayer.style.transition = 'none';
+        els.propLayer.style.right = '-80px';
+        els.propLayer.style.bottom = pattern.bottom;
+        els.propLayer.innerText = pattern.icon;
+        els.propLayer.style.fontSize = '3rem';
 
-        <div class="space-y-4">
-          <!-- Action 1: LINE -->
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
-            <h3 class="font-bold text-[#0095f6] mb-2 text-base">① LINEで状況を相談する</h3>
-            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-              「暁秀高1／テスト前だけ心配」など、ひと言メッセージからでも大丈夫です。
-            </p>
-            <a
-              href="https://lin.ee/blKCpXC"
-              target="_blank"
-              rel="noopener noreferrer"
-              onclick="fbq('track', 'Contact'); gtag('event', 'contact_click', { method: 'LINE', source: 'insta_lp' });"
-              class="block w-full bg-[#0095f6] text-white text-center font-bold py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm"
-            >
-              LINEで相談
-            </a>
-          </div>
+        // 移動開始
+        requestAnimationFrame(() => {
+          els.propLayer.style.transition = 'right 1.5s linear';
+          els.propLayer.style.right = '120%';
+        });
+      }
 
-          <!-- Action 2: Free Trial -->
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-            <h3 class="font-bold text-slate-800 mb-2 text-base">② 冬の無料体験に申し込む</h3>
-            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-              実際の教室の雰囲気や、勉強の進め方を見てから、<br />
-              通うかどうかをゆっくり決めていただけます。
-            </p>
-            <a
-              href="https://stsrjk.com/trial"
-              target="_blank"
-              rel="noopener noreferrer"
-              onclick="fbq('track', 'Lead'); gtag('event', 'generate_lead', { form_type: 'winter_trial', source: 'insta_lp' });"
-              class="block w-full bg-white border border-slate-300 text-slate-800 text-center font-bold py-3 rounded-lg hover:bg-slate-100 transition-colors shadow-sm"
-            >
-              冬の無料体験に申し込む
-            </a>
-          </div>
+      // --- DOM要素 ---
+      const els = {
+        gameContainer: document.getElementById('game-container'),
+        timeDisplay: document.getElementById('time-display'),
+        stageIndicator: document.getElementById('stage-indicator'),
+        storyText: document.getElementById('story-text'),
+        btnUp: document.getElementById('btn-up'),
+        btnDown: document.getElementById('btn-down'),
+        textUp: document.getElementById('text-up'),
+        textDown: document.getElementById('text-down'),
+        player: document.getElementById('player'),
+        scrollingBg: document.getElementById('scrolling-bg'),
+        propLayer: document.getElementById('prop-layer'),
+        endingScreen: document.getElementById('ending-screen'),
+        endingTitle: document.getElementById('ending-title'),
+        endingIcon: document.getElementById('ending-icon'),
+        endingText: document.getElementById('ending-text'),
+        ctaContainer: document.getElementById('cta-container'),
+        retryContainer: document.getElementById('retry-container'),
+        energyFill: document.getElementById('energy-fill'),
+      };
 
-          <!-- Action 3: Website (New!) -->
-          <a
-            href="https://stsrjk.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="fbq('track', 'ViewContent'); gtag('event', 'view_homepage', { source: 'insta_lp' });"
-            class="block w-full bg-slate-50 border border-slate-300 text-slate-600 text-center font-bold py-3.5 rounded-xl hover:bg-slate-100 hover:text-slate-800 transition-all shadow-sm flex items-center justify-center gap-2 group"
-          >
-            <span>その前にホームページを見る</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4 group-hover:translate-x-1 transition-transform"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </main>
+      // --- 初期化 ---
+      function initStars() {
+        const layer = document.getElementById('stars-layer');
+        for (let i = 0; i < 30; i++) {
+          const star = document.createElement('div');
+          star.className = 'star absolute bg-white rounded-full';
+          star.style.width = Math.random() * 2 + 1 + 'px';
+          star.style.height = star.style.width;
+          star.style.top = Math.random() * 60 + '%';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.animationDelay = Math.random() * 3 + 's';
+          layer.appendChild(star);
+        }
+      }
+      initStars();
+
+      // --- ゲーム開始 ---
+      renderScene();
+
+      // --- シーン描画 ---
+      function renderScene() {
+        const scene = scenarios[currentState.sceneIndex];
+
+        // UI更新
+        els.timeDisplay.innerText = scene.time;
+        els.stageIndicator.innerText = `Stage ${currentState.sceneIndex + 1}/3`;
+
+        // テキスト更新
+        els.storyText.innerText = scene.text;
+        els.textUp.innerText = scene.choices.study.label;
+        els.textDown.innerText = scene.choices.phone.label;
+
+        // プロップリセット
+        els.propLayer.style.transition = 'none';
+        els.propLayer.style.right = '-100px';
+        els.propLayer.innerText = scene.bgProp;
+        els.propLayer.style.fontSize = '4rem';
+
+        // プレイヤー位置リセット
+        els.player.style.bottom = '14rem';
+        els.player.classList.remove(
+          'animate-hit',
+          'animate-crouch',
+          'animate-spin-jump',
+          'animate-knockout',
+          'animate-jump-arc',
+          'animate-damage'
+        );
+        els.player.classList.add('animate-run');
+
+        // 入力受付開始
+        currentState.isAnimating = false;
+
+        // ボタンを表示状態に
+        els.btnUp.disabled = false;
+        els.btnDown.disabled = false;
+        els.btnUp.style.opacity = '1';
+        els.btnDown.style.opacity = '1';
+      }
+
+      // --- ゲージ更新 ---
+      function updateEnergy(amount) {
+        currentState.energy = Math.max(0, Math.min(100, currentState.energy + amount));
+        els.energyFill.style.width = currentState.energy + '%';
+
+        if (currentState.energy > 60) {
+          els.energyFill.className =
+            'energy-bar-fill h-full bg-green-400 w-full shadow-[0_0_10px_rgba(74,222,128,0.5)]';
+        } else if (currentState.energy > 30) {
+          els.energyFill.className =
+            'energy-bar-fill h-full bg-yellow-400 w-full shadow-[0_0_10px_rgba(250,204,21,0.5)]';
+        } else {
+          els.energyFill.className =
+            'energy-bar-fill h-full bg-red-500 w-full shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse';
+        }
+      }
+
+      // --- 選択処理 ---
+      function makeChoice(type) {
+        if (currentState.isAnimating) return;
+        currentState.isAnimating = true;
+
+        // 選択履歴を記録
+        currentState.choices[currentState.sceneIndex] = type;
+        currentState.lastChoice = type;
+
+        if (type === 'study') {
+          currentState.studyScore += 1;
+        } else {
+          currentState.phoneScore += 1;
+        }
+
+        els.btnUp.style.opacity = '0.5';
+        els.btnDown.style.opacity = '0.5';
+        els.btnUp.disabled = true;
+        els.btnDown.disabled = true;
+
+        animateAction(type);
+      }
+
+      // --- アクションアニメーション ---
+      function animateAction(type) {
+        // テキストは更新しない（指示通り）
+        // els.storyText.innerText = reactionText;
+
+        // 1. 障害物を出す
+        showObstacle(currentState.sceneIndex, type);
+
+        // 2. タイミング調整 (前回と同じロジック)
+        const hitTime = 900;
+        const jumpPreTime = 400;
+        const actionDelay = type === 'study' ? hitTime - jumpPreTime : hitTime;
+
+        // いったん足を止める
+        els.player.classList.remove('animate-run');
+
+        setTimeout(() => {
+          if (type === 'study') {
+            // ★勉強ルート：ジャンプ
+            updateEnergy(5);
+            els.player.classList.remove('character-transition');
+            els.player.classList.add('animate-jump-arc');
+
+            setTimeout(() => {
+              els.player.classList.remove('animate-jump-arc');
+              els.player.style.bottom = '17rem';
+              els.player.classList.add('animate-run');
+              els.player.classList.add('character-transition');
+            }, 800);
+
+            els.scrollingBg.style.transform = `translateX(-30%)`;
+          } else {
+            // ★スマホルート：衝突 or ダウン
+            const damage = 35;
+            const nextEnergy = currentState.energy - damage; // 予測値
+
+            updateEnergy(-damage);
+
+            if (nextEnergy <= 0) {
+              // 【ダウン演出】エネルギーが0以下になる場合はバタリと倒れる
+              els.player.classList.add('animate-knockout');
+              // ※ここではあえて animate-run に戻さない（倒れたままにする）
+            } else {
+              // 【通常ダメージ】回転して戻る
+              els.player.classList.add('animate-spin-jump');
+              setTimeout(() => {
+                els.player.classList.remove('animate-spin-jump');
+                els.player.classList.add('animate-run');
+              }, 800);
+            }
+
+            els.scrollingBg.style.transform = `translateX(-10%)`;
+          }
+        }, actionDelay);
+
+        // 3. 次のシーンへ遷移
+        setTimeout(() => {
+          els.scrollingBg.classList.remove('slide-bg');
+          els.scrollingBg.style.transform = 'translateX(0)';
+
+          setTimeout(() => {
+            els.scrollingBg.classList.add('slide-bg');
+          }, 50);
+
+          currentState.sceneIndex++;
+
+          if (currentState.sceneIndex < scenarios.length) {
+            renderScene();
+          } else {
+            checkEnding();
+          }
+        }, 3000);
+      }
+
+      // --- エンディング判定 (ロジック全面書き換え) ---
+      function checkEnding() {
+        els.gameContainer.classList.add('paused');
+        els.endingScreen.style.display = 'flex';
+
+        const [c1, c2, c3] = currentState.choices;
+        const patternId = getPatternId(c1, c2, c3);
+
+        setTimeout(() => {
+          els.endingScreen.classList.remove('hidden');
+          showEndingByPattern(patternId);
+        }, 500);
+      }
+
+      // 8パターンのID判定
+      function getPatternId(c1, c2, c3) {
+        if (c1 === 'study' && c2 === 'study' && c3 === 'study') return 1;
+        if (c1 === 'study' && c2 === 'study' && c3 === 'phone') return 2;
+        if (c1 === 'study' && c2 === 'phone' && c3 === 'study') return 3;
+        if (c1 === 'study' && c2 === 'phone' && c3 === 'phone') return 4;
+        if (c1 === 'phone' && c2 === 'study' && c3 === 'study') return 5;
+        if (c1 === 'phone' && c2 === 'study' && c3 === 'phone') return 6;
+        if (c1 === 'phone' && c2 === 'phone' && c3 === 'study') return 7;
+        if (c1 === 'phone' && c2 === 'phone' && c3 === 'phone') return 8;
+        return 8; // default fallback
+      }
+
+      // パターン別エンディング表示
+      function showEndingByPattern(patternId) {
+        // デフォルト要素リセット
+        els.ctaContainer.classList.add('hidden');
+        els.ctaContainer.style.display = 'none';
+        // retryContainerは常に表示するので操作しないが、念の為初期化
+        els.retryContainer.classList.remove('hidden');
+        els.retryContainer.style.display = 'block';
+
+        let title = '';
+        let text = '';
+        let icon = '';
+        let titleColor = '';
+
+        switch (patternId) {
+          case 1: // S1: A-A-A
+            icon = '✨📖';
+            title = '完璧な夜のランニング';
+            text =
+              '寄り道せず、夕飯後も机に向かい、今日やると決めたことを完璧にやり遂げました。\n\n「今日の自分、すごいかも。」\n心地よい疲労感と達成感に包まれて、最高の気分で眠りにつけます。\n明日もきっと、いい日になるはず。';
+            titleColor = 'text-yellow-300';
+            break;
+          case 2: // A1: A-A-B
+            icon = '😌📘';
+            title = 'ほぼ完璧、あと一歩！';
+            text =
+              'まっすぐ帰って机にも向かったけれど、最後だけスマホの誘惑に負けてしまいました。\n\n「まあ、やることはやったし。」\n十分に合格点な夜ですが、最後の粘りがあればもっと気持ちよく眠れたかもしれません。';
+            titleColor = 'text-blue-200';
+            break;
+          case 3: // A2: A-B-A
+            icon = '🔥📝';
+            title = '見事なラストスパート';
+            text =
+              '夕飯後はソファでダラダラしてしまったけれど、寝る直前に理性を取り戻して机に向かいました。\n\n「危なかった、なんとか取り返したぞ。」\nその「最後のひと踏ん張り」ができるかどうかが、大きな分かれ道です。ナイスリカバリー！';
+            titleColor = 'text-orange-300';
+            break;
+          case 4: // G1: A-B-B
+            icon = '🛌💤';
+            title = '机にたどり着けず…';
+            text =
+              'せっかく早く家に帰ったのに、一度も机に向かわないまま寝落ちしてしまいました。\n\n「明日の朝やろう…」\nそう思って閉じたまぶたの裏に、今日やるはずだった問題集が浮かびます。\n時間はあったはずなのに、もったいない夜でした。';
+            titleColor = 'text-slate-400';
+            showCTA(); // 追加 (4, 6, 7, 8 のみ)
+            break;
+          case 5: // S2: B-A-A
+            icon = '⭐️📚';
+            title = '見事な巻き返し勝利';
+            text =
+              '帰りに少し寄り道したけれど、家に着いてからは完璧なムーブでした。\n\n「遊びも勉強も、どっちも楽しめた！」\n切り替え上手な理想的な夜の過ごし方です。メリハリをつけて、明日もがんばりましょう！';
+            titleColor = 'text-yellow-300';
+            break;
+          case 6: // A3: B-A-B
+            icon = '🙂📗';
+            title = '悪くはない夜';
+            text =
+              '寄り道をして、机にも向かって、最後はスマホ。\n色々なことがあった夜でした。\n\nやるべきことは最低限こなしていますが、もう少しだけ集中できれば、さらに充実した時間になったかもしれません。';
+            titleColor = 'text-blue-200';
+            showCTA(); // 追加
+            break;
+          case 7: // A4: B-B-A
+            icon = '😅📓';
+            title = 'ギリギリセーフ！';
+            text =
+              '寄り道して、ダラダラして、もうダメかと思ったけれど…最後の最後に机に向かいました。\n\n「これだけはやらないと眠れない！」\nその意地が、あなたの未来を少しだけ変えるかもしれません。終わりよければすべてよし？';
+            titleColor = 'text-green-300';
+            showCTA(); // 追加
+            break;
+          case 8: // G2: B-B-B
+            icon = '💤📱';
+            title = 'スマホといっしょに寝落ち';
+            text =
+              '寄り道して、家でもダラダラして、そのままスマホを握りしめて寝落ちしてしまいました。\n\n「今日は疲れてたから…」\n言い訳をしながら眠る夜。\nその「また今度」が、少しずつ積もっていきます。明日は机に行けるでしょうか？';
+            titleColor = 'text-slate-500';
+            showCTA(); // 追加
+            break;
+        }
+
+        els.endingIcon.innerText = icon;
+        els.endingTitle.innerText = title;
+        els.endingTitle.className = `text-xl font-bold mb-4 ${titleColor}`;
+        els.endingText.innerText = text;
+      }
+
+      function showCTA() {
+        els.ctaContainer.classList.remove('hidden');
+        els.ctaContainer.style.display = 'flex';
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var btnRealRetry = document.getElementById('lp-btn-real-retry');
+        var btnTrial = document.getElementById('lp-btn-trial');
+        var btnHome = document.getElementById('lp-btn-home');
+
+        // 現実リトライボタン（エンディング画面）
+        if (btnRealRetry) {
+          btnRealRetry.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+              gtag('event', 'click_real_retry', {
+                event_category: 'LP_night_run',
+                event_label: 'ending_screen',
+              });
+            }
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', 'ClickRealRetry', { position: 'ending_screen' });
+            }
+          });
+        }
+
+        // 冬の無料体験ボタン
+        if (btnTrial) {
+          btnTrial.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+              gtag('event', 'click_trial', {
+                event_category: 'LP_night_run',
+                event_label: 'trial_section',
+              });
+            }
+            if (typeof fbq === 'function') {
+              // コンバージョン用に Lead を送信
+              fbq('track', 'Lead', { content_name: 'winter_trial_LP' });
+            }
+          });
+        }
+
+        // ホームページへ移動ボタン
+        if (btnHome) {
+          btnHome.addEventListener('click', function () {
+            if (typeof gtag === 'function') {
+              gtag('event', 'click_home', {
+                event_category: 'LP_night_run',
+                event_label: 'home_link',
+              });
+            }
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', 'ClickHomeFromLP', {});
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
