@@ -916,7 +916,7 @@ export default function NewHomepage() {
 
               {/* サブコピー */}
               <p className="text-base md:text-lg text-[#334455]/80 leading-relaxed font-medium mb-12 max-w-2xl pl-1 border-l-4 border-[#D6DE26]">
-                日大三島・暁秀・桐陽・加藤学園、
+                日大三島・暁秀、
                 <br className="hidden md:inline" />
                 沼津東・三島北などの高校生が通っています。
               </p>
