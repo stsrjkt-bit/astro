@@ -920,7 +920,7 @@ export default function NewHomepage() {
                 <br className="hidden md:inline" />
                 沼津東・三島北などの高校生が通っています。
                 <span className="block mt-4">
-                  「がんばっているのに数学が伸びない」「一人だと勉強が続かない」
+                  「がんばっているのに数学が伸びない」「勉強が行き詰まっている」
                   <br className="hidden md:inline" />
                   そんな理系志望の高校生を支える個別塾です。
                 </span>
