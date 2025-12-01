@@ -657,10 +657,7 @@ const HabitSection = () => {
 
 const HomeLearningSection: React.FC = () => {
   return (
-    <section
-      id="home-learning"
-      className="py-16 md:py-24 bg-[#F8FAFC] relative overflow-hidden"
-    >
+    <section id="home-learning" className="py-16 md:py-24 bg-[#F8FAFC] relative overflow-hidden">
       {/* 背景装飾 */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
         <div className="absolute top-[-10%] right-[-5%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-[#009DE0]/10 to-transparent rounded-full blur-3xl" />
@@ -733,8 +730,7 @@ const HomeLearningSection: React.FC = () => {
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                     塾で使っているAI教材を、そのまま自宅でも使えます。
-                    「今日は何をやればいいか」を毎回一から考えなくてよいので、
-                    勉強のペースが崩れにくくなります。
+                    「今日は何をやればいいか」を毎回一から考えなくてよいので、 勉強のペースが崩れにくくなります。
                   </p>
                 </div>
               </div>
@@ -756,8 +752,7 @@ const HomeLearningSection: React.FC = () => {
                     <span>質問はため込まない</span>
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                    数学の問題でつまずいたときは、
-                    大学受験レベルまで対応できるAI質問チャットで、疑問点を解消できます。
+                    数学の問題でつまずいたときは、 大学受験レベルまで対応できるAI質問チャットで、疑問点を解消できます。
                     解説を読んでも分からない問題を、そのまま放置しなくてすみます。
                   </p>
                 </div>
