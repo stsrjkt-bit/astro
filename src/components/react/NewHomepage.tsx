@@ -968,7 +968,7 @@ export default function NewHomepage() {
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
                 >
                   <Mail size={22} strokeWidth={2.5} />
-                  <span className="text-lg tracking-wide">学習相談・お問い合わせへ</span>
+                  <span className="text-lg tracking-wide">塾長に相談してみる</span>
                   <ArrowRight
                     size={20}
                     strokeWidth={2.5}
