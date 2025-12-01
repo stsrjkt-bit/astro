@@ -929,7 +929,7 @@ export default function NewHomepage() {
                   <br className="hidden md:inline" />
                   「このままだと将来の選択肢が狭まりそうで不安」
                   <br className="hidden md:inline" />
-                  という気持ちが、通塾のきっかけになっています。
+                  というご相談が通塾のきっかけになっています。
                 </span>
               </p>
             </Reveal>
