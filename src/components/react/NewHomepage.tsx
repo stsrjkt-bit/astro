@@ -932,6 +932,21 @@ export default function NewHomepage() {
                   というご相談が通塾のきっかけになっています。
                 </span>
               </p>
+
+              <div className="mt-6 flex justify-center">
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
+                >
+                  <Mail size={22} strokeWidth={2.5} />
+                  <span className="text-lg tracking-wide">学習相談・お問い合わせへ</span>
+                  <ArrowRight
+                    size={20}
+                    strokeWidth={2.5}
+                    className="group-hover:translate-x-2 transition-transform duration-300"
+                  />
+                </a>
+              </div>
             </Reveal>
           </div>
         </div>
