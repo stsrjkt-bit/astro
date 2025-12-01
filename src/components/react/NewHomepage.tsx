@@ -919,6 +919,18 @@ export default function NewHomepage() {
                 日大三島・暁秀、
                 <br className="hidden md:inline" />
                 沼津東・三島北などの高校生が通っています。
+                <span className="block mt-4">
+                  「がんばっているのに数学が伸びない」「一人だと勉強が続かない」
+                  <br className="hidden md:inline" />
+                  そんな理系志望の高校生を支える個別塾です。
+                </span>
+                <span className="block mt-4">
+                  多くのご家庭で、
+                  <br className="hidden md:inline" />
+                  「このままだと将来の選択肢が狭まりそうで不安」
+                  <br className="hidden md:inline" />
+                  という気持ちが、通塾のきっかけになっています。
+                </span>
               </p>
             </Reveal>
           </div>
