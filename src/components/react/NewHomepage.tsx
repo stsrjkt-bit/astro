@@ -29,6 +29,7 @@ import {
   Smartphone,
   AlertCircle,
   Footprints,
+  Home,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
@@ -654,6 +655,145 @@ const HabitSection = () => {
   );
 };
 
+const HomeLearningSection: React.FC = () => {
+  return (
+    <section
+      id="home-learning"
+      className="py-16 md:py-24 bg-[#F8FAFC] relative overflow-hidden"
+    >
+      {/* 背景装飾 */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-40">
+        <div className="absolute top-[-10%] right-[-5%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-[#009DE0]/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-gradient-to-tr from-[#D6DE26]/10 to-transparent rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
+          {/* 左カラム：見出し・導入文 */}
+          <div className="flex flex-col gap-5 md:gap-6">
+            <Reveal>
+              <div className="flex flex-col gap-3 md:gap-4">
+                <span className="text-[#009DE0] font-bold tracking-wider text-xs md:text-sm uppercase">
+                  Home Learning Support
+                </span>
+                <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#334455] leading-snug md:leading-tight">
+                  <span className="bg-gradient-to-r from-[#D6DE26]/90 to-[#D6DE26]/50 bg-[length:100%_35%] bg-no-repeat bg-bottom px-1 rounded-sm box-decoration-clone">
+                    家庭学習も、
+                    <br />
+                    同じ流れで進められます
+                  </span>
+                </h2>
+              </div>
+            </Reveal>
+
+            <Reveal delay={350}>
+              <p className="text-gray-600 leading-relaxed text-base md:text-lg">
+                さとう数理塾では、教室だけでなく
+                <br className="hidden md:block" />
+                ご家庭での勉強時間も整えられるように、
+                <br className="hidden md:block" />
+                AI教材と、AI質問チャットの仕組みを用意しています。
+              </p>
+            </Reveal>
+
+            <Reveal delay={450}>
+              <div className="mt-2 md:mt-4">
+                <a
+                  href="/counseling"
+                  className="inline-flex items-center justify-center bg-[#009DE0] text-white font-bold rounded-full py-3 px-8 hover:bg-[#008ac4] transition-colors gap-2 text-base md:text-lg group shadow-sm hover:shadow-md"
+                >
+                  学習相談フォーム
+                  <ArrowRight className="w-4 h-4 md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform" />
+                </a>
+                <p className="text-xs md:text-sm text-gray-500 mt-3 leading-relaxed">
+                  家庭学習の進め方について詳しく知りたい方は、
+                  <br className="sm:hidden" />
+                  上記フォームからご相談ください。
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* 右カラム：3つのポイントカード */}
+          <div className="flex flex-col gap-4 md:gap-6">
+            {/* POINT 1 */}
+            <Reveal delay={300}>
+              <div className="bg-white p-5 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-gray-100 flex gap-4 md:gap-5 hover:shadow-md transition-shadow duration-300 items-start">
+                <div className="shrink-0 mt-1 md:mt-0">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#E0F2FE] flex items-center justify-center text-[#009DE0]">
+                    <BookOpen className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-[#334455] mb-1 md:mb-2 flex flex-col items-start md:flex-row md:items-center gap-1 md:gap-2">
+                    <span className="text-[#009DE0] text-[10px] md:text-sm font-extrabold bg-[#E0F2FE] px-2 py-0.5 rounded-full whitespace-nowrap">
+                      POINT 1
+                    </span>
+                    <span>家でも続きから</span>
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    塾で使っているAI教材を、そのまま自宅でも使えます。
+                    「今日は何をやればいいか」を毎回一から考えなくてよいので、
+                    勉強のペースが崩れにくくなります。
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* POINT 2 */}
+            <Reveal delay={400}>
+              <div className="bg-white p-5 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-gray-100 flex gap-4 md:gap-5 hover:shadow-md transition-shadow duration-300 items-start">
+                <div className="shrink-0 mt-1 md:mt-0">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#FEF9C3] flex items-center justify-center text-[#854D0E]">
+                    <MessageCircle className="w-6 h-6 md:w-8 md:h-8 text-[#A3AD00]" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-[#334455] mb-1 md:mb-2 flex flex-col items-start md:flex-row md:items-center gap-1 md:gap-2">
+                    <span className="text-[#A3AD00] text-[10px] md:text-sm font-extrabold bg-[#FEF9C3] px-2 py-0.5 rounded-full whitespace-nowrap">
+                      POINT 2
+                    </span>
+                    <span>質問はため込まない</span>
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    数学の問題でつまずいたときは、
+                    大学受験レベルまで対応できるAI質問チャットで、疑問点を解消できます。
+                    解説を読んでも分からない問題を、そのまま放置しなくてすみます。
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* POINT 3 */}
+            <Reveal delay={500}>
+              <div className="bg-white p-5 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-gray-100 flex gap-4 md:gap-5 hover:shadow-md transition-shadow duration-300 items-start">
+                <div className="shrink-0 mt-1 md:mt-0">
+                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514]">
+                    <Home className="w-6 h-6 md:w-8 md:h-8" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-[#334455] mb-1 md:mb-2 flex flex-col items-start md:flex-row md:items-center gap-1 md:gap-2">
+                    <span className="text-[#EA5514] text-[10px] md:text-sm font-extrabold bg-[#EA5514]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
+                      POINT 3
+                    </span>
+                    <span>進め方も一緒に見直す</span>
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                    「どこまで家で進めるか」「テスト前はどう配分するか」など、
+                    家庭学習の組み立て方も、希望があれば面談で一緒に考えます。
+                    塾と家で、勉強の話が一本線につながるようサポートします。
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- メインコンポーネント ---
 export default function NewHomepage() {
   const [loaded, setLoaded] = useState(false);
@@ -1075,6 +1215,8 @@ export default function NewHomepage() {
           学習習慣セクション (HABIT)
          =========================================== */}
       <HabitSection />
+
+      <HomeLearningSection />
 
       <MobileTableOfContents />
 
