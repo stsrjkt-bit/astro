@@ -104,10 +104,7 @@ function TrialForm() {
       email: formData.get('email'), // メールアドレス
       message: formData.get('message') || 'なし', // ご質問・ご要望
       campaign: campaignValue,
-      campaign_label:
-        campaignValue === 'xmas_high1_2025'
-          ? '高1理系スタート応援オファー（初月 14,800円 税込）'
-          : '',
+      campaign_label: campaignValue === 'xmas_high1_2025' ? '高1理系スタート応援オファー（初月 14,800円 税込）' : '',
     };
 
     try {
@@ -230,8 +227,7 @@ function TrialForm() {
                 このページからのお申し込みは、
                 <span className="font-bold"> 初月月謝 14,800円（税込）</span>
                 が適用されます（通常 17,600円）。
-                <br className="hidden md:inline" />
-                ※ 高1の方が対象です。
+                <br className="hidden md:inline" />※ 高1の方が対象です。
               </p>
             </div>
           )}
