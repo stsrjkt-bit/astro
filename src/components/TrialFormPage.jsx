@@ -49,6 +49,7 @@ function TrialForm() {
   // フォームの状態
   const [trialMonths, setTrialMonths] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('');
+  const [campaign, setCampaign] = useState('');
 
   // EmailJSスクリプトの動的読み込み
   useEffect(() => {
@@ -69,6 +70,13 @@ function TrialForm() {
     setTrialMonths(getUpcomingMonths());
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const value = params.get('campaign') || '';
+    setCampaign(value);
+  }, []);
+
   // --- 送信処理 ---
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,6 +93,8 @@ function TrialForm() {
     // フォームデータから値を取得
     const formData = new FormData(e.currentTarget);
 
+    const campaignValue = campaign || '';
+
     // EmailJSに渡すパラメータを構築
     const templateParams = {
       // フォームの入力項目
@@ -93,6 +103,8 @@ function TrialForm() {
       grade: formData.get('grade'), // 学年
       email: formData.get('email'), // メールアドレス
       message: formData.get('message') || 'なし', // ご質問・ご要望
+      campaign: campaignValue,
+      campaign_label: campaignValue === 'xmas_high1_2025' ? '高1理系スタート応援オファー（初月 14,800円 税込）' : '',
     };
 
     try {
@@ -204,6 +216,22 @@ function TrialForm() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
+          <input type="hidden" name="campaign" value={campaign || ''} />
+
+          {campaign === 'xmas_high1_2025' && (
+            <div className="mb-4 md:mb-6 p-4 md:p-5 rounded-xl border-2 border-[#EA5514]/30 bg-[#FFF7ED] text-[#7C2D12] shadow-sm">
+              <p className="text-xs md:text-sm font-bold text-[#EA5514] tracking-[0.15em] uppercase mb-1">
+                🎁 高1理系スタート 応援オファー適用中
+              </p>
+              <p className="text-sm md:text-base leading-relaxed">
+                このページからのお申し込みは、
+                <span className="font-bold"> 初月月謝 14,800円（税込）</span>
+                が適用されます（通常 17,600円）。
+                <br className="hidden md:inline" />※ 高1の方が対象です。
+              </p>
+            </div>
+          )}
+
           {/* セクション1: 体験月選択 */}
           <div className="bg-white p-5 md:p-8 rounded-xl md:rounded-2xl border border-[#334455]/5 shadow-sm relative overflow-hidden group hover:border-[#009DE0]/30 transition-colors">
             <div className="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-[#D6DE26]"></div>
