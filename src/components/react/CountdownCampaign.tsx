@@ -285,7 +285,9 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
             "relative overflow-hidden rounded-2xl bg-gradient-to-b from-red-900 via-red-800 to-red-950",
             "shadow-2xl ring-4 ring-yellow-500/30 border-t border-red-500/50 pt-6 pb-2",
             !isExpired ? "urgent-border" : ""
-          ].join(" ")}
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
           
           {/* 背景の雪のエフェクト */}
