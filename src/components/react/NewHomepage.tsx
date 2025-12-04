@@ -475,180 +475,182 @@ const HabitSection = () => {
         </Reveal>
 
         {/* 2カラム本体 */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-stretch">
-          {/* 左：高校生・保護者の声 */}
+        <div className="mt-8 space-y-8">
           <Reveal delay={200}>
-            <div className="space-y-6 md:space-y-8 h-full flex flex-col justify-center">
+            <div className="space-y-6 md:space-y-8">
               <div className="flex items-center gap-3">
                 <div className="h-[2px] w-8 bg-[#334455]/20"></div>
                 <p className="text-sm font-bold text-[#334455]/60 tracking-wide">よくいただくお悩み</p>
               </div>
 
-              {/* 高校生の声 */}
-              <div className="bg-white rounded-2xl border border-[#334455]/10 shadow-sm p-6 md:p-8 relative overflow-hidden group hover:shadow-md transition-all duration-300">
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#009DE0]"></div>
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-10 h-10 rounded-full bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0]">
-                    <Smartphone size={20} />
+              {/* 1段目：声カードの段（高校生＋保護者さま） */}
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                {/* 高校生の声 */}
+                <div className="bg-white rounded-2xl border border-[#334455]/10 shadow-sm p-6 md:p-8 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-[#009DE0]"></div>
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="w-10 h-10 rounded-full bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0]">
+                      <Smartphone size={20} />
+                    </div>
+                    <p className="text-base font-bold text-[#334455]">高校生の声</p>
                   </div>
-                  <p className="text-base font-bold text-[#334455]">高校生の声</p>
+                  <ul className="space-y-3 md:space-y-4">
+                    {[
+                      '高校に入ってから数学が急に難しくなり、授業についていけないと感じる。',
+                      'いくら勉強しても数学の点数があまり伸びず、この先が不安になる。',
+                      '理系に進みたいけれど、このままでは無理かもしれないと感じてしまう。',
+                    ].map((text, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
+                      >
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#009DE0]/40 shrink-0" />
+                        {text}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3 md:space-y-4">
-                  {[
-                    '高校に入ってから数学が急に難しくなり、授業についていけないと感じる。',
-                    'いくら勉強しても数学の点数があまり伸びず、この先が不安になる。',
-                    '理系に進みたいけれど、このままでは無理かもしれないと感じてしまう。',
-                  ].map((text, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
-                    >
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#009DE0]/40 shrink-0" />
-                      {text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              {/* 保護者の声 */}
-              <div className="bg-[#F8FAFC] rounded-2xl border border-[#334455]/5 shadow-inner p-6 md:p-8 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#EA5514]"></div>
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-10 h-10 rounded-full bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514]">
-                    <AlertCircle size={20} />
+                {/* 保護者の声 */}
+                <div className="bg-[#F8FAFC] rounded-2xl border border-[#334455]/5 shadow-inner p-6 md:p-8 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-[#EA5514]"></div>
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="w-10 h-10 rounded-full bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514]">
+                      <AlertCircle size={20} />
+                    </div>
+                    <p className="text-base font-bold text-[#334455]">保護者さまの声</p>
                   </div>
-                  <p className="text-base font-bold text-[#334455]">保護者さまの声</p>
+                  <ul className="space-y-3 md:space-y-4">
+                    {[
+                      '子どもには自主性を持ってほしいけれど、どこまで勉強に口出ししてよいか悩んでいる。',
+                      'このまま数学の成績が低いままだと、将来の選択肢が狭まりそうで不安になる。',
+                      '理系進学を諦めてほしくないが、今の成績を見ると本当に大丈夫か心配になる。',
+                    ].map((text, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
+                      >
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#EA5514]/40 shrink-0" />
+                        {text}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3 md:space-y-4">
-                  {[
-                    '子どもには自主性を持ってほしいけれど、どこまで勉強に口出ししてよいか悩んでいる。',
-                    'このまま数学の成績が低いままだと、将来の選択肢が狭まりそうで不安になる。',
-                    '理系進学を諦めてほしくないが、今の成績を見ると本当に大丈夫か心配になる。',
-                  ].map((text, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-sm md:text-base text-[#334455]/80 leading-relaxed"
-                    >
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#EA5514]/40 shrink-0" />
-                      {text}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </Reveal>
 
-          {/* 右：塾としての答え（しくみ） */}
+          {/* 2段目：さとう数理塾の「答え」の段（横いっぱい） */}
           <Reveal delay={400}>
-            <div className="flex flex-col h-full bg-white rounded-3xl border-2 border-[#009DE0]/10 shadow-xl shadow-[#009DE0]/5 p-6 md:p-10 relative overflow-hidden">
-              {/* 装飾タグ */}
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#D6DE26] rotate-45 transform"></div>
-              <div className="absolute top-4 right-4 text-xs font-bold text-[#334455] bg-[#D6DE26] px-3 py-1 rounded-full shadow-sm z-10">
-                Solution
-              </div>
+            <div>
+              <div className="flex flex-col h-full bg-white rounded-3xl border-2 border-[#009DE0]/10 shadow-xl shadow-[#009DE0]/5 p-6 md:p-10 relative overflow-hidden">
+                {/* 装飾タグ */}
+                <div className="absolute -top-12 -right-12 w-24 h-24 bg-[#D6DE26] rotate-45 transform"></div>
+                <div className="absolute top-4 right-4 text-xs font-bold text-[#334455] bg-[#D6DE26] px-3 py-1 rounded-full shadow-sm z-10">
+                  Solution
+                </div>
 
-              <div className="mb-6 md:mb-8">
-                <p className="text-xs font-bold text-[#009DE0] tracking-wide mb-3 flex items-center gap-2">
-                  <CheckCircle2 size={16} />
-                  さとう数理塾の「答え」
-                </p>
+                <div className="mb-6 md:mb-8">
+                  <p className="text-xs font-bold text-[#009DE0] tracking-wide mb-3 flex items-center gap-2">
+                    <CheckCircle2 size={16} />
+                    さとう数理塾の「答え」
+                  </p>
 
-                <h3 className="text-[#334455]">
-                  <span className="block text-base md:text-lg font-bold mb-2 md:mb-3">
-                    「時間・場所・やること」を整理
-                  </span>
-                  <span className="block text-xl md:text-2xl font-serif font-bold leading-relaxed tracking-tight">
-                    <span className="relative inline-block z-10">
-                      <span className="absolute inset-x-0 bottom-1 md:bottom-2 h-3 bg-[#D6DE26]/50 -z-10 rounded-sm transform -rotate-1 w-full"></span>
-                      意志の力に頼らず、
+                  <h3 className="text-[#334455]">
+                    <span className="block text-base md:text-lg font-bold mb-2 md:mb-3">
+                      「時間・場所・やること」を整理
                     </span>
-                    <br className="md:hidden" />
-                    勉強のペースを作ります。
-                  </span>
-                </h3>
-              </div>
-
-              <div className="space-y-6 md:space-y-8 flex-1">
-                {/* Point 1 */}
-                <div className="flex gap-4 md:gap-5 group">
-                  <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <Clock className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
-                      部活あとに寄れる、平日夜3時間の勉強タイム
-                    </p>
-                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
-                      平日18:50〜21:50のあいだなら、週1でも週5でも通えます。テスト前だけ回数を増やすこともできるので、
-                      「勉強時間がとれない」「ペースが安定しない」という不安から先に解消します。
-                    </p>
-                  </div>
+                    <span className="block text-xl md:text-2xl font-serif font-bold leading-relaxed tracking-tight">
+                      <span className="relative inline-block z-10">
+                        <span className="absolute inset-x-0 bottom-1 md:bottom-2 h-3 bg-[#D6DE26]/50 -z-10 rounded-sm transform -rotate-1 w-full"></span>
+                        意志の力に頼らず、
+                      </span>
+                      <br className="md:hidden" />
+                      勉強のペースを作ります。
+                    </span>
+                  </h3>
                 </div>
 
-                {/* Point 2 */}
-                <div className="flex gap-4 md:gap-5 group">
-                  <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#D6DE26]/20 flex items-center justify-center text-[#8C9400] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <MapPin className="w-5 h-5 md:w-6 md:h-6" />
+                <div className="space-y-6 md:space-y-8 flex-1">
+                  {/* Point 1 */}
+                  <div className="flex gap-4 md:gap-5 group">
+                    <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#009DE0]/10 flex items-center justify-center text-[#009DE0] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
+                        部活あとに寄れる、平日夜3時間の勉強タイム
+                      </p>
+                      <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                        平日18:50〜21:50のあいだなら、週1でも週5でも通えます。テスト前だけ回数を増やすこともできるので、
+                        「勉強時間がとれない」「ペースが安定しない」という不安から先に解消します。
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
-                      家でも学校でもない「半こもり空間」
-                    </p>
-                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
-                      個別ブースで周りの視線を気にせず、静かに勉強に集中できます。
-                      数学の質問や、進路にかかわる不安も、落ち着いた環境で相談できます。
-                    </p>
-                  </div>
-                </div>
 
-                {/* Point 3 */}
-                <div className="flex gap-4 md:gap-5 group">
-                  <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514] shrink-0 group-hover:scale-110 transition-transform duration-300">
-                    <Footprints className="w-5 h-5 md:w-6 md:h-6" />
+                  {/* Point 2 */}
+                  <div className="flex gap-4 md:gap-5 group">
+                    <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#D6DE26]/20 flex items-center justify-center text-[#8C9400] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <MapPin className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
+                        家でも学校でもない「半こもり空間」
+                      </p>
+                      <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                        個別ブースで周りの視線を気にせず、静かに勉強に集中できます。
+                        数学の質問や、進路にかかわる不安も、落ち着いた環境で相談できます。
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
-                      迷ったときは、一緒に「今日やること」を整える
-                    </p>
-                    <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
-                      ふだんはAI教材や学校の課題を、自分のペースでどんどん進めてもらいます。
-                      「何から手をつければいいか分からない」「テストまでの進め方を整理したい」
-                      というときは、塾長が一緒に方針を相談し、必要に応じて進め方を調整します。
-                    </p>
+
+                  {/* Point 3 */}
+                  <div className="flex gap-4 md:gap-5 group">
+                    <div className="mt-1 w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-[#EA5514]/10 flex items-center justify-center text-[#EA5514] shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Footprints className="w-5 h-5 md:w-6 md:h-6" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#334455] text-base md:text-lg mb-1 md:mb-2">
+                        迷ったときは、一緒に「今日やること」を整える
+                      </p>
+                      <p className="text-sm md:text-base text-[#334455]/70 leading-relaxed">
+                        ふだんはAI教材や学校の課題を、自分のペースでどんどん進めてもらいます。
+                        「何から手をつければいいか分からない」「テストまでの進め方を整理したい」
+                        というときは、塾長が一緒に方針を相談し、必要に応じて進め方を調整します。
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* ミニCTA */}
-              {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス start ===== */}
-              <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-[#334455]/10 col-span-full">
-                <CountdownCampaign
-                  title={
-                    <>
-                      高1理系スタート
-                      <br className="block sm:hidden" />
-                      応援オファー
-                    </>
-                  }
-                  description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
-                  originalPrice="通常月謝 17,600円（税込）"
-                  discountedPrice="初月月謝 14,800円（税込）"
-                  deadline="2025-12-21T23:59:59+09:00"
-                  ctaLabel={
-                    <>
-                      このボタンから
-                      <br className="block sm:hidden" />
-                      無料体験を予約する
-                    </>
-                  }
-                  ctaHref="/trial?campaign=xmas_high1_2025"
-                  cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
-                  campaignId="xmas_high1_2025"
-                />
-              </div>
-              {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス end ===== */}
             </div>
           </Reveal>
+
+          {/* ミニCTA：高1理系スタート応援オファー */}
+          <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-[#334455]/10">
+            <CountdownCampaign
+              title={
+                <>
+                  高1理系スタート
+                  <br className="block sm:hidden" />
+                  応援オファー
+                </>
+              }
+              description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
+              originalPrice="通常月謝 17,600円（税込）"
+              discountedPrice="初月月謝 14,800円（税込）"
+              deadline="2025-12-21T23:59:59+09:00"
+              ctaLabel={
+                <>
+                  このボタンから
+                  <br className="block sm:hidden" />
+                  無料体験を予約する
+                </>
+              }
+              ctaHref="/trial?campaign=xmas_high1_2025"
+              cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
+              campaignId="xmas_high1_2025"
+            />
+          </div>
         </div>
       </div>
     </section>
