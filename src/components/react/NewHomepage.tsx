@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
-import { CountdownCampaign } from '~/components/react/CountdownCampaign';
+import { CountdownCampaign } from '~/components/react/CountdownCampaign.tsx';
 
 // --- ブランドカラー定義 ---
 // Primary (Sky Blue): #009DE0
