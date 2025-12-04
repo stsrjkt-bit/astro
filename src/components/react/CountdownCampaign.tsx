@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 // GA4 / Meta Pixel の型定義
 declare global {
   interface Window {
-    gtag?: (command: 'event', action: string, params?: { [key: string]: any }) => void;
-    fbq?: (command: 'track' | 'trackCustom', eventName: string, params?: { [key: string]: any }) => void;
+    gtag?: (command: 'event', action: string, params?: { [key: string]: unknown }) => void;
+    fbq?: (command: 'track' | 'trackCustom', eventName: string, params?: { [key: string]: unknown }) => void;
   }
 }
 
@@ -250,7 +250,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
       const getPart = (type: Intl.DateTimeFormatPartTypes) => 
         parts.find(p => p.type === type)?.value || '';
       return `${getPart('month')}月${getPart('day')}日（${getPart('weekday')}）${getPart('hour')}:${getPart('minute')} まで`;
-    } catch (e) {
+    } catch {
       return '';
     }
   };
@@ -260,7 +260,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
   }
 
   const splitPrice = (priceStr: string) => {
-    const parts = priceStr.split(/[\s　]+/);
+    const parts = priceStr.split(/[\s\u3000]+/);
     if (parts.length >= 2) {
       const label = parts[0];
       const value = parts.slice(1).join(' ');
