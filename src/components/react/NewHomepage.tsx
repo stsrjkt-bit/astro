@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
+import { CountdownCampaign } from '~/components/react/CountdownCampaign.tsx';
 
 // --- ブランドカラー定義 ---
 // Primary (Sky Blue): #009DE0
@@ -619,34 +620,31 @@ const HabitSection = () => {
               </div>
 
               {/* ミニCTA */}
-              <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-[#334455]/10 text-center">
-                <div className="bg-[#F8FAFC] rounded-lg p-4 inline-block w-full">
-                  <p className="text-sm text-[#334455]/80 leading-relaxed">
-                    「うちの子の場合、どんな通い方が合いそう？」
-                    <br className="md:hidden" />
-                    といったご相談は
-                    <a
-                      href="/counseling"
-                      className="inline-flex items-center ml-1 text-[#009DE0] font-bold border-b border-[#009DE0] hover:text-[#008ac4] hover:border-[#008ac4] transition-colors gap-1"
-                      onClick={() => {
-                        trackMetaEvent('Contact', {
-                          type: 'counseling_cta',
-                          pageType: 'home',
-                          position: 'habit_section',
-                        });
-                        trackGAEvent('counseling_cta_click', {
-                          page_type: 'home',
-                          position: 'habit_section',
-                        });
-                      }}
-                    >
-                      学習相談フォーム
-                      <ArrowRight size={14} />
-                    </a>
-                    へどうぞ。
-                  </p>
-                </div>
-              </div>
+              {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス start ===== */}
+              <CountdownCampaign
+                title={
+                  <>
+                    高1理系スタート
+                    <br className="block sm:hidden" />
+                    応援オファー
+                  </>
+                }
+                description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
+                originalPrice="通常月謝 17,600円（税込）"
+                discountedPrice="初月月謝 14,800円（税込）"
+                deadline="2025-12-21T23:59:59+09:00"
+                ctaLabel={
+                  <>
+                    このボタンから
+                    <br className="block sm:hidden" />
+                    無料体験を予約する
+                  </>
+                }
+                ctaHref="/trial?campaign=xmas_high1_2025"
+                cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
+                campaignId="xmas_high1_2025"
+              />
+              {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス end ===== */}
             </div>
           </Reveal>
         </div>
