@@ -134,12 +134,23 @@ const CampaignStyles = () => (
 
 // タイトル横のヒイラギアイコン
 const HollyIcon = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="inline-block mr-2 shrink-0 drop-shadow-sm -mt-1">
-    <path d="M12 2C12 2 13.5 5 16 5C18.5 5 21 3 21 3C21 3 20 6 21 8C22 10 24 10.5 24 10.5C24 10.5 21.5 12 21 14C20.5 16 22 19 22 19C22 19 19 18.5 17 19.5C15 20.5 14 23 14 23C14 23 12.5 20 10 20C7.5 20 5 22 5 22C5 22 6 19 5 17C4 15 2 14.5 2 14.5C2 14.5 4.5 13 5 11C5.5 9 4 6 4 6C4 6 7 6.5 9 5.5C11 4.5 12 2 12 2Z" fill="#15803d" stroke="#0f391e" strokeWidth="1"/>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 24 24"
+    fill="none"
+    className="inline-block mr-2 shrink-0 drop-shadow-sm -mt-1"
+  >
+    <path
+      d="M12 2C12 2 13.5 5 16 5C18.5 5 21 3 21 3C21 3 20 6 21 8C22 10 24 10.5 24 10.5C24 10.5 21.5 12 21 14C20.5 16 22 19 22 19C22 19 19 18.5 17 19.5C15 20.5 14 23 14 23C14 23 12.5 20 10 20C7.5 20 5 22 5 22C5 22 6 19 5 17C4 15 2 14.5 2 14.5C2 14.5 4.5 13 5 11C5.5 9 4 6 4 6C4 6 7 6.5 9 5.5C11 4.5 12 2 12 2Z"
+      fill="#15803d"
+      stroke="#0f391e"
+      strokeWidth="1"
+    />
     <g>
-      <circle cx="12" cy="12" r="2.5" fill="#ef4444"/>
-      <circle cx="15.5" cy="10.5" r="2" fill="#ef4444"/>
-      <circle cx="13.5" cy="15.5" r="2" fill="#ef4444"/>
+      <circle cx="12" cy="12" r="2.5" fill="#ef4444" />
+      <circle cx="15.5" cy="10.5" r="2" fill="#ef4444" />
+      <circle cx="13.5" cy="15.5" r="2" fill="#ef4444" />
     </g>
   </svg>
 );
@@ -247,8 +258,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
         hour12: false,
       });
       const parts = formatter.formatToParts(d);
-      const getPart = (type: Intl.DateTimeFormatPartTypes) => 
-        parts.find(p => p.type === type)?.value || '';
+      const getPart = (type: Intl.DateTimeFormatPartTypes) => parts.find((p) => p.type === type)?.value || '';
       return `${getPart('month')}月${getPart('day')}日（${getPart('weekday')}）${getPart('hour')}:${getPart('minute')} まで`;
     } catch {
       return '';
@@ -276,20 +286,18 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
     <>
       <CampaignStyles />
       <div className="relative w-full my-8 font-sans group isolate">
-        
         {/* =========================================
             メインカードコンテナ
             ========================================= */}
         <div
           className={[
-            "relative overflow-hidden rounded-2xl bg-gradient-to-b from-red-900 via-red-800 to-red-950",
-            "shadow-2xl ring-4 ring-yellow-500/30 border-t border-red-500/50 pt-6 pb-2",
-            !isExpired ? "urgent-border" : ""
+            'relative overflow-hidden rounded-2xl bg-gradient-to-b from-red-900 via-red-800 to-red-950',
+            'shadow-2xl ring-4 ring-yellow-500/30 border-t border-red-500/50 pt-6 pb-2',
+            !isExpired ? 'urgent-border' : '',
           ]
             .filter(Boolean)
-            .join(" ")}
+            .join(' ')}
         >
-          
           {/* 背景の雪のエフェクト */}
           <div className="snowflake">❄</div>
           <div className="snowflake">❅</div>
@@ -297,7 +305,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
           <div className="snowflake">❄</div>
           <div className="snowflake">❅</div>
           <div className="snowflake">❆</div>
-          
+
           {/* ★ 賑わい演出1: ぶら下がるオーナメント (もみの木の飾り風) ★ */}
           {!isExpired && (
             <>
@@ -338,10 +346,13 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
           {!isExpired && (
             <>
               {/* 左上付近: ツリー */}
-              <div className="floating-emoji top-16 left-2 sm:left-6 text-2xl opacity-80" style={{ animationDelay: '0.2s' }}>
+              <div
+                className="floating-emoji top-16 left-2 sm:left-6 text-2xl opacity-80"
+                style={{ animationDelay: '0.2s' }}
+              >
                 🎄
               </div>
-              
+
               {/* 左下付近: 雪だるま */}
               <div className="floating-emoji bottom-12 left-4 text-3xl" style={{ animationDelay: '2s' }}>
                 ⛄
@@ -351,7 +362,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
               <div className="floating-emoji bottom-20 right-2 text-2xl" style={{ animationDelay: '0.5s' }}>
                 🎁
               </div>
-              
+
               {/* 中央付近: クッキー */}
               <div className="floating-emoji top-1/2 left-10 text-xl opacity-60" style={{ animationDelay: '1.2s' }}>
                 🍪
@@ -366,7 +377,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
 
           {/* 内側の金枠 */}
           <div className="absolute inset-1.5 border border-yellow-400/30 rounded-xl pointer-events-none z-10 box-border"></div>
-          
+
           {/* 右上のリボン */}
           {!isExpired && (
             <div className="absolute -top-2 -right-2 w-24 h-24 overflow-hidden z-20 pointer-events-none">
@@ -378,17 +389,17 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
 
           {/* コンテンツラッパー */}
           <div className="relative z-20 px-4 py-6 sm:p-6 lg:p-8 flex flex-col lg:flex-row lg:items-stretch gap-6 sm:gap-8 mt-4 sm:mt-0">
-            
             {/* -------------------------------------------------
                 左側：キャンペーン情報
                 ------------------------------------------------- */}
             <div className="flex-1 flex flex-col justify-center">
-              
               {!isExpired && (
                 <div className="relative self-start mb-4">
                   <div className="bg-green-800 text-white px-3 py-1 sm:px-4 sm:py-1.5 rounded-sm shadow-md border border-green-600 flex items-center gap-2">
                     <span className="text-yellow-400 animate-pulse">★</span>
-                    <span className="text-xs sm:text-sm font-bold tracking-widest font-serif text-yellow-50">CHRISTMAS SALE</span>
+                    <span className="text-xs sm:text-sm font-bold tracking-widest font-serif text-yellow-50">
+                      CHRISTMAS SALE
+                    </span>
                     <span className="text-yellow-400 animate-pulse">★</span>
                   </div>
                 </div>
@@ -396,7 +407,6 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
 
               {/* 情報カード */}
               <div className="bg-white rounded-lg p-4 sm:p-5 shadow-xl shadow-black/30">
-                
                 <h3 className="flex items-start text-lg sm:text-2xl font-bold text-slate-900 mb-3 leading-snug drop-shadow-sm">
                   <HollyIcon />
                   <span className="break-words w-full">{title}</span>
@@ -449,10 +459,8 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                 右側：緊迫のタイマー & CTA
                 ------------------------------------------------- */}
             <div className="flex flex-col justify-center items-center lg:items-end w-full lg:w-auto shrink-0 gap-5">
-              
               {!isExpired && timeLeft && (
                 <div className="w-full lg:w-auto relative mt-8 sm:mt-0">
-                  
                   {/* タイマーヘッダー */}
                   <div className="text-center mb-2">
                     <span className="text-[12px] font-bold text-yellow-400 tracking-[0.2em] uppercase text-shadow-sm animate-pulse">
@@ -467,11 +475,10 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                     {/* 🦌(トナカイ) + 🎅(サンタ) */}
                     <span className="text-4xl sm:text-5xl filter drop-shadow-md">🦌🎅</span>
                   </div>
-                  
+
                   {/* タイマー本体 */}
                   <div className="relative z-10 bg-black/80 backdrop-blur-md rounded-xl p-3 border border-red-500/50 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
                     <div className="flex items-center justify-center gap-1 sm:gap-2 text-white">
-                      
                       {/* Days */}
                       <div className="flex flex-col items-center min-w-[3.2rem] sm:min-w-[3.8rem]">
                         <span className="text-2xl sm:text-4xl font-black font-mono leading-none text-white tabular-nums drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">
@@ -479,9 +486,9 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                         </span>
                         <span className="text-[10px] text-red-400 font-bold mt-1">DAYS</span>
                       </div>
-                      
+
                       <span className="text-red-500 text-2xl font-bold pb-4 timer-colon">:</span>
-                      
+
                       {/* Hours */}
                       <div className="flex flex-col items-center min-w-[3.2rem] sm:min-w-[3.8rem]">
                         <span className="text-2xl sm:text-4xl font-black font-mono leading-none text-white tabular-nums drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">
@@ -489,9 +496,9 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                         </span>
                         <span className="text-[10px] text-red-400 font-bold mt-1">HRS</span>
                       </div>
-                      
+
                       <span className="text-red-500 text-2xl font-bold pb-4 timer-colon">:</span>
-                      
+
                       {/* Mins */}
                       <div className="flex flex-col items-center min-w-[3.2rem] sm:min-w-[3.8rem]">
                         <span className="text-2xl sm:text-4xl font-black font-mono leading-none text-white tabular-nums drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">
@@ -499,9 +506,9 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                         </span>
                         <span className="text-[10px] text-red-400 font-bold mt-1">MINS</span>
                       </div>
-                      
+
                       <span className="text-red-500 text-2xl font-bold pb-4 timer-colon">:</span>
-                      
+
                       {/* Secs */}
                       <div className="flex flex-col items-center min-w-[3.2rem] sm:min-w-[3.8rem]">
                         <span className="text-2xl sm:text-4xl font-black font-mono leading-none text-red-500 tabular-nums drop-shadow-[0_0_8px_rgba(220,38,38,0.8)]">
@@ -529,9 +536,10 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                     relative group/btn w-full lg:w-auto inline-flex items-center justify-center px-6 py-4 sm:px-8 sm:py-5
                     text-base sm:text-lg font-bold text-white transition-all duration-200 
                     rounded-full shadow-[0_4px_14px_0_rgba(22,163,74,0.39)]
-                    ${isExpired 
-                      ? 'bg-slate-500 cursor-not-allowed' 
-                      : 'bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 border-t border-green-400 shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0'
+                    ${
+                      isExpired
+                        ? 'bg-slate-500 cursor-not-allowed'
+                        : 'bg-gradient-to-b from-green-500 to-green-700 hover:from-green-400 hover:to-green-600 border-t border-green-400 shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0'
                     }
                   `}
                   aria-disabled={isExpired}
@@ -540,17 +548,19 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
                   {!isExpired && (
                     <span className="absolute inset-0 rounded-full bg-white/20 group-hover/btn:animate-pulse"></span>
                   )}
-                  {isExpired ? expiredCtaLabel : (
+                  {isExpired ? (
+                    expiredCtaLabel
+                  ) : (
                     <span className="relative flex items-center justify-center gap-2 drop-shadow-md text-center">
                       <span className="text-2xl shrink-0 filter drop-shadow">🎁</span>
-                      <span className="leading-tight text-shadow-sm">
-                        {ctaLabel}
-                      </span>
-                      <svg className="w-5 h-5 ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"/></svg>
+                      <span className="leading-tight text-shadow-sm">{ctaLabel}</span>
+                      <svg className="w-5 h-5 ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                      </svg>
                     </span>
                   )}
                 </a>
-                
+
                 {!isExpired && (
                   <p className="mt-3 text-[10px] sm:text-xs text-red-100 font-medium w-full max-w-[300px] mx-auto lg:mr-0 lg:ml-auto leading-tight opacity-90">
                     {cautionText}
