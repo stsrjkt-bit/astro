@@ -621,29 +621,31 @@ const HabitSection = () => {
 
               {/* ミニCTA */}
               {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス start ===== */}
-              <CountdownCampaign
-                title={
-                  <>
-                    高1理系スタート
-                    <br className="block sm:hidden" />
-                    応援オファー
-                  </>
-                }
-                description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
-                originalPrice="通常月謝 17,600円（税込）"
-                discountedPrice="初月月謝 14,800円（税込）"
-                deadline="2025-12-21T23:59:59+09:00"
-                ctaLabel={
-                  <>
-                    このボタンから
-                    <br className="block sm:hidden" />
-                    無料体験を予約する
-                  </>
-                }
-                ctaHref="/trial?campaign=xmas_high1_2025"
-                cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
-                campaignId="xmas_high1_2025"
-              />
+              <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-[#334455]/10 col-span-full">
+                <CountdownCampaign
+                  title={
+                    <>
+                      高1理系スタート
+                      <br className="block sm:hidden" />
+                      応援オファー
+                    </>
+                  }
+                  description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
+                  originalPrice="通常月謝 17,600円（税込）"
+                  discountedPrice="初月月謝 14,800円（税込）"
+                  deadline="2025-12-21T23:59:59+09:00"
+                  ctaLabel={
+                    <>
+                      このボタンから
+                      <br className="block sm:hidden" />
+                      無料体験を予約する
+                    </>
+                  }
+                  ctaHref="/trial?campaign=xmas_high1_2025"
+                  cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
+                  campaignId="xmas_high1_2025"
+                />
+              </div>
               {/* ===== STUDY HABIT SUPPORT: 学習相談ボックス end ===== */}
             </div>
           </Reveal>
