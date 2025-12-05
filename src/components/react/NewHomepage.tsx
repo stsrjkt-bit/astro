@@ -630,12 +630,12 @@ const HabitSection = () => {
             <CountdownCampaign
               title={
                 <>
-                  高1理系スタート
+                  高校生の理系立て直し
                   <br className="block sm:hidden" />
                   応援オファー
                 </>
               }
-              description="この冬〜1月で理系の勉強を立て直したい高1向けの期間限定オファーです。"
+              description="この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。"
               originalPrice="通常月謝 17,600円（税込）"
               discountedPrice="初月月謝 14,800円（税込）"
               deadline="2025-12-21T23:59:59+09:00"
