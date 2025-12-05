@@ -105,9 +105,7 @@ function TrialForm() {
       message: formData.get('message') || 'なし', // ご質問・ご要望
       campaign: campaignValue,
       campaign_label:
-        campaignValue === 'xmas_high1_2025'
-          ? '高校生の理系立て直し応援オファー（初月 14,800円 税込）'
-          : '',
+        campaignValue === 'xmas_high1_2025' ? '高校生の理系立て直し応援オファー（初月 14,800円 税込）' : '',
     };
 
     try {
@@ -202,7 +200,9 @@ function TrialForm() {
           <div className="bg-white/80 backdrop-blur-sm border border-[#009DE0]/20 rounded-xl p-4 md:p-6 max-w-xl mx-auto shadow-sm">
             <p className="text-[#334455]/90 text-sm md:text-base leading-relaxed font-medium text-left md:text-center">
               さとう数理塾の授業を
-              <span className="text-[#009DE0] font-bold border-b-2 border-[#D6DE26] whitespace-nowrap">実際の通塾と同じ形</span>
+              <span className="text-[#009DE0] font-bold border-b-2 border-[#D6DE26] whitespace-nowrap">
+                実際の通塾と同じ形
+              </span>
               でお試しいただけます。
             </p>
             <div className="mt-3 md:mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-center gap-2 md:gap-4 text-xs md:text-sm text-[#334455]/70">
