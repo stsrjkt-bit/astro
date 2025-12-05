@@ -104,7 +104,10 @@ function TrialForm() {
       email: formData.get('email'), // メールアドレス
       message: formData.get('message') || 'なし', // ご質問・ご要望
       campaign: campaignValue,
-      campaign_label: campaignValue === 'xmas_high1_2025' ? '高校生の理系立て直し応援オファー（初月 14,800円 税込）' : '',
+      campaign_label:
+        campaignValue === 'xmas_high1_2025'
+          ? '高校生の理系立て直し応援オファー（初月 14,800円 税込）'
+          : '',
     };
 
     try {
