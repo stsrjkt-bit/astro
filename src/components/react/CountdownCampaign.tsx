@@ -240,7 +240,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
           const fbq = (window as any).fbq;
           if (fbq) {
             fbq('trackCustom', 'campaign_block_view', {
-              campaign_id: 'xmas_high1_2025',
+              campaign_id: campaignId,
               position: 'homepage',
             });
           }
@@ -248,7 +248,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
           const gtag = (window as any).gtag;
           if (gtag) {
             gtag('event', 'campaign_block_view', {
-              campaign_id: 'xmas_high1_2025',
+              campaign_id: campaignId,
               position: 'homepage',
             });
           }
