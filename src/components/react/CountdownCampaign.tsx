@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // GA4 / Meta Pixel の型定義
 declare global {
@@ -175,6 +175,8 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
   const [isExpired, setIsExpired] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const campaignRef = useRef<HTMLDivElement | null>(null);
+  const hasTrackedView = useRef(false);
 
   const calculateTimeLeft = (): TimeLeft | null => {
     if (!deadline) return null;
@@ -226,6 +228,38 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
 
     return () => clearInterval(timer);
   }, [campaignId, deadline]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !campaignRef.current) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasTrackedView.current) {
+          hasTrackedView.current = true;
+
+          const fbq = (window as any).fbq;
+          if (fbq) {
+            fbq('trackCustom', 'campaign_block_view', {
+              campaign_id: 'xmas_high1_2025',
+              position: 'homepage',
+            });
+          }
+
+          const gtag = (window as any).gtag;
+          if (gtag) {
+            gtag('event', 'campaign_block_view', {
+              campaign_id: 'xmas_high1_2025',
+              position: 'homepage',
+            });
+          }
+        }
+      });
+    });
+
+    observer.observe(campaignRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isExpired) {
@@ -285,7 +319,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
   return (
     <>
       <CampaignStyles />
-      <div className="relative w-full my-8 font-sans group isolate">
+      <div ref={campaignRef} className="relative w-full my-8 font-sans group isolate">
         {/* =========================================
             メインカードコンテナ
             ========================================= */}
