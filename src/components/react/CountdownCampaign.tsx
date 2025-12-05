@@ -230,7 +230,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
   }, [campaignId, deadline]);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !campaignRef.current) return;
+    if (!isClient || typeof window === 'undefined' || !campaignRef.current) return;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -259,7 +259,7 @@ export const CountdownCampaign: React.FC<CountdownCampaignProps> = ({
     observer.observe(campaignRef.current);
 
     return () => observer.disconnect();
-  }, []);
+  }, [isClient, campaignId]);
 
   const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isExpired) {
