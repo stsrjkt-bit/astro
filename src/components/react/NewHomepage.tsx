@@ -34,6 +34,7 @@ import {
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
 import { CountdownCampaign } from '~/components/react/CountdownCampaign.tsx';
+import UserChoiceSection from '~/components/react/UserChoiceSection';
 
 // --- ブランドカラー定義 ---
 // Primary (Sky Blue): #009DE0
@@ -1117,6 +1118,8 @@ export default function NewHomepage() {
           </div>
         </div>
       </section>
+
+      <UserChoiceSection />
 
       {/* ===========================================
           共感・問題提起 (EMPATHY) - レイアウト修正版
