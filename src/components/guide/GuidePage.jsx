@@ -37,6 +37,8 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
   );
 };
 
+import { headerData } from '~/navigation';
+
 // --- メインコンポーネント: ご利用の手引ページ ---
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,10 +71,9 @@ export default function App() {
   }, []);
 
   // 共通ナビゲーションリンク（トップページに戻る想定）
-  const navLinks = [
-    { name: 'HOME', href: '/' },
-    { name: '入塾までの流れ', href: '/#contact' },
-  ];
+  const navLinks = headerData.links
+    .filter((link) => ['HOME', '入塾までの流れ'].includes(link.text))
+    .map((link) => ({ name: link.text, href: link.href }));
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 overflow-x-hidden relative">
@@ -98,14 +99,11 @@ export default function App() {
       >
         <div className="max-w-5xl mx-auto px-6 h-12 md:h-14 flex items-center justify-between">
           <h1 className="flex items-center">
-            <a href="/" className="block w-32 md:w-40 transition-opacity hover:opacity-80">
-              <img
-                src="https://placehold.co/400x100/transparent/009DE0?text=Sato+Juku+Logo"
-                alt="さとう数理塾"
-                className="w-full h-auto object-contain"
-                width={160}
-                height={40}
-              />
+            <a
+              href="/"
+              className="inline-flex items-center text-[#009DE0] font-semibold tracking-[0.08em] text-sm md:text-base hover:opacity-80 transition-opacity"
+            >
+              さとう数理塾
             </a>
           </h1>
 
