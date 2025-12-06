@@ -1567,7 +1567,7 @@ export default function NewHomepage() {
 
               <Reveal delay={400}>
                 <a
-                  href="/guide"
+                  href="/join"
                   className="flex items-center justify-between p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-[#009DE0] hover:shadow-lg transition-all group"
                 >
                   <div className="flex items-center gap-6">
