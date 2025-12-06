@@ -30,6 +30,7 @@ import {
   AlertCircle,
   Footprints,
   Home,
+  ClipboardList,
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
@@ -1561,6 +1562,25 @@ export default function NewHomepage() {
                     </div>
                   </div>
                   <ExternalLink size={20} className="text-slate-300 group-hover:text-[#009DE0]" />
+                </a>
+              </Reveal>
+
+              <Reveal delay={400}>
+                <a
+                  href="/guide"
+                  className="flex items-center justify-between p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-[#009DE0] hover:shadow-lg transition-all group"
+                >
+                  <div className="flex items-center gap-6">
+                    <div className="p-4 bg-[#F0F9FF] rounded-2xl text-[#009DE0] group-hover:bg-[#009DE0] group-hover:text-white transition-colors">
+                      <ClipboardList size={24} />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-slate-400 mb-1">FLOW</span>
+                      <span className="font-bold text-[#334455] text-lg">入塾までの流れを見る</span>
+                      <p className="text-sm text-slate-500 mt-1">無料体験〜ご入塾までのステップを確認できます。</p>
+                    </div>
+                  </div>
+                  <ChevronRight size={20} className="text-slate-300 group-hover:text-[#009DE0]" />
                 </a>
               </Reveal>
             </div>
