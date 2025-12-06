@@ -19,6 +19,31 @@ import {
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
+import { CampaignSection, type CampaignData } from '~/components/react/CampaignSection';
+
+const campaignData: CampaignData = {
+  title: (
+    <>
+      高校生の理系立て直し
+      <br className="block sm:hidden" />
+      応援オファー
+    </>
+  ),
+  description: 'この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。',
+  originalPrice: '通常月謝 17,600円（税込）',
+  discountedPrice: '初月月謝 14,800円（税込）',
+  deadline: '2025-12-21T23:59:59+09:00',
+  ctaLabel: (
+    <>
+      このボタンから
+      <br className="block sm:hidden" />
+      無料体験を予約する
+    </>
+  ),
+  ctaHref: '/trial?campaign=xmas_high1_2025',
+  cautionText: '※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
+  campaignId: 'xmas_high1_2025',
+};
 
 // --- ブランドカラー定義 (トップページと共通) ---
 // Primary (Sky Blue): #009DE0
@@ -659,6 +684,8 @@ export default function MathNigatePage() {
             </div>
           </div>
         </section>
+
+        <CampaignSection variant="mathNigate" campaign={campaignData} />
 
         {/* ===========================================
           CLOSING / CTA SECTION
