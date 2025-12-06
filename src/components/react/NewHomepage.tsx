@@ -46,6 +46,7 @@ import UserChoiceSection from '~/components/react/UserChoiceSection';
 const SECTIONS = [
   { id: 'top', label: 'Top' },
   { id: 'concept', label: '当塾の想い' },
+  { id: 'campaign', label: '特別オファー' },
   { id: 'about', label: '当塾について' },
   { id: 'features', label: '3つの特徴' },
   { id: 'achievements', label: '合格実績' },
@@ -194,6 +195,8 @@ const getIcon = (id: string) => {
   switch (id) {
     case 'concept':
       return <PenTool size={18} className="text-[#009DE0]" />;
+    case 'campaign':
+      return <Star size={18} className="text-[#009DE0]" />;
     case 'about':
       return <Info size={18} className="text-[#009DE0]" />;
     case 'features':
@@ -213,6 +216,7 @@ const getIcon = (id: string) => {
 
 // --- MENU用セクション（「当塾の想い」を除外した6つ） ---
 const MENU_SECTIONS = [
+  { id: 'campaign', label: '特別オファー' },
   { id: 'about', label: '当塾について' },
   { id: 'features', label: '3つの特徴' },
   { id: 'achievements', label: '合格実績' },
@@ -435,6 +439,40 @@ const HatchingEgg = () => {
   );
 };
 
+const campaignData = {
+  title: (
+    <>
+      高校生の理系立て直し
+      <br className="block sm:hidden" />
+      応援オファー
+    </>
+  ),
+  description: 'この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。',
+  originalPrice: '通常月謝 17,600円（税込）',
+  discountedPrice: '初月月謝 14,800円（税込）',
+  deadline: '2025-12-21T23:59:59+09:00',
+  ctaLabel: (
+    <>
+      このボタンから
+      <br className="block sm:hidden" />
+      無料体験を予約する
+    </>
+  ),
+  ctaHref: '/trial?campaign=xmas_high1_2025',
+  cautionText: '※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
+  campaignId: 'xmas_high1_2025',
+};
+
+const CampaignSection = () => {
+  return (
+    <section id="campaign" className="bg-slate-50 py-16 px-4 md:py-20">
+      <div className="max-w-5xl mx-auto">
+        <CountdownCampaign {...campaignData} />
+      </div>
+    </section>
+  );
+};
+
 // --- ★学習習慣セクション (Topページ挿入用) ---
 const HabitSection = () => {
   return (
@@ -625,33 +663,6 @@ const HabitSection = () => {
               </div>
             </div>
           </Reveal>
-
-          {/* ミニCTA：高1理系スタート応援オファー */}
-          <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-[#334455]/10">
-            <CountdownCampaign
-              title={
-                <>
-                  高校生の理系立て直し
-                  <br className="block sm:hidden" />
-                  応援オファー
-                </>
-              }
-              description="この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。"
-              originalPrice="通常月謝 17,600円（税込）"
-              discountedPrice="初月月謝 14,800円（税込）"
-              deadline="2025-12-21T23:59:59+09:00"
-              ctaLabel={
-                <>
-                  このボタンから
-                  <br className="block sm:hidden" />
-                  無料体験を予約する
-                </>
-              }
-              ctaHref="/trial?campaign=xmas_high1_2025"
-              cautionText="※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。"
-              campaignId="xmas_high1_2025"
-            />
-          </div>
         </div>
       </div>
     </section>
@@ -1118,6 +1129,8 @@ export default function NewHomepage() {
           </div>
         </div>
       </section>
+
+      <CampaignSection />
 
       <UserChoiceSection />
 
