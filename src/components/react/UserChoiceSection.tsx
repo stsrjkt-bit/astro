@@ -1,7 +1,22 @@
 import React from 'react';
 import { Footprints, GraduationCap, ArrowRight, Sparkles } from 'lucide-react';
+import { trackGAEvent } from '~/utils/ga4';
+import { trackMetaCustomEvent } from '~/utils/metaPixel';
 
 export default function UserChoiceSection() {
+  const trackRouteSelection = (routeType: 'math_nigate' | 'rikei') => {
+    const eventParams = {
+      route_type: routeType,
+      section: 'choice',
+    };
+
+    trackGAEvent('select_route', eventParams);
+    trackMetaCustomEvent('SelectRoute', eventParams);
+  };
+
+  const handleMathRouteClick = () => trackRouteSelection('math_nigate');
+  const handleRikeiRouteClick = () => trackRouteSelection('rikei');
+
   return (
     <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="choice">
       {/* シマー効果（光が走る）のアニメーション定義 */}
@@ -52,6 +67,7 @@ export default function UserChoiceSection() {
               </div>
               <a
                 href="/math-nigate"
+                onClick={handleMathRouteClick}
                 className="
                   relative w-full h-14 md:h-16 rounded-full 
                   bg-[#D6DE26] text-[#334455]
@@ -96,6 +112,7 @@ export default function UserChoiceSection() {
               </div>
               <a
                 href="/rikei"
+                onClick={handleRikeiRouteClick}
                 className="
                   relative w-full h-14 md:h-16 rounded-full 
                   bg-[#009DE0] text-white

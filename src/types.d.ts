@@ -279,3 +279,18 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+declare global {
+  interface Window {
+    gtag?: (
+      command: 'event',
+      action: string,
+      params?: { [key: string]: string | number | boolean | undefined }
+    ) => void;
+    fbq?: (
+      command: 'track' | 'trackCustom',
+      event: string,
+      params?: { [key: string]: string | number | boolean | undefined }
+    ) => void;
+  }
+}
