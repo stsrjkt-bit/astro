@@ -33,8 +33,32 @@ import {
 } from 'lucide-react';
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
-import { CountdownCampaign } from '~/components/react/CountdownCampaign.tsx';
 import UserChoiceSection from '~/components/react/UserChoiceSection';
+import { CampaignSection, type CampaignData } from '~/components/react/CampaignSection';
+
+const campaignData: CampaignData = {
+  title: (
+    <>
+      高校生の理系立て直し
+      <br className="block sm:hidden" />
+      応援オファー
+    </>
+  ),
+  description: 'この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。',
+  originalPrice: '通常月謝 17,600円（税込）',
+  discountedPrice: '初月月謝 14,800円（税込）',
+  deadline: '2025-12-21T23:59:59+09:00',
+  ctaLabel: (
+    <>
+      このボタンから
+      <br className="block sm:hidden" />
+      無料体験を予約する
+    </>
+  ),
+  ctaHref: '/trial?campaign=xmas_high1_2025',
+  cautionText: '※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
+  campaignId: 'xmas_high1_2025',
+};
 
 // --- ブランドカラー定義 ---
 // Primary (Sky Blue): #009DE0
@@ -436,40 +460,6 @@ const HatchingEgg = () => {
         </svg>
       </div>
     </div>
-  );
-};
-
-const campaignData = {
-  title: (
-    <>
-      高校生の理系立て直し
-      <br className="block sm:hidden" />
-      応援オファー
-    </>
-  ),
-  description: 'この冬〜1月で理系科目の勉強を立て直したい高校生向けの期間限定オファーです。',
-  originalPrice: '通常月謝 17,600円（税込）',
-  discountedPrice: '初月月謝 14,800円（税込）',
-  deadline: '2025-12-21T23:59:59+09:00',
-  ctaLabel: (
-    <>
-      このボタンから
-      <br className="block sm:hidden" />
-      無料体験を予約する
-    </>
-  ),
-  ctaHref: '/trial?campaign=xmas_high1_2025',
-  cautionText: '※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
-  campaignId: 'xmas_high1_2025',
-};
-
-const CampaignSection = () => {
-  return (
-    <section id="campaign" className="bg-slate-50 py-16 px-4 md:py-20">
-      <div className="max-w-5xl mx-auto">
-        <CountdownCampaign {...campaignData} />
-      </div>
-    </section>
   );
 };
 
@@ -1130,7 +1120,7 @@ export default function NewHomepage() {
         </div>
       </section>
 
-      <CampaignSection />
+      <CampaignSection variant="homepage" campaign={campaignData} />
 
       <UserChoiceSection />
 
