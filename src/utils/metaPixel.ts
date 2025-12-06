@@ -21,3 +21,12 @@ export const trackMetaEvent = (eventName: MetaEventName, params: Record<string, 
     ...params,
   });
 };
+
+export const trackMetaCustomEvent = (eventName: MetaEventName, params: Record<string, unknown> = {}) => {
+  if (typeof window === 'undefined') return;
+
+  const fbq = (window as WindowWithFbq).fbq;
+  if (typeof fbq !== 'function') return;
+
+  fbq('trackCustom', eventName, params);
+};

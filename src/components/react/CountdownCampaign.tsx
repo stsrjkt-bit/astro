@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// GA4 / Meta Pixel の型定義
-declare global {
-  interface Window {
-    gtag?: (command: 'event', action: string, params?: { [key: string]: unknown }) => void;
-    fbq?: (command: 'track' | 'trackCustom', eventName: string, params?: { [key: string]: unknown }) => void;
-  }
-}
-
 interface CountdownCampaignProps {
   title: string | React.ReactNode;
   description?: string;
