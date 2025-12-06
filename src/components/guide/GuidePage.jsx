@@ -71,7 +71,7 @@ export default function App() {
   // 共通ナビゲーションリンク（トップページに戻る想定）
   const navLinks = [
     { name: 'HOME', href: '/' },
-    { name: '入塾までの流れ', href: '/#contact' },
+    { name: '入塾までの流れ', href: '/join' },
   ];
 
   return (
