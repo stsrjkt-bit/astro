@@ -12,6 +12,7 @@ import {
   GraduationCap,
   Mail,
   Info,
+  Calculator,
   BookOpen,
   School,
   BrainCircuit,
