@@ -21,12 +21,23 @@ export default {
 
       animation: {
         fade: 'fadeInUp 1s both',
+        'shimmer-auto': 'shimmer 2.5s infinite',
+        float: 'floating-y 2s ease-in-out infinite',
       },
 
       keyframes: {
         fadeInUp: {
           '0%': { opacity: 0, transform: 'translateY(2rem)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-150%) skewX(-12deg)' },
+          '15%': { transform: 'translateX(150%) skewX(-12deg)' },
+          '100%': { transform: 'translateX(150%) skewX(-12deg)' },
+        },
+        'floating-y': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(4px)' },
         },
       },
     },

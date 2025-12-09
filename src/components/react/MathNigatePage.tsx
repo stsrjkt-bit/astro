@@ -105,27 +105,6 @@ const Reveal = ({
   );
 };
 
-// --- アニメーション用グローバルスタイル ---
-const GlobalStyles = () => (
-  <style>{`
-    @keyframes shimmer {
-      0% { transform: translateX(-150%) skewX(-12deg); }
-      15% { transform: translateX(150%) skewX(-12deg); }
-      100% { transform: translateX(150%) skewX(-12deg); }
-    }
-    .animate-shimmer-auto {
-      animation: shimmer 2.5s infinite;
-    }
-    @keyframes floating-y {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
-    }
-    .animate-float {
-      animation: floating-y 2s ease-in-out infinite;
-    }
-  `}</style>
-);
-
 // --- PC用 ドットナビゲーション (共通スタイル) ---
 const DotNavigation = ({ activeSection }: { activeSection: string }) => {
   return (
@@ -445,7 +424,6 @@ export default function MathNigatePage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 overflow-x-hidden relative">
-      <GlobalStyles />
       {/* ナビゲーション */}
       <DotNavigation activeSection={activeSection} />
 
