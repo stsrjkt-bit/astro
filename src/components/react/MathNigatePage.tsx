@@ -207,6 +207,106 @@ const MobileTableOfContents = () => {
   );
 };
 
+// --- フローセクションのデータ定義 ---
+const studentCases = [
+  {
+    id: 'A',
+    delay: 100,
+    theme: 'blue',
+    icon: Calendar,
+    title: '数学が苦手な Aさん(高1)',
+    attendance: (
+      <>
+        週2回 (19:30〜)。
+        <br />
+        予習に必要な過去単元はAIが自動提案。効率よくつまずきを解消しながら予習し、学校の授業を「復習の場」に変える。
+      </>
+    ),
+    goal: (
+      <>
+        「予習→学校の授業(復習)→定着」のサイクルを確立すること。
+        <br />
+        学習科学に基づいたアプローチで、無理なく平均点以上を目指す。
+      </>
+    ),
+  },
+  {
+    id: 'B',
+    delay: 200,
+    theme: 'yellow',
+    icon: GraduationCap,
+    title: '理系志望の Bさん(高2)',
+    attendance: (
+      <>
+        週3回 (19:30〜)。
+        <br />
+        数学は予習ペースが定着し、余裕が生まれた分、英語や理科の先取り学習にも着手。
+      </>
+    ),
+    goal: <>数学での「貯金」を活かして全教科の評定平均を底上げし、希望する大学の指定校推薦枠を確実に掴む。</>,
+  },
+  {
+    id: 'C',
+    delay: 300,
+    theme: 'orange',
+    icon: Lightbulb,
+    title: '理系の選択肢を残したい Cさん(高2)',
+    attendance: (
+      <>
+        週2回 (19:30〜) をベースに、テスト週間や大会前の週はお休みもあり。
+        <br />
+        その代わり来られた日は、AI教材で「今週どこまで予習しておくか」を整理。
+        <br />
+        塾で予習 → 学校の授業で復習 のリズムだけは崩さないようにする。
+      </>
+    ),
+    goal: (
+      <>部活の忙しさに波があっても、数学・理科だけでも学年の上位に入れるようにしながら、国公立理系の選択肢を守る。</>
+    ),
+  },
+];
+
+const themeClasses = {
+  blue: {
+    border: 'border-[#009DE0]/20',
+    text: 'text-[#009DE0]',
+  },
+  yellow: {
+    border: 'border-[#D6DE26]/50',
+    text: 'text-[#8C9400]',
+  },
+  orange: {
+    border: 'border-[#EA5514]/20',
+    text: 'text-[#EA5514]',
+  },
+};
+
+type StudentCase = (typeof studentCases)[0];
+
+const StudentCaseCard = ({ caseData }: { caseData: StudentCase }) => {
+  const Icon = caseData.icon;
+  const classes = themeClasses[caseData.theme];
+
+  return (
+    <div className={`border rounded-xl p-6 bg-white shadow-sm ${classes.border}`}>
+      <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
+        <Icon className={classes.text} size={24} />
+        <h4 className="font-bold text-[#334455]">{caseData.title}</h4>
+      </div>
+      <ul className="space-y-4 text-sm text-[#334455]/80">
+        <li className="flex gap-3">
+          <span className={`font-bold w-12 flex-shrink-0 ${classes.text}`}>通塾</span>
+          <span>{caseData.attendance}</span>
+        </li>
+        <li className="flex gap-3">
+          <span className={`font-bold w-12 flex-shrink-0 ${classes.text}`}>目標</span>
+          <span>{caseData.goal}</span>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export default function MathNigatePage() {
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -629,58 +729,12 @@ export default function MathNigatePage() {
               </div>
             </Reveal>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <Reveal delay={100}>
-                <div className="border border-[#009DE0]/20 rounded-xl p-6 bg-white shadow-sm">
-                  <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                    <Calendar className="text-[#009DE0]" size={24} />
-                    <h4 className="font-bold text-[#334455]">数学が苦手な A君(高2)</h4>
-                  </div>
-                  <ul className="space-y-4 text-sm text-[#334455]/80">
-                    <li className="flex gap-3">
-                      <span className="font-bold w-12 text-[#009DE0] flex-shrink-0">通塾</span>
-                      <span>
-                        週2回 (19:30〜)。
-                        <br />
-                        予習に必要な過去単元はAIが自動提案。効率よくつまずきを解消しながら予習し、学校の授業を「復習の場」に変える。
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="font-bold w-12 text-[#009DE0] flex-shrink-0">目標</span>
-                      <span>
-                        「予習→学校の授業(復習)→定着」のサイクルを確立すること。
-                        <br />
-                        学習科学に基づいたアプローチで、無理なく平均点以上を目指す。
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </Reveal>
-
-              <Reveal delay={200}>
-                <div className="border border-[#D6DE26]/50 rounded-xl p-6 bg-white shadow-sm">
-                  <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
-                    <GraduationCap className="text-[#8C9400]" size={24} />
-                    <h4 className="font-bold text-[#334455]">理系志望の Bさん(高1)</h4>
-                  </div>
-                  <ul className="space-y-4 text-sm text-[#334455]/80">
-                    <li className="flex gap-3">
-                      <span className="font-bold w-12 text-[#8C9400] flex-shrink-0">通塾</span>
-                      <span>
-                        週3回 (19:30〜)。
-                        <br />
-                        数学は予習ペースが定着し、余裕が生まれた分、英語や理科の先取り学習にも着手。
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="font-bold w-12 text-[#8C9400] flex-shrink-0">目標</span>
-                      <span>
-                        数学での「貯金」を活かして全教科の評定平均を底上げし、希望する大学の指定校推薦枠を確実に掴む。
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </Reveal>
+            <div className="grid md:grid-cols-3 gap-8">
+              {studentCases.map((caseData) => (
+                <Reveal key={caseData.id} delay={caseData.delay}>
+                  <StudentCaseCard caseData={caseData} />
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
