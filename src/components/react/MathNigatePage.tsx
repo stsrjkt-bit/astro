@@ -297,12 +297,24 @@ const StudentCaseCard = ({ caseData }: { caseData: StudentCase }) => {
 
 // --- 診断ロジック用の定数 ---
 const DIAGNOSIS_ITEMS = [
-  '模試や定期テストで、他教科はそこそこ取れているのに、数学だけがじわじわ足を引っ張っている気がする',
-  '自習室や塾には通っていて勉強時間も取っているのに、数学の点数だけが安定しない',
-  'とりあえず問題集は進めているものの、これで十分なのか自分でも手応えがなく、勉強の方向性に迷っているように見える',
-  '解説を読めば「わかった気にはなる」のに、類題になると手が止まり、テスト本番では得点につながらない',
-  '部活の練習や大会で平日の時間がタイトになりがちで、勉強はしているつもりなのに、数学だけ「積み残し」が増えているように見える',
-];
+  {
+    text: '模試や定期テストで、他教科はそこそこ取れているのに、数学だけがじわじわ足を引っ張っている気がする',
+    category: 'A',
+  },
+  { text: '自習室や塾には通っていて勉強時間も取っているのに、数学の点数だけが安定しない', category: 'A' },
+  {
+    text: 'とりあえず問題集は進めているものの、これで十分なのか自分でも手応えがなく、勉強の方向性に迷っているように見える',
+    category: 'B',
+  },
+  {
+    text: '解説を読めば「わかった気にはなる」のに、類題になると手が止まり、テスト本番では得点につながらない',
+    category: 'B',
+  },
+  {
+    text: '部活の練習や大会で平日の時間がタイトになりがちで、勉強はしているつもりなのに、数学だけ「積み残し」が増えているように見える',
+    category: 'C',
+  },
+] as const;
 
 const DIAGNOSIS_RESULTS = {
   A: {
@@ -395,27 +407,24 @@ export default function MathNigatePage() {
     }
     setShowError(false);
 
-    let scoreA = 0;
-    let scoreB = 0;
-    let scoreC = 0;
+    const scores: { [key: string]: number } = { A: 0, B: 0, C: 0 };
+    for (const index of checkedItems) {
+      const item = DIAGNOSIS_ITEMS[index];
+      if (item) {
+        scores[item.category]++;
+      }
+    }
 
-    if (checkedItems.has(0)) scoreA++;
-    if (checkedItems.has(1)) scoreA++;
-    if (checkedItems.has(2)) scoreB++;
-    if (checkedItems.has(3)) scoreB++;
-    if (checkedItems.has(4)) scoreC++;
-
-    const maxScore = Math.max(scoreA, scoreB, scoreC);
+    const maxScore = Math.max(...Object.values(scores));
 
     if (maxScore === 0) {
       setDiagnosisResult([]);
       return;
     }
 
-    const types: string[] = [];
-    if (scoreA === maxScore) types.push('A');
-    if (scoreB === maxScore) types.push('B');
-    if (scoreC === maxScore) types.push('C');
+    const types = Object.entries(scores)
+      .filter(([, score]) => score === maxScore)
+      .map(([type]) => type);
 
     setDiagnosisResult(types);
 
@@ -687,7 +696,7 @@ export default function MathNigatePage() {
                             isChecked ? 'text-[#009DE0] font-bold' : 'text-[#334455]'
                           }`}
                         >
-                          {item}
+                          {item.text}
                         </p>
                       </button>
                     </Reveal>
