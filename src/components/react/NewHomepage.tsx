@@ -1107,7 +1107,9 @@ export default function NewHomepage() {
                   href="/math-nigate"
                   className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
                 >
-                  <span aria-hidden className="text-xl">✨</span>
+                  <span aria-hidden className="text-xl">
+                    ✨
+                  </span>
                   <span className="text-lg tracking-wide">数学から立て直す</span>
                   <ArrowRight
                     size={20}
