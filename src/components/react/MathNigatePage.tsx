@@ -629,12 +629,12 @@ export default function MathNigatePage() {
               </div>
             </Reveal>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               <Reveal delay={100}>
                 <div className="border border-[#009DE0]/20 rounded-xl p-6 bg-white shadow-sm">
                   <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
                     <Calendar className="text-[#009DE0]" size={24} />
-                    <h4 className="font-bold text-[#334455]">数学が苦手な A君(高2)</h4>
+                    <h4 className="font-bold text-[#334455]">数学が苦手な Aさん(高1)</h4>
                   </div>
                   <ul className="space-y-4 text-sm text-[#334455]/80">
                     <li className="flex gap-3">
@@ -661,7 +661,7 @@ export default function MathNigatePage() {
                 <div className="border border-[#D6DE26]/50 rounded-xl p-6 bg-white shadow-sm">
                   <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
                     <GraduationCap className="text-[#8C9400]" size={24} />
-                    <h4 className="font-bold text-[#334455]">理系志望の Bさん(高1)</h4>
+                    <h4 className="font-bold text-[#334455]">理系志望の Bさん(高2)</h4>
                   </div>
                   <ul className="space-y-4 text-sm text-[#334455]/80">
                     <li className="flex gap-3">
@@ -676,6 +676,33 @@ export default function MathNigatePage() {
                       <span className="font-bold w-12 text-[#8C9400] flex-shrink-0">目標</span>
                       <span>
                         数学での「貯金」を活かして全教科の評定平均を底上げし、希望する大学の指定校推薦枠を確実に掴む。
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </Reveal>
+
+              <Reveal delay={300}>
+                <div className="border border-[#EA5514]/20 rounded-xl p-6 bg-white shadow-sm">
+                  <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
+                    <Lightbulb className="text-[#EA5514]" size={24} />
+                    <h4 className="font-bold text-[#334455]">理系の選択肢を残したい Cさん(高2)</h4>
+                  </div>
+                  <ul className="space-y-4 text-sm text-[#334455]/80">
+                    <li className="flex gap-3">
+                      <span className="font-bold w-12 text-[#EA5514] flex-shrink-0">通塾</span>
+                      <span>
+                        週2回 (19:30〜) をベースに、テスト週間や大会前の週はお休みもあり。
+                        <br />
+                        その代わり来られた日は、AI教材で「今週どこまで予習しておくか」を整理。
+                        <br />
+                        塾で予習 → 学校の授業で復習 のリズムだけは崩さないようにする。
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="font-bold w-12 text-[#EA5514] flex-shrink-0">目標</span>
+                      <span>
+                        部活の忙しさに波があっても、数学・理科だけでも学年の上位に入れるようにしながら、国公立理系の選択肢を守る。
                       </span>
                     </li>
                   </ul>
