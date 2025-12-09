@@ -11,10 +11,6 @@ export const headerData = {
       href: getPermalink('/math-nigate'),
     },
     {
-      text: '理系大学をめざすあなたへ',
-      href: getPermalink('/rikei'),
-    },
-    {
       text: '入塾までの流れ',
       href: getPermalink('/join'),
     },
