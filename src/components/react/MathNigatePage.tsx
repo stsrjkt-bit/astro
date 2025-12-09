@@ -16,11 +16,14 @@ import {
   MessageCircle,
   GraduationCap,
   Mail,
+  ClipboardList,
 } from 'lucide-react';
+
 import { trackMetaEvent } from '~/utils/metaPixel';
 import { trackGAEvent } from '~/utils/ga4';
 import { CampaignSection, type CampaignData } from '~/components/react/CampaignSection';
 
+// --- このページ用キャンペーンデータ ---
 const campaignData: CampaignData = {
   title: (
     <>
@@ -41,23 +44,17 @@ const campaignData: CampaignData = {
     </>
   ),
   ctaHref: '/trial?campaign=xmas_high1_2025',
-  cautionText: '※ 本ボタン経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
+  cautionText:
+    '※ 本ボタン経経由の予約のみ割引が適用されます。他ページからのご予約は対象外となりますのでご注意ください。',
   campaignId: 'xmas_high1_2025',
 };
-
-// --- ブランドカラー定義 (トップページと共通) ---
-// Primary (Sky Blue): #009DE0
-// Secondary (Lime Yellow): #D6DE26
-// Accent (Orange/Red): #F39800, #EA5514
-// Text (Dark Navy): #334455
-// Base: #F8FAFC
 
 // --- このページ用のセクション定義 ---
 const SECTIONS = [
   { id: 'hero', label: 'Top' },
+  { id: 'solution', label: 'アプローチ' },
   { id: 'worry', label: 'こんなお悩み' },
   { id: 'reason', label: '伸び悩む理由' },
-  { id: 'solution', label: '解決へのアプローチ' },
   { id: 'flow', label: '通塾イメージ' },
   { id: 'contact', label: 'ご相談' },
 ];
@@ -108,6 +105,27 @@ const Reveal = ({
   );
 };
 
+// --- アニメーション用グローバルスタイル ---
+const GlobalStyles = () => (
+  <style>{`
+    @keyframes shimmer {
+      0% { transform: translateX(-150%) skewX(-12deg); }
+      15% { transform: translateX(150%) skewX(-12deg); }
+      100% { transform: translateX(150%) skewX(-12deg); }
+    }
+    .animate-shimmer-auto {
+      animation: shimmer 2.5s infinite;
+    }
+    @keyframes floating-y {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+    .animate-float {
+      animation: floating-y 2s ease-in-out infinite;
+    }
+  `}</style>
+);
+
 // --- PC用 ドットナビゲーション (共通スタイル) ---
 const DotNavigation = ({ activeSection }: { activeSection: string }) => {
   return (
@@ -149,7 +167,7 @@ const getIcon = (id: string) => {
     case 'flow':
       return <CheckCircle2 size={18} className="text-[#009DE0]" />;
     case 'contact':
-      return <MessageCircle size={18} className="text-[#009DE0]" />; // contactも青に統一
+      return <MessageCircle size={18} className="text-[#009DE0]" />;
     default:
       return <ChevronRight size={18} className="text-[#009DE0]" />;
   }
@@ -159,19 +177,16 @@ const getIcon = (id: string) => {
 const MobileTableOfContents = () => {
   return (
     <div className="md:hidden w-full relative overflow-hidden">
-      {/* 背景装飾: ブランドカラーを使った淡いグラデーション */}
+      {/* 背景装飾 */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#009DE0]/5 via-[#F8FAFC] to-[#D6DE26]/10 pointer-events-none" />
-
-      {/* 上下のボーダーもグラデーションで表現 */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#009DE0]/20 to-transparent" />
 
       <div className="relative px-5 py-8">
-        {/* タイトル周り: 装飾ラインを入れて華やかに */}
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="h-[2px] w-8 bg-gradient-to-r from-transparent to-[#009DE0]"></span>
+          <span className="h-[2px] w-8 bg-gradient-to-r from-transparent to-[#009DE0]" />
           <p className="text-xs font-bold tracking-[0.2em] text-[#009DE0] uppercase">Page Menu</p>
-          <span className="h-[2px] w-8 bg-gradient-to-l from-transparent to-[#009DE0]"></span>
+          <span className="h-[2px] w-8 bg-gradient-to-l from-transparent to-[#009DE0]" />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
@@ -182,19 +197,13 @@ const MobileTableOfContents = () => {
                 href={`#${section.id}`}
                 className="group relative flex items-center justify-between p-3.5 rounded-xl shadow-sm transition-all duration-300 bg-white text-[#334455] hover:shadow-md hover:shadow-[#009DE0]/5 active:scale-95 border border-slate-100"
               >
-                {/* 左端アクセントバー (ホバー時に表示) - 全項目共通にしました */}
                 <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-2/3 bg-[#D6DE26] rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity" />
-
                 <div className="flex flex-col">
-                  {/* 英語ラベル（装飾用） */}
                   <span className="text-[10px] uppercase tracking-wider font-bold mb-0.5 text-[#009DE0]/70">
                     0{SECTIONS.indexOf(section)}
                   </span>
-                  {/* 日本語ラベル */}
                   <span className="text-sm font-bold text-[#334455]">{section.label}</span>
                 </div>
-
-                {/* アイコンサークル */}
                 <div className="flex items-center justify-center w-8 h-8 rounded-full transition-transform group-hover:scale-110 bg-[#F8FAFC] group-hover:bg-[#009DE0]/10">
                   {getIcon(section.id)}
                 </div>
@@ -264,7 +273,7 @@ const studentCases = [
       <>部活の忙しさに波があっても、数学・理科だけでも学年の上位に入れるようにしながら、国公立理系の選択肢を守る。</>
     ),
   },
-];
+] as const;
 
 const themeClasses = {
   blue: {
@@ -281,7 +290,7 @@ const themeClasses = {
   },
 };
 
-type StudentCase = (typeof studentCases)[0];
+type StudentCase = (typeof studentCases)[number];
 
 const StudentCaseCard = ({ caseData }: { caseData: StudentCase }) => {
   const Icon = caseData.icon;
@@ -307,9 +316,60 @@ const StudentCaseCard = ({ caseData }: { caseData: StudentCase }) => {
   );
 };
 
+// --- 診断ロジック用の定数 ---
+const DIAGNOSIS_ITEMS = [
+  '模試や定期テストで、他教科はそこそこ取れているのに、数学だけがじわじわ足を引っ張っている気がする',
+  '自習室や塾には通っていて勉強時間も取っているのに、数学の点数だけが安定しない',
+  'とりあえず問題集は進めているものの、これで十分なのか自分でも手応えがなく、勉強の方向性に迷っているように見える',
+  '解説を読めば「わかった気にはなる」のに、類題になると手が止まり、テスト本番では得点につながらない',
+  '部活の練習や大会で平日の時間がタイトになりがちで、勉強はしているつもりなのに、数学だけ「積み残し」が増えているように見える',
+];
+
+const DIAGNOSIS_RESULTS = {
+  A: {
+    title: '診断結果：数学だけ成績バランス崩れタイプです',
+    content: (
+      <>
+        他の教科はそこそこ取れているのに、数学だけがじわじわ足を引っ張っているタイプです。
+        <br />
+        勉強時間自体はある程度取れていることが多く、「やっていない」わけではないのに成績だけ崩れていくことで、お子様もご家族もモヤモヤしやすい状態です。
+        <br />
+        さとう数理塾では、AI教材で「どこから崩れ始めているのか」を特定し、土台から立て直すことで、数学だけのバランス崩れを整えていきます。
+      </>
+    ),
+  },
+  B: {
+    title: '診断結果：がんばり方・理解のズレタイプです',
+    content: (
+      <>
+        問題集を進めたり、解説を読んだりと、勉強自体はしているのに「手応えがない」「点数にならない」というタイプです。
+        <br />
+        「わかったつもり」と「自力で解ける」の間にギャップがあり、がんばり方と成果が噛み合っていない可能性が高い状態です。
+        <br />
+        さとう数理塾では、1対1の対話を通して「なぜその式になるのか」を言葉にしてもらいながら、類題でも使える形で理解を固めていきます。
+      </>
+    ),
+  },
+  C: {
+    title: '診断結果：時間配分・部活両立タイプです',
+    content: (
+      <>
+        部活の練習や大会で平日の時間がタイトな中、「できる範囲では勉強しているつもり」なのに、数学だけ積み残しが増えてしまうタイプです。
+        <br />
+        学校・部活・勉強の優先順位づけや、限られた時間で「どこまでやれば十分か」の線引きが難しくなっている状態と言えます。
+        <br />
+        さとう数理塾では、部活の予定も含めて週ごとの学習量を一緒に整理し、「ここだけは外さない」という最小限のラインから逆算して学習計画を立てていきます。
+      </>
+    ),
+  },
+};
+
 export default function MathNigatePage() {
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [checkedItems, setCheckedItems] = useState(new Set<number>());
+  const [diagnosisResult, setDiagnosisResult] = useState<string[] | null>(null);
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
@@ -335,8 +395,57 @@ export default function MathNigatePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // チェックリストのトグル関数
+  const toggleCheck = (index: number) => {
+    const newChecked = new Set(checkedItems);
+    if (newChecked.has(index)) {
+      newChecked.delete(index);
+    } else {
+      newChecked.add(index);
+    }
+    setCheckedItems(newChecked);
+    if (showError) setShowError(false);
+  };
+
+  // 診断実行関数
+  const handleDiagnosis = () => {
+    if (checkedItems.size === 0) {
+      setShowError(true);
+      setDiagnosisResult(null);
+      return;
+    }
+    setShowError(false);
+
+    let scoreA = 0;
+    let scoreB = 0;
+    let scoreC = 0;
+
+    if (checkedItems.has(0)) scoreA++;
+    if (checkedItems.has(1)) scoreA++;
+    if (checkedItems.has(2)) scoreB++;
+    if (checkedItems.has(3)) scoreB++;
+    if (checkedItems.has(4)) scoreC++;
+
+    const maxScore = Math.max(scoreA, scoreB, scoreC);
+
+    if (maxScore === 0) {
+      setDiagnosisResult([]);
+      return;
+    }
+
+    const types: string[] = [];
+    if (scoreA === maxScore) types.push('A');
+    if (scoreB === maxScore) types.push('B');
+    if (scoreC === maxScore) types.push('C');
+
+    setDiagnosisResult(types);
+
+    trackMetaEvent('Contact', { type: 'diagnosis_check', result: types.join('_') });
+  };
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 overflow-x-hidden relative">
+      <GlobalStyles />
       {/* ナビゲーション */}
       <DotNavigation activeSection={activeSection} />
 
@@ -347,19 +456,14 @@ export default function MathNigatePage() {
           backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }}
-      ></div>
+      />
 
-      {/* Main Content (was <main> in original, now div to fit inside Layout) */}
       <div className="w-full overflow-hidden">
-        {/* ===========================================
-        HERO SECTION (Parents)
-        ===========================================
-      */}
-        {/* スマホでの高さ調整: min-h-[85vh] だと長すぎる場合があるので、
-        コンテンツ量に合わせて調整しつつ、min-h-[600px]などで最低高さを確保します。
-        flex items-center で上下中央寄せにしています。
-      */}
-        <section id="hero" className="relative w-full min-h-[80vh] md:min-h-[85vh] flex items-center overflow-hidden">
+        {/* HERO SECTION */}
+        <section
+          id="hero"
+          className="relative w-full min-h-[70vh] md:min-h-[85vh] flex md:items-center overflow-hidden"
+        >
           {/* 背景画像エリア */}
           <div className="absolute inset-0 z-0">
             <div
@@ -380,10 +484,10 @@ export default function MathNigatePage() {
           </div>
 
           {/* グラデーションオーバーレイ */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/90 to-[#F8FAFC]/40"></div>
+          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#F8FAFC]/95 via-[#F8FAFC]/90 to-[#F8FAFC]/40" />
 
           {/* コンテンツエリア */}
-          <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-20 md:pt-20">
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 pt-24 pb-12 md:py-20">
             <div className="max-w-3xl text-left">
               {/* ラベル部分 */}
               <div
@@ -398,31 +502,19 @@ export default function MathNigatePage() {
                 </div>
               </div>
 
-              {/* 見出し部分（ここを重点的に修正） */}
+              {/* 見出し部分 */}
               <div
                 className={`transition-all duration-1000 delay-500 ${
                   loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
                 }`}
               >
-                <h2 className="font-serif text-[#334455] mb-6 md:mb-8 drop-shadow-sm tracking-tight">
-                  {/* スマホ (text-3xl): 少し大きめにしてインパクトを出す
-                   PC (md:text-5xl): 従来通り
-                   leading: スマホでは少し広め(relaxed)にとって読みやすく
-                */}
+                <h2 className="font-serif text-[#334455] mb-8 md:mb-8 drop-shadow-sm tracking-tight">
                   <span className="text-3xl md:text-5xl leading-relaxed md:leading-snug block">「数学が心配...」</span>
-
-                  {/* スマホ調整のポイント:
-                   文節ごとに改行を入れるのではなく、
-                   スマホでは「その不安は、適切なアプローチで必ず変えられます。」と
-                   自然に流すか、あるいは意味の塊ごとに block 表示にします。
-                */}
                   <span className="text-2xl md:text-5xl leading-relaxed md:leading-snug mt-4 md:mt-0 block md:inline">
                     その不安は、
-                    {/* PCのみ改行を入れる */}
                     <br className="hidden md:block" />
                     <span className="inline-block relative">
                       <span className="text-[#009DE0] relative z-10 font-bold">適切なアプローチ</span>
-                      {/* アンダーラインSVG */}
                       <svg
                         className="absolute w-full h-2 md:h-3 bottom-0.5 left-0 text-[#D6DE26]/60 -z-10"
                         viewBox="0 0 100 10"
@@ -431,17 +523,38 @@ export default function MathNigatePage() {
                         <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
                       </svg>
                     </span>
-                    {/* 「で必ず変えられます」が不自然に切れないように、nowrap指定をするか、自然に任せる */}
                     <span className="inline-block">で必ず変えられます。</span>
                   </span>
                 </h2>
+              </div>
 
-                {/* 本文エリア */}
-                <p className="text-[#334455]/80 text-base md:text-lg leading-7 md:leading-loose mb-10 max-w-2xl">
-                  {/* スマホでは改行タグ <br> を無効化 (hidden md:block) して、
-                  画面幅いっぱい使って自然に折り返させます。
-                  これにより「諦めかけて / はいませんか？」のような不自然な切れ方を防ぎます。
-                */}
+              {/* ボタンエリア */}
+              <div
+                className={`transition-all duration-1000 delay-700 ${
+                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                  <a
+                    href="#solution"
+                    className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#009DE0] to-[#008ac4] text-white rounded-full text-base font-bold shadow-lg shadow-[#009DE0]/30 active:shadow-md active:scale-[0.98] transition-all duration-200 min-w-[240px] overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-white/30 skew-y-12 animate-shimmer-auto" />
+                    <span className="relative flex items-center gap-2">
+                      アプローチを見る
+                      <ChevronDown size={20} className="animate-float" />
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              {/* 説明文 */}
+              <div
+                className={`transition-all duration-1000 delay-700 ${
+                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
+                }`}
+              >
+                <p className="text-[#334455]/80 text-base md:text-lg leading-7 md:leading-loose max-w-2xl">
                   お子様の数学の点数を見て、将来の進路を諦めかけてはいませんか？
                   <br className="hidden md:block" />
                   高校数学は一度つまずくと挽回が難しい教科ですが、
@@ -451,50 +564,98 @@ export default function MathNigatePage() {
                   まずは保護者の方の「どうしたらいいの？」を、当塾にお聞かせください。
                 </p>
               </div>
-
-              {/* ボタンエリア */}
-              <div
-                className={`transition-all duration-1000 delay-700 ${
-                  loaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="#contact"
-                    className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-[#009DE0] text-white rounded-full text-sm font-bold shadow-lg hover:bg-[#008ac4] transition-all hover:-translate-y-1"
-                    onClick={() => {
-                      trackMetaEvent('Contact', {
-                        type: 'scroll_to_contact',
-                        pageType: 'math_nigate',
-                        position: 'hero',
-                      });
-                      trackGAEvent('hero_cta_click', {
-                        page_type: 'math_nigate',
-                        action: 'scroll_to_contact',
-                      });
-                    }}
-                  >
-                    無料体験・学習相談を予約する
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
-                  <a
-                    href="#worry"
-                    className="inline-flex justify-center items-center gap-2 px-8 py-4 bg-white text-[#334455] border border-[#334455]/10 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50 transition-all"
-                  >
-                    詳しく読む <ChevronDown size={16} />
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
+        {/* スマホ用メニュー */}
         <MobileTableOfContents />
 
-        {/* ===========================================
-          WORRY SECTION (Checklist)
-          ===========================================
-        */}
+        {/* SOLUTION SECTION */}
+        <section id="solution" className="py-20 md:py-32 bg-[#F1F5F9] relative">
+          <div className="max-w-5xl mx-auto px-6">
+            <Reveal>
+              <div className="text-center mb-16">
+                <span className="text-[#009DE0] font-bold text-sm tracking-widest uppercase mb-2 block">
+                  Our Approach
+                </span>
+                <h3 className="font-serif text-2xl md:text-3xl text-[#334455] mb-4 font-bold">
+                  さとう数理塾では、
+                  <br className="md:hidden" />
+                  こう変えていきます
+                </h3>
+              </div>
+            </Reveal>
+
+            <div className="space-y-8">
+              {/* Item 1 */}
+              <Reveal delay={100}>
+                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#009DE0]/10 flex flex-col md:flex-row gap-8 items-center">
+                  <div className="flex-shrink-0 w-24 h-24 bg-[#009DE0]/10 rounded-full flex items-center justify-center text-[#009DE0]">
+                    <BrainCircuit size={40} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h4 className="text-xl font-bold text-[#334455] mb-3">AI教材で「つまずきの根源」を特定</h4>
+                    <p className="text-[#334455]/80 leading-relaxed">
+                      最新のAI教材を使用し、お子様がどこでつまずいているかを数分で診断します。
+                      「高2だから高2の問題」ではなく、「中3の二次関数が怪しいからそこへ戻る」といった、
+                      <span className="text-[#009DE0] font-bold bg-[#009DE0]/5 px-1">最短ルートの復習計画</span>
+                      を立てます。 その結果、
+                      <span className="font-bold">
+                        「何から手をつければいいのか分からない」状態が、1〜2ヶ月先まで見通せるやることリスト
+                      </span>
+                      に変わります。
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Item 2 */}
+              <Reveal delay={200}>
+                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#D6DE26]/30 flex flex-col md:flex-row gap-8 items-center">
+                  <div className="flex-shrink-0 w-24 h-24 bg-[#D6DE26]/20 rounded-full flex items-center justify-center text-[#8C9400]">
+                    <MessageCircle size={40} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「なぜ？」を解決</h4>
+                    <p className="text-[#334455]/80 leading-relaxed">
+                      ただ答えを教えるのではなく、「どうしてこの式になると思う？」と対話をしながら進めます。
+                      自分の言葉で説明できるようになることで、「わかったつもり」を排除し、
+                      <span className="text-[#8C9400] font-bold bg-[#D6DE26]/10 px-1">
+                        テスト本番で手が止まらない解き方
+                      </span>
+                      へ変えていきます。
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Item 3 */}
+              <Reveal delay={300}>
+                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#EA5514]/20 flex flex-col md:flex-row gap-8 items-center">
+                  <div className="flex-shrink-0 w-24 h-24 bg-[#EA5514]/10 rounded-full flex items-center justify-center text-[#EA5514]">
+                    <Clock size={40} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h4 className="text-xl font-bold text-[#334455] mb-3">「演習」しながらその場で解決</h4>
+                    <p className="text-[#334455]/80 leading-relaxed">
+                      「授業を聞いて終わり」ではなく、実際に手を動かす時間を重視します。
+                      学習中にわからないことがあればその都度指導が入るため、
+                      <span className="text-[#EA5514] font-bold bg-[#EA5514]/5 px-1">疑問をその場で解消</span>
+                      しながら進められます。 これにより、
+                      <span className="font-bold">
+                        「解きっぱなしで結局身についていない」勉強から、1問ごとに理解を確認しながら積み上げる勉強
+                      </span>
+                      に変わります。
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* WORRY SECTION (CHECK LIST) */}
         <section id="worry" className="py-20 bg-white relative">
           <div className="max-w-4xl mx-auto px-6">
             <Reveal>
@@ -502,54 +663,169 @@ export default function MathNigatePage() {
                 <span className="text-[#009DE0] font-bold text-sm tracking-widest uppercase mb-2 block">
                   Check List
                 </span>
-                <h3 className="font-serif text-xl md:text-3xl text-[#334455] leading-relaxed font-bold">
+                <h3 className="font-serif text-xl md:text-3xl text-[#334455] leading-relaxed font-bold mb-4">
                   こんなご様子に、
                   <br className="md:hidden" />
                   心当たりはありませんか？
                 </h3>
+                <p className="text-xs md:text-sm text-[#334455]/70 max-w-xl mx-auto">
+                  ※2〜3分でできる簡単なチェックです。あてはまるところにチェックを入れてみてください。
+                </p>
               </div>
             </Reveal>
 
             <div className="bg-[#F8FAFC] border border-[#009DE0]/10 rounded-2xl p-8 md:p-12 shadow-sm">
-              <div className="grid md:grid-cols-1 gap-6">
-                {[
-                  '模試や定期テストで、数学だけ極端に点数が低い（あるいは下がってきた）',
-                  '「勉強しなさい」と言っても、机に向かう時間が以前より減っている',
-                  'テスト前には勉強しているはずなのに、本番になると真っ白になってしまう',
-                  '数学の話をすると、急に不機嫌になったり、口をつぐんだりする',
-                  '塾には通っているが、集団授業のスピードについていけていないようだ',
-                ].map((item, index) => (
-                  <Reveal key={index} delay={index * 100}>
-                    <div className="flex items-start gap-4 p-4 bg-white rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                      <div className="mt-1 flex-shrink-0 text-[#EA5514]">
-                        <AlertCircle size={24} />
-                      </div>
-                      <p className="text-[#334455] font-medium leading-relaxed">{item}</p>
-                    </div>
-                  </Reveal>
-                ))}
+              <div className="grid md:grid-cols-1 gap-4 mb-10">
+                {DIAGNOSIS_ITEMS.map((item, index) => {
+                  const isChecked = checkedItems.has(index);
+                  return (
+                    <Reveal key={index} delay={index * 100}>
+                      <button
+                        onClick={() => toggleCheck(index)}
+                        className={`w-full text-left flex items-start gap-4 p-4 rounded-lg border transition-all duration-200 active:scale-[0.99] ${
+                          isChecked
+                            ? 'bg-[#E0F4FC] border-[#009DE0]/50 ring-1 ring-[#009DE0]/30 shadow-sm'
+                            : 'bg-white border-gray-100 shadow-sm hover:shadow-md hover:border-[#009DE0]/30'
+                        }`}
+                        aria-pressed={isChecked}
+                      >
+                        <div
+                          className={`mt-1 flex-shrink-0 transition-colors duration-300 ${
+                            isChecked ? 'text-[#009DE0]' : 'text-[#EA5514]'
+                          }`}
+                        >
+                          {isChecked ? (
+                            <div className="scale-110 transition-transform duration-200">
+                              <CheckCircle2 size={24} className="fill-[#009DE0]/10" />
+                            </div>
+                          ) : (
+                            <div className="text-gray-300">
+                              <CheckCircle2 size={24} />
+                            </div>
+                          )}
+                        </div>
+                        <p
+                          className={`font-medium leading-relaxed transition-colors duration-200 ${
+                            isChecked ? 'text-[#009DE0] font-bold' : 'text-[#334455]'
+                          }`}
+                        >
+                          {item}
+                        </p>
+                      </button>
+                    </Reveal>
+                  );
+                })}
               </div>
 
-              <Reveal delay={600}>
-                <div className="mt-10 text-center">
-                  <p className="text-[#334455]/80 leading-relaxed">
-                    これらは、決して「お子様の努力不足」や「能力の問題」だけが原因ではありません。
-                    <br className="hidden md:block" />
-                    高校数学特有の<strong className="text-[#009DE0] font-bold">「構造的な難しさ」</strong>
-                    が壁になっているケースがほとんどです。
-                  </p>
+              {/* 診断ボタン */}
+              <Reveal delay={500}>
+                <div className="flex flex-col items-center">
+                  {showError && (
+                    <p className="text-[#FF4757] font-bold text-sm mb-4 animate-bounce">
+                      ※どれか1つ以上チェックを入れてください
+                    </p>
+                  )}
+
+                  <button
+                    onClick={handleDiagnosis}
+                    className="group relative inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#009DE0] text-white rounded-full font-bold text-base shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 active:translate-y-0 active:shadow-sm transition-all duration-200 min-w-[280px]"
+                  >
+                    <ClipboardList size={20} />
+                    今の状態を簡単チェックする
+                  </button>
+
+                  {diagnosisResult && (
+                    <div className="mt-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+                      {diagnosisResult.length === 0 ? (
+                        <div className="bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm">
+                          <p className="text-[#334455] font-bold mb-2">はっきりした傾向は見られませんでした</p>
+                          <p className="text-[#334455]/70 text-sm">
+                            チェック項目が少ない場合、特定の傾向が出ないことがあります。
+                            <br />
+                            気になる点があれば、お気軽に学習相談でご質問ください。
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="space-y-6">
+                          {diagnosisResult.map((type) => {
+                            if (!(type in DIAGNOSIS_RESULTS)) return null;
+                            const result = DIAGNOSIS_RESULTS[type as keyof typeof DIAGNOSIS_RESULTS];
+
+                            return (
+                              <div
+                                key={type}
+                                className="bg-white border-2 border-[#009DE0]/20 rounded-xl p-6 md:p-8 shadow-md relative overflow-hidden"
+                              >
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#009DE0] to-[#D6DE26]" />
+                                <h4 className="text-xl md:text-2xl font-bold text-[#009DE0] mb-4 flex items-center gap-2">
+                                  <Lightbulb size={24} className="flex-shrink-0" />
+                                  {result.title}
+                                </h4>
+                                <p className="text-[#334455]/80 leading-relaxed text-sm md:text-base">
+                                  {result.content}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      <p className="mt-6 text-xs text-[#334455]/50 text-center mb-8">
+                        ※この結果は、学習状況を整理するための「簡単な目安」です。
+                      </p>
+
+                      <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+                        <a
+                          href="/counseling"
+                          className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                          onClick={() => {
+                            trackMetaEvent('Contact', {
+                              type: 'counseling_cta',
+                              pageType: 'math_nigate',
+                              position: 'diagnosis_section',
+                            });
+                            trackGAEvent('counseling_cta_click', {
+                              page_type: 'math_nigate',
+                              position: 'diagnosis_section',
+                            });
+                          }}
+                        >
+                          <MessageCircle size={20} />
+                          学習相談に申し込む
+                          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </a>
+
+                        <a
+                          href="/trial"
+                          className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
+                          onClick={() => {
+                            trackMetaEvent('Lead', {
+                              type: 'trial_cta',
+                              pageType: 'math_nigate',
+                              position: 'diagnosis_section',
+                            });
+                            trackGAEvent('trial_cta_click', {
+                              page_type: 'math_nigate',
+                              position: 'diagnosis_section',
+                            });
+                          }}
+                        >
+                          <Mail size={20} />
+                          無料体験に申し込む
+                          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </Reveal>
             </div>
           </div>
         </section>
 
-        {/* ===========================================
-          REASON SECTION
-          ===========================================
-        */}
+        {/* REASON SECTION */}
         <section id="reason" className="py-20 md:py-32 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D6DE26]/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/4"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D6DE26]/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/4" />
 
           <div className="max-w-5xl mx-auto px-6 relative z-10">
             <Reveal>
@@ -636,88 +912,7 @@ export default function MathNigatePage() {
           </div>
         </section>
 
-        {/* ===========================================
-          SOLUTION SECTION
-          ===========================================
-        */}
-        <section id="solution" className="py-20 md:py-32 bg-[#F1F5F9] relative">
-          <div className="max-w-5xl mx-auto px-6">
-            <Reveal>
-              <div className="text-center mb-16">
-                <span className="text-[#009DE0] font-bold text-sm tracking-widest uppercase mb-2 block">
-                  Our Approach
-                </span>
-                <h3 className="font-serif text-2xl md:text-3xl text-[#334455] mb-4 font-bold">
-                  さとう数理塾では、
-                  <br className="md:hidden" />
-                  こう変えていきます
-                </h3>
-              </div>
-            </Reveal>
-
-            {/* Solution Items - Layout similar to Top Page Features but with details */}
-            <div className="space-y-8">
-              {/* Item 1 */}
-              <Reveal delay={100}>
-                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#009DE0]/10 flex flex-col md:flex-row gap-8 items-center">
-                  <div className="flex-shrink-0 w-24 h-24 bg-[#009DE0]/10 rounded-full flex items-center justify-center text-[#009DE0]">
-                    <BrainCircuit size={40} />
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold text-[#334455] mb-3">AI教材で「つまずきの根源」を特定</h4>
-                    <p className="text-[#334455]/80 leading-relaxed">
-                      最新のAI教材を使用し、お子様がどこでつまずいているかを数分で診断します。
-                      「高2だから高2の問題」ではなく、「中3の二次関数が怪しいからそこへ戻る」といった、
-                      <span className="text-[#009DE0] font-bold bg-[#009DE0]/5 px-1">最短ルートの復習計画</span>
-                      を立てます。
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* Item 2 */}
-              <Reveal delay={200}>
-                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#D6DE26]/30 flex flex-col md:flex-row gap-8 items-center">
-                  <div className="flex-shrink-0 w-24 h-24 bg-[#D6DE26]/20 rounded-full flex items-center justify-center text-[#8C9400]">
-                    <MessageCircle size={40} />
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「なぜ？」を解決</h4>
-                    <p className="text-[#334455]/80 leading-relaxed">
-                      ただ答えを教えるのではなく、「どうしてこの式になると思う？」と対話をしながら進めます。
-                      自分の言葉で説明できるようになることで、「わかったつもり」を排除し、
-                      <span className="text-[#8C9400] font-bold bg-[#D6DE26]/10 px-1">テスト本番で使える力</span>
-                      へ変えます。
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* Item 3 */}
-              <Reveal delay={300}>
-                <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-[#EA5514]/20 flex flex-col md:flex-row gap-8 items-center">
-                  <div className="flex-shrink-0 w-24 h-24 bg-[#EA5514]/10 rounded-full flex items-center justify-center text-[#EA5514]">
-                    <Clock size={40} />
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold text-[#334455] mb-3">「演習」しながらその場で解決</h4>
-                    <p className="text-[#334455]/80 leading-relaxed">
-                      「授業を聞いて終わり」ではなく、実際に手を動かす時間を重視します。
-                      学習中にわからないことがあればその都度指導が入るため、
-                      <span className="text-[#EA5514] font-bold bg-[#EA5514]/5 px-1">疑問をその場で解消</span>
-                      しながら進められます。
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ===========================================
-          FLOW SECTION
-          ===========================================
-        */}
+        {/* FLOW SECTION */}
         <section id="flow" className="py-20 md:py-32">
           <div className="max-w-4xl mx-auto px-6">
             <Reveal>
@@ -739,12 +934,10 @@ export default function MathNigatePage() {
           </div>
         </section>
 
+        {/* キャンペーンセクション */}
         <CampaignSection variant="mathNigate" campaign={campaignData} />
 
-        {/* ===========================================
-          CLOSING / CTA SECTION
-          ===========================================
-        */}
+        {/* CLOSING / CTA SECTION */}
         <section
           id="contact"
           className="py-20 bg-gradient-to-b from-[#F8FAFC] to-[#009DE0]/5 border-t border-[#009DE0]/10"
@@ -772,9 +965,7 @@ export default function MathNigatePage() {
                 </p>
               </div>
 
-              {/* Updated CTA buttons to match Top Page style (Split Free Trial & Consultation) */}
               <div className="flex flex-col md:flex-row gap-4 justify-center mt-10 flex-wrap">
-                {/* Free Trial Button */}
                 <a
                   href="/trial"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full shadow-lg hover:bg-[#008ac4] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
@@ -795,7 +986,6 @@ export default function MathNigatePage() {
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                {/* Consultation Button */}
                 <a
                   href="/counseling"
                   className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#009DE0] border-2 border-[#009DE0] rounded-full shadow-lg hover:bg-[#009DE0]/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-bold text-base md:text-lg min-w-[280px]"
@@ -811,13 +1001,11 @@ export default function MathNigatePage() {
                     });
                   }}
                 >
-                  {/* TODO: 将来、無料体験・学習相談フォームページができたら、このボタンのhrefを差し替える */}
                   <MessageCircle size={20} />
                   学習相談に申し込む
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                {/* LINE Button */}
                 <a
                   href="https://lin.ee/blKCpXC"
                   target="_blank"
