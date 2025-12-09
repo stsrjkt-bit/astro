@@ -4,17 +4,15 @@ import { trackGAEvent } from '~/utils/ga4';
 import { trackMetaCustomEvent } from '~/utils/metaPixel';
 
 export default function UserChoiceSection() {
-  const trackRouteSelection = (routeType: 'math_nigate') => {
+  const handleMathRouteClick = () => {
     const eventParams = {
-      route_type: routeType,
+      route_type: 'math_nigate',
       section: 'choice',
     };
 
     trackGAEvent('select_route', eventParams);
     trackMetaCustomEvent('SelectRoute', eventParams);
   };
-
-  const handleMathRouteClick = () => trackRouteSelection('math_nigate');
 
   return (
     <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="choice">
