@@ -417,11 +417,6 @@ export default function MathNigatePage() {
 
     const maxScore = Math.max(...Object.values(scores));
 
-    if (maxScore === 0) {
-      setDiagnosisResult([]);
-      return;
-    }
-
     const types = Object.entries(scores)
       .filter(([, score]) => score === maxScore)
       .map(([type]) => type);
