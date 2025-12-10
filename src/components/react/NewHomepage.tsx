@@ -49,6 +49,7 @@ const TRACKING_SECTIONS = [
   'gallery',
   'access',
   'contact',
+  'home-learning',
 ];
 
 const useSectionViewTracking = () => {
