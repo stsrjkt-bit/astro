@@ -15,7 +15,7 @@ export default function UserChoiceSection() {
   };
 
   return (
-    <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="choice">
+    <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="user_choice">
       {/* シマー効果（光が走る）のアニメーション定義 */}
       <style>{`
         @keyframes shimmer {

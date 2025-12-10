@@ -37,6 +37,66 @@ import { trackGAEvent } from '~/utils/ga4';
 import UserChoiceSection from '~/components/react/UserChoiceSection';
 import { CampaignSection, type CampaignData } from '~/components/react/CampaignSection';
 
+const TRACKING_SECTIONS = [
+  'top',
+  'campaign',
+  'user_choice',
+  'habit',
+  'concept',
+  'about',
+  'features',
+  'achievements',
+  'gallery',
+  'access',
+  'contact',
+];
+
+const useSectionViewTracking = () => {
+  const viewIndexRef = useRef(1);
+  const seenSectionsRef = useRef(new Set<string>());
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const sectionId = entry.target.id;
+
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && !seenSectionsRef.current.has(sectionId)) {
+            trackGAEvent('section_view', {
+              page_type: 'home',
+              section_id: sectionId,
+              view_index: viewIndexRef.current,
+            });
+
+            seenSectionsRef.current.add(sectionId);
+            viewIndexRef.current += 1;
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      }
+    );
+
+    TRACKING_SECTIONS.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+};
+
 const campaignData: CampaignData = {
   title: (
     <>
@@ -796,6 +856,7 @@ const HomeLearningSection: React.FC = () => {
 
 // --- メインコンポーネント ---
 export default function NewHomepage() {
+  useSectionViewTracking();
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
   const scrollY = useScrollPosition();
@@ -1123,7 +1184,9 @@ export default function NewHomepage() {
         </div>
       </section>
 
-      <CampaignSection variant="homepage" campaign={campaignData} />
+      <section id="campaign">
+        <CampaignSection variant="homepage" campaign={campaignData} />
+      </section>
 
       <UserChoiceSection />
 
