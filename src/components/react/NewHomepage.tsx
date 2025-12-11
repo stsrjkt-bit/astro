@@ -1177,7 +1177,7 @@ export default function NewHomepage() {
               <div className="mt-6 flex justify-center">
                 <a
                   href="/math-nigate"
-                  className="group/btn relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
+                  className="group/btn relative overflow-hidden inline-flex items-center justify-center px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
                 >
                   <div className="absolute inset-0 -translate-x-full animate-shimmer-button w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none z-10" />
                   <span className="relative z-20 flex items-center gap-3">
