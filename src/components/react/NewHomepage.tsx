@@ -964,6 +964,10 @@ export default function NewHomepage() {
             90% { transform: translate(1px, 2px) rotate(0deg); }
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
+        @keyframes shine {
+          0% { transform: translateX(-100%) skewX(-45deg); }
+          100% { transform: translateX(200%) skewX(-45deg); }
+        }
         .animate-blob {
           animation: blob 7s infinite;
         }
@@ -975,6 +979,22 @@ export default function NewHomepage() {
         }
         .animation-delay-2000 {
           animation-delay: 2s;
+        }
+        .shine-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        .shine-effect:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 30%; /* 光の帯の幅 */
+          height: 100%;
+          background: rgba(255, 255, 255, 0.4); /* 光の帯の色 */
+          transform: skewX(-45deg);
+          animation: shine 2s infinite; /* アニメーションの時間と繰り返し */
+          animation-delay: 1s; /* アニメーションの開始タイミングをずらす */
         }
       `}</style>
 
@@ -1177,7 +1197,7 @@ export default function NewHomepage() {
               <div className="mt-6 flex justify-center">
                 <a
                   href="/math-nigate"
-                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px] shine-effect"
                 >
                   <span aria-hidden className="text-xl">
                     ✨
