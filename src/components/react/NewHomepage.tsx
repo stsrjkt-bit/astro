@@ -55,47 +55,43 @@ const TRACKING_SECTIONS = [
 const useSectionViewTracking = () => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
+  const scrollY = useScrollPosition();
 
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const sectionId = entry.target.id;
-
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && !seenSectionsRef.current.has(sectionId)) {
-            trackGAEvent('section_view', {
-              page_type: 'home',
-              section_id: sectionId,
-              view_index: viewIndexRef.current,
-            });
-
-            seenSectionsRef.current.add(sectionId);
-            viewIndexRef.current += 1;
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.5,
-      }
-    );
-
     TRACKING_SECTIONS.forEach((sectionId) => {
+      if (seenSectionsRef.current.has(sectionId)) {
+        return;
+      }
+
       const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
+      if (!element) {
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      if (rect.height === 0) {
+        return;
+      }
+      
+      const viewportHeight = window.innerHeight;
+      const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+      const ratio = visibleHeight / rect.height;
+
+      if (visibleHeight > 0 && ratio >= 0.25) {
+        trackGAEvent('section_view', {
+          page_type: 'home',
+          section_id: sectionId,
+          view_index: viewIndexRef.current,
+        });
+        seenSectionsRef.current.add(sectionId);
+        viewIndexRef.current += 1;
       }
     });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  }, [scrollY]);
 };
 
 const campaignData: CampaignData = {
