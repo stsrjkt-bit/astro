@@ -64,9 +64,16 @@ const useSectionViewTracking = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const sectionId = entry.target.id;
+          const target = entry.target as HTMLElement;
+          const sectionId = target.id;
 
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5 && !seenSectionsRef.current.has(sectionId)) {
+          // id がない要素や TRACKING_SECTIONS に含まれないものは無視
+          if (!sectionId || !TRACKING_SECTIONS.includes(sectionId)) {
+            return;
+          }
+
+          // 画面に 25% 以上入ったタイミングで 1 回だけ送信
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !seenSectionsRef.current.has(sectionId)) {
             trackGAEvent('section_view', {
               page_type: 'home',
               section_id: sectionId,
@@ -75,16 +82,19 @@ const useSectionViewTracking = () => {
 
             seenSectionsRef.current.add(sectionId);
             viewIndexRef.current += 1;
-            observer.unobserve(entry.target);
+
+            // 一度送信した要素は監視解除
+            observer.unobserve(target);
           }
         });
       },
       {
         root: null,
-        threshold: 0.5,
+        threshold: 0.25,
       }
     );
 
+    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
     TRACKING_SECTIONS.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) {
