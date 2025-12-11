@@ -16,17 +16,6 @@ export default function UserChoiceSection() {
 
   return (
     <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="user_choice">
-      {/* シマー効果（光が走る）のアニメーション定義 */}
-      <style>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) skewX(-15deg); }
-          100% { transform: translateX(200%) skewX(-15deg); }
-        }
-        .animate-shimmer {
-          animation: shimmer 2.5s infinite;
-        }
-      `}</style>
-
       {/* 背景装飾 */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 w-[600px] h-[600px] bg-[#009DE0]/5 rounded-full blur-[100px] -translate-x-1/2 mix-blend-multiply" />
@@ -75,7 +64,7 @@ export default function UserChoiceSection() {
                   active:translate-y-0 active:scale-95 active:shadow-inner
                 "
               >
-                <div className="absolute inset-0 -translate-x-full animate-shimmer w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none z-10" />
+                <div className="absolute inset-0 -translate-x-full animate-shimmer-button w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none z-10" />
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center text-[#9ca31a] shadow-sm relative z-20">
                   <ArrowRight size={20} className="group-hover/btn:translate-x-0.5 transition-transform" />
                 </div>

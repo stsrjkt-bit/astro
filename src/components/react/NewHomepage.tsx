@@ -976,13 +976,6 @@ export default function NewHomepage() {
         .animation-delay-2000 {
           animation-delay: 2s;
         }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) skewX(-15deg); }
-          100% { transform: translateX(200%) skewX(-15deg); }
-        }
-        .animate-shimmer {
-          animation: shimmer 2.5s infinite;
-        }
       `}</style>
 
       <DotNavigation activeSection={activeSection} />
@@ -1186,7 +1179,7 @@ export default function NewHomepage() {
                   href="/math-nigate"
                   className="group/btn relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#009DE0] text-white rounded-full font-bold shadow-md hover:shadow-xl hover:bg-[#007bb5] hover:-translate-y-0.5 transition-all duration-300 min-w-[280px]"
                 >
-                  <div className="absolute inset-0 -translate-x-full animate-shimmer w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-0 -translate-x-full animate-shimmer-button w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none z-10" />
                   <span className="relative z-20 flex items-center gap-3">
                     <span aria-hidden className="text-xl">
                       ✨

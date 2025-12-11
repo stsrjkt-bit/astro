@@ -23,6 +23,7 @@ export default {
         fade: 'fadeInUp 1s both',
         'shimmer-auto': 'shimmer 2.5s infinite',
         float: 'floating-y 2s ease-in-out infinite',
+        'shimmer-button': 'shimmer-button 2.5s infinite',
       },
 
       keyframes: {
@@ -34,6 +35,10 @@ export default {
           '0%': { transform: 'translateX(-150%) skewX(-12deg)' },
           '15%': { transform: 'translateX(150%) skewX(-12deg)' },
           '100%': { transform: 'translateX(150%) skewX(-12deg)' },
+        },
+        'shimmer-button': {
+          '0%': { transform: 'translateX(-100%) skewX(-15deg)' },
+          '100%': { transform: 'translateX(200%) skewX(-15deg)' },
         },
         'floating-y': {
           '0%, 100%': { transform: 'translateY(0)' },
