@@ -55,43 +55,57 @@ const TRACKING_SECTIONS = [
 const useSectionViewTracking = () => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
-  const scrollY = useScrollPosition();
 
   useEffect(() => {
     if (typeof window === 'undefined') {
       return;
     }
 
-    TRACKING_SECTIONS.forEach((sectionId) => {
-      if (seenSectionsRef.current.has(sectionId)) {
-        return;
-      }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          const sectionId = target.id;
 
-      const element = document.getElementById(sectionId);
-      if (!element) {
-        return;
-      }
+          // id がない要素や TRACKING_SECTIONS に含まれないものは無視
+          if (!sectionId || !TRACKING_SECTIONS.includes(sectionId)) {
+            return;
+          }
 
-      const rect = element.getBoundingClientRect();
-      if (rect.height === 0) {
-        return;
-      }
-      
-      const viewportHeight = window.innerHeight;
-      const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-      const ratio = visibleHeight / rect.height;
+          // 画面に 25% 以上入ったタイミングで 1 回だけ送信
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !seenSectionsRef.current.has(sectionId)) {
+            trackGAEvent('section_view', {
+              page_type: 'home',
+              section_id: sectionId,
+              view_index: viewIndexRef.current,
+            });
 
-      if (visibleHeight > 0 && ratio >= 0.25) {
-        trackGAEvent('section_view', {
-          page_type: 'home',
-          section_id: sectionId,
-          view_index: viewIndexRef.current,
+            seenSectionsRef.current.add(sectionId);
+            viewIndexRef.current += 1;
+
+            // 一度送信した要素は監視解除
+            observer.unobserve(target);
+          }
         });
-        seenSectionsRef.current.add(sectionId);
-        viewIndexRef.current += 1;
+      },
+      {
+        root: null,
+        threshold: 0.25,
+      }
+    );
+
+    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
+    TRACKING_SECTIONS.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
       }
     });
-  }, [scrollY]);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 };
 
 const campaignData: CampaignData = {
