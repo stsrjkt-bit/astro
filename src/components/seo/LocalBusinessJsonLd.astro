@@ -1,12 +1,11 @@
 ---
 const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const url = site || 'https://stsrjk.com'; // site設定があるならそっちが優先。違うならここだけ直す
 
 const data = {
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'EducationalOrganization'],
   name: 'さとう数理塾',
-  url: url,
+  url: site,
   description: '高校生の理系（数学・理科）に特化した個別指導塾。AI教材×個別指導で学習習慣から立て直します。',
   address: {
     '@type': 'PostalAddress',
