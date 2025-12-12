@@ -52,6 +52,12 @@ const TRACKING_SECTIONS = [
   'home-learning',
 ];
 
+const GALLERY_SRCSET_WIDTHS = [800, 1200, 1800] as const;
+
+const toW = (src: string, w: number) => src.replace(/=s0$/, `=w${w}`);
+
+const buildSrcSet = (src: string) => GALLERY_SRCSET_WIDTHS.map((w) => `${toW(src, w)} ${w}w`).join(', ');
+
 const useSectionViewTracking = () => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
@@ -932,8 +938,6 @@ export default function NewHomepage() {
     },
   ];
 
-  const toW = (src: string, w: number) => src.replace(/=s0$/, `=w${w}`);
-
   return (
     <div className="min-h-screen bg-slate-50 text-[#334455] font-sans antialiased selection:bg-[#009DE0]/20 selection:text-[#009DE0] overflow-x-hidden m-0 p-0">
       {/* アニメーション用スタイル定義 */}
@@ -1546,7 +1550,7 @@ export default function NewHomepage() {
               >
                 <img
                   src={toW(img.src, 1200)}
-                  srcSet={`${toW(img.src, 800)} 800w, ${toW(img.src, 1200)} 1200w, ${toW(img.src, 1800)} 1800w`}
+                  srcSet={buildSrcSet(img.src)}
                   sizes="(min-width: 768px) 600px, 85vw"
                   alt={img.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
