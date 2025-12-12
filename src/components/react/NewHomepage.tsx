@@ -52,12 +52,13 @@ const TRACKING_SECTIONS = [
   'home-learning',
 ];
 
-const useSectionViewTracking = () => {
+const useSectionViewTracking = (enabled: boolean) => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
+  const observedSectionsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !enabled) {
       return;
     }
 
@@ -82,6 +83,7 @@ const useSectionViewTracking = () => {
 
             seenSectionsRef.current.add(sectionId);
             viewIndexRef.current += 1;
+            observedSectionsRef.current.delete(sectionId);
 
             // 一度送信した要素は監視解除
             observer.unobserve(target);
@@ -95,17 +97,43 @@ const useSectionViewTracking = () => {
     );
 
     // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
-    TRACKING_SECTIONS.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
+    const observeSection = (element: HTMLElement | null) => {
+      if (!element) return;
+
+      const sectionId = element.id;
+      if (!sectionId || !TRACKING_SECTIONS.includes(sectionId) || seenSectionsRef.current.has(sectionId)) {
+        return;
       }
+
+      if (observedSectionsRef.current.has(sectionId)) {
+        return;
+      }
+
+      observer.observe(element);
+      observedSectionsRef.current.add(sectionId);
+    };
+
+    TRACKING_SECTIONS.forEach((sectionId) => observeSection(document.getElementById(sectionId)));
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+
+          observeSection(node);
+          node.querySelectorAll<HTMLElement>('[id]').forEach((child) => observeSection(child));
+        });
+      });
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
+      observedSectionsRef.current.clear();
     };
-  }, []);
+  }, [enabled]);
 };
 
 const campaignData: CampaignData = {
@@ -867,11 +895,12 @@ const HomeLearningSection: React.FC = () => {
 
 // --- メインコンポーネント ---
 export default function NewHomepage() {
-  useSectionViewTracking();
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
   const scrollY = useScrollPosition();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useSectionViewTracking(loaded);
 
   useEffect(() => {
     setLoaded(true);
