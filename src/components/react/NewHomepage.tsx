@@ -58,12 +58,13 @@ const toW = (src: string, w: number) => src.replace(/=s0$/, `=w${w}`);
 
 const buildSrcSet = (src: string) => GALLERY_SRCSET_WIDTHS.map((w) => `${toW(src, w)} ${w}w`).join(', ');
 
-const useSectionViewTracking = () => {
+const useSectionViewTracking = (enabled: boolean) => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
+  const observedSectionsRef = useRef(new Set<string>());
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !enabled) {
       return;
     }
 
@@ -79,7 +80,7 @@ const useSectionViewTracking = () => {
           }
 
           // 画面に 25% 以上入ったタイミングで 1 回だけ送信
-          if (entry.isIntersecting && !seenSectionsRef.current.has(sectionId)) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !seenSectionsRef.current.has(sectionId)) {
             trackGAEvent('section_view', {
               page_type: 'home',
               section_id: sectionId,
@@ -87,6 +88,7 @@ const useSectionViewTracking = () => {
             });
 
             seenSectionsRef.current.add(sectionId);
+            observedSectionsRef.current.delete(sectionId);
             viewIndexRef.current += 1;
 
             // 一度送信した要素は監視解除
@@ -100,18 +102,49 @@ const useSectionViewTracking = () => {
       }
     );
 
-    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
-    TRACKING_SECTIONS.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
+    const observeSection = (element: HTMLElement | null) => {
+      if (!element) return;
+
+      const sectionId = element.id;
+      if (!sectionId || !TRACKING_SECTIONS.includes(sectionId) || seenSectionsRef.current.has(sectionId)) {
+        return;
       }
+
+      if (observedSectionsRef.current.has(sectionId)) {
+        return;
+      }
+
+      observer.observe(element);
+      observedSectionsRef.current.add(sectionId);
+    };
+
+    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
+    TRACKING_SECTIONS.forEach((sectionId) => observeSection(document.getElementById(sectionId)));
+
+    const trackedSelector =
+      typeof CSS !== 'undefined' && CSS.escape
+        ? TRACKING_SECTIONS.map((id) => `#${CSS.escape(id)}`).join(',')
+        : TRACKING_SECTIONS.map((id) => `#${id}`).join(',');
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+
+          observeSection(node);
+          if (trackedSelector) node.querySelectorAll<HTMLElement>(trackedSelector).forEach(observeSection);
+        });
+      });
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
+      observedSectionsRef.current.clear();
     };
-  }, []);
+  }, [enabled]);
 };
 
 const campaignData: CampaignData = {
@@ -871,11 +904,12 @@ const HomeLearningSection: React.FC = () => {
 
 // --- メインコンポーネント ---
 export default function NewHomepage() {
-  useSectionViewTracking();
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const conceptBgRef = useRef<HTMLDivElement>(null);
+
+  useSectionViewTracking(loaded);
 
   useEffect(() => {
     setLoaded(true);
