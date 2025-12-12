@@ -10,6 +10,7 @@ const data = {
   name: 'さとう数理塾',
   url: site,
   sameAs: instagramUrl ? [instagramUrl] : undefined,
+  image: site ? [`${site}/images/sato-math-about.jpg`] : undefined,
   description: '高校生の理系（数学・理科）に特化した個別指導塾。AI教材×個別指導で学習習慣から立て直します。',
   address: {
     '@type': 'PostalAddress',
@@ -17,6 +18,7 @@ const data = {
     addressRegion: '静岡県',
     addressLocality: '沼津市',
     streetAddress: '沢田町1-3 牧原ビル102',
+    postalCode: '410-0052',
   },
   openingHoursSpecification: [
     {
