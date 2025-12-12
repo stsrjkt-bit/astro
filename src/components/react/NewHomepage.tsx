@@ -1204,9 +1204,7 @@ export default function NewHomepage() {
         </div>
       </section>
 
-      <section id="campaign">
-        <CampaignSection variant="homepage" campaign={campaignData} />
-      </section>
+      <CampaignSection id="campaign" variant="homepage" campaign={campaignData} />
 
       <UserChoiceSection />
 

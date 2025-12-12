@@ -18,6 +18,7 @@ export interface CampaignData {
 }
 
 interface CampaignSectionProps {
+  id?: string;
   variant?: 'homepage' | 'mathNigate' | 'rikei';
   campaign: CampaignData;
 }
@@ -28,9 +29,9 @@ const variantLeadText = {
   rikei: '理系をあきらめたくない高校生向けの、期間限定スタートオファーです。',
 };
 
-export const CampaignSection: React.FC<CampaignSectionProps> = ({ variant = 'homepage', campaign }) => {
+export const CampaignSection: React.FC<CampaignSectionProps> = ({ id, variant = 'homepage', campaign }) => {
   return (
-    <section className="bg-slate-50 py-16 px-4 md:py-20">
+    <section id={id} className="bg-slate-50 py-16 px-4 md:py-20">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
           <p className="text-base md:text-lg text-gray-600">{variantLeadText[variant]}</p>
