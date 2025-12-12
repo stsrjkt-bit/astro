@@ -884,13 +884,15 @@ export default function NewHomepage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const PARALLAX_FACTOR = 0.4;
+
     const handleParallaxScroll = () => {
       if (conceptBgRef.current) {
         const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         // The transform is applied based on the scroll position relative to the viewport height.
         // The 0.4 factor creates the parallax effect by moving the background slower than the scroll speed.
-        conceptBgRef.current.style.transform = `translateY(${(scrollY - windowHeight) * 0.4}px)`;
+        conceptBgRef.current.style.transform = `translateY(${(scrollY - windowHeight) * PARALLAX_FACTOR}px)`;
       }
     };
 
