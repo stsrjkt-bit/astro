@@ -30,7 +30,7 @@ const variantLeadText = {
 
 export const CampaignSection: React.FC<CampaignSectionProps> = ({ variant = 'homepage', campaign }) => {
   return (
-    <section id="campaign" className="bg-slate-50 py-16 px-4 md:py-20">
+    <section className="bg-slate-50 py-16 px-4 md:py-20">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
           <p className="text-base md:text-lg text-gray-600">{variantLeadText[variant]}</p>
