@@ -31,8 +31,9 @@ export const trackGAEvent = (eventName: string, params: GAEventParams = {}) => {
 
   // gtag がなければ、dataLayer に積むだけのフォールバックを定義
   if (typeof extendedWindow.gtag !== 'function') {
-    extendedWindow.gtag = (...args: unknown[]) => {
-      extendedWindow.dataLayer!.push(args);
+    // eslint-disable-next-line prefer-rest-params
+    extendedWindow.gtag = function () {
+      extendedWindow.dataLayer!.push(arguments);
     };
   }
 
