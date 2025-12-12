@@ -1,6 +1,6 @@
 site:
   name: さとう数理塾
-  site: 'https://astrowind.vercel.app'
+  site: 'https://stsrjk.com'
   base: '/'
   trailingSlash: false
 
@@ -23,12 +23,10 @@ metadata:
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: ja
   textDirection: ltr
 
 apps:
