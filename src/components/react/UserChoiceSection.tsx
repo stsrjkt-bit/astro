@@ -3,7 +3,11 @@ import { Footprints, ArrowRight, Sparkles } from 'lucide-react';
 import { trackGAEvent } from '~/utils/ga4';
 import { trackMetaCustomEvent } from '~/utils/metaPixel';
 
-export default function UserChoiceSection() {
+interface UserChoiceSectionProps {
+  id?: string;
+}
+
+export default function UserChoiceSection({ id }: UserChoiceSectionProps) {
   const handleMathRouteClick = () => {
     const eventParams = {
       route_type: 'math_nigate',
@@ -15,7 +19,7 @@ export default function UserChoiceSection() {
   };
 
   return (
-    <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id="user_choice">
+    <section className="bg-slate-50 py-16 px-4 md:py-32 relative overflow-hidden" id={id}>
       {/* 背景装飾 */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 w-[600px] h-[600px] bg-[#009DE0]/5 rounded-full blur-[100px] -translate-x-1/2 mix-blend-multiply" />

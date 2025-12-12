@@ -157,22 +157,6 @@ const SECTIONS = [
   { id: 'contact', label: 'お問い合わせ' },
 ];
 
-// --- カスタムフック: スクロール位置の取得 ---
-const useScrollPosition = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return scrollPosition;
-};
-
 // --- 背景装飾用コンポーネント (Blob) ---
 const DecorativeBlob = ({
   color = 'bg-[#009DE0]',
@@ -366,29 +350,43 @@ const MobileTableOfContents = () => {
 // --- ヒヨコのアニメーションコンポーネント ---
 const HatchingEgg = () => {
   const [stage, setStage] = useState<'idle' | 'shaking' | 'cracking' | 'hatched'>('idle');
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+
+  // Cleanup timers function
+  const clearTimers = () => {
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+  };
 
   const startAnimation = () => {
-    if (stage !== 'hatched') {
-      setStage('shaking');
-      setTimeout(() => setStage('cracking'), 1200);
-      setTimeout(() => setStage('hatched'), 1800);
-    } else {
+    clearTimers(); // Clear any existing timers before starting
+
+    if (stage === 'hatched') {
       // Reset for replay
       setStage('idle');
-      setTimeout(() => {
+      const replayTimer = setTimeout(() => {
         setStage('shaking');
-        setTimeout(() => setStage('cracking'), 1200);
-        setTimeout(() => setStage('hatched'), 1800);
+        const crackingTimer = setTimeout(() => setStage('cracking'), 1200);
+        const hatchedTimer = setTimeout(() => setStage('hatched'), 1800);
+        timersRef.current.push(crackingTimer, hatchedTimer);
       }, 100);
+      timersRef.current.push(replayTimer);
+    } else {
+      // Normal animation flow
+      setStage('shaking');
+      const crackingTimer = setTimeout(() => setStage('cracking'), 1200);
+      const hatchedTimer = setTimeout(() => setStage('hatched'), 1800);
+      timersRef.current.push(crackingTimer, hatchedTimer);
     }
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      startAnimation();
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
+    const initialAnimationTimer = setTimeout(startAnimation, 500);
+    timersRef.current.push(initialAnimationTimer);
+
+    // Cleanup on unmount
+    return () => clearTimers();
+  }, []); // Run only once on mount
 
   return (
     <div
@@ -876,11 +874,45 @@ export default function NewHomepage() {
   useSectionViewTracking();
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
-  const scrollY = useScrollPosition();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const conceptBgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleParallaxScroll = () => {
+      if (conceptBgRef.current) {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        // The transform is applied based on the scroll position relative to the viewport height.
+        // The 0.4 factor creates the parallax effect by moving the background slower than the scroll speed.
+        conceptBgRef.current.style.transform = `translateY(${(scrollY - windowHeight) * 0.4}px)`;
+      }
+    };
+
+    let ticking = false;
+    const throttledScrollHandler = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleParallaxScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+
+    // Set initial position
+    handleParallaxScroll();
+
+    return () => {
+      window.removeEventListener('scroll', throttledScrollHandler);
+    };
   }, []);
 
   useEffect(() => {
@@ -1118,12 +1150,7 @@ export default function NewHomepage() {
       >
         {/* 背景画像エリア */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div
-            className="w-full h-full"
-            style={{
-              transform: `translateY(${(scrollY - (typeof window !== 'undefined' ? window.innerHeight : 0)) * 0.4}px)`,
-            }}
-          >
+          <div ref={conceptBgRef} className="w-full h-full">
             <img
               src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop"
               alt="教室のイメージ"
@@ -1206,7 +1233,7 @@ export default function NewHomepage() {
 
       <CampaignSection id="campaign" variant="homepage" campaign={campaignData} />
 
-      <UserChoiceSection />
+      <UserChoiceSection id="user_choice" />
 
       {/* ===========================================
           共感・問題提起 (EMPATHY) - レイアウト修正版
