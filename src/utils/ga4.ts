@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params */
 // src/utils/ga4.ts
 
 export type GAEventParams = Record<string, unknown>;
@@ -31,7 +32,6 @@ export const trackGAEvent = (eventName: string, params: GAEventParams = {}) => {
 
   // gtag がなければ、dataLayer に積むだけのフォールバックを定義
   if (typeof extendedWindow.gtag !== 'function') {
-    // eslint-disable-next-line prefer-rest-params
     extendedWindow.gtag = function () {
       extendedWindow.dataLayer!.push(arguments);
     };
