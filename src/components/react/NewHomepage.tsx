@@ -52,6 +52,11 @@ const TRACKING_SECTIONS = [
   'home-learning',
 ];
 
+const GALLERY_SRCSET_WIDTHS = [800, 1200, 1800] as const;
+
+const toW = (src: string, w: number) => src.replace(/=s0$/, `=w${w}`);
+
+const buildSrcSet = (src: string) => GALLERY_SRCSET_WIDTHS.map((w) => `${toW(src, w)} ${w}w`).join(', ');
 const useSectionViewTracking = (enabled: boolean) => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
@@ -82,8 +87,8 @@ const useSectionViewTracking = (enabled: boolean) => {
             });
 
             seenSectionsRef.current.add(sectionId);
-            viewIndexRef.current += 1;
             observedSectionsRef.current.delete(sectionId);
+            viewIndexRef.current += 1;
 
             // 一度送信した要素は監視解除
             observer.unobserve(target);
@@ -96,7 +101,6 @@ const useSectionViewTracking = (enabled: boolean) => {
       }
     );
 
-    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
     const observeSection = (element: HTMLElement | null) => {
       if (!element) return;
 
@@ -113,15 +117,20 @@ const useSectionViewTracking = (enabled: boolean) => {
       observedSectionsRef.current.add(sectionId);
     };
 
+    // TRACKING_SECTIONS に登録されている id を持つ要素だけ監視
     TRACKING_SECTIONS.forEach((sectionId) => observeSection(document.getElementById(sectionId)));
 
+    const trackedSelector =
+      typeof CSS !== 'undefined' && CSS.escape
+        ? TRACKING_SECTIONS.map((id) => `#${CSS.escape(id)}`).join(',')
+        : TRACKING_SECTIONS.map((id) => `#${id}`).join(',');
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (!(node instanceof HTMLElement)) return;
 
           observeSection(node);
-          node.querySelectorAll<HTMLElement>('[id]').forEach((child) => observeSection(child));
+          if (trackedSelector) node.querySelectorAll<HTMLElement>(trackedSelector).forEach(observeSection);
         });
       });
     });
