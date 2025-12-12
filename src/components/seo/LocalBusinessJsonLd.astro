@@ -1,12 +1,15 @@
 ---
+import { SITE } from 'astrowind:config';
+
 const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const instagramUrl = SITE.social?.instagram;
 
 const data = {
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'EducationalOrganization'],
   name: 'さとう数理塾',
   url: site,
-  sameAs: ['https://www.instagram.com/satosurijyuku/'],
+  sameAs: instagramUrl ? [instagramUrl] : undefined,
   description: '高校生の理系（数学・理科）に特化した個別指導塾。AI教材×個別指導で学習習慣から立て直します。',
   address: {
     '@type': 'PostalAddress',
