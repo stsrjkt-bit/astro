@@ -1202,7 +1202,7 @@ export default function NewHomepage() {
         <CampaignSection variant="homepage" campaign={campaignData} />
       </section>
 
-      <UserChoiceSection />
+      <section id="user_choice"><UserChoiceSection /></section>
 
       {/* ===========================================
           共感・問題提起 (EMPATHY) - レイアウト修正版
