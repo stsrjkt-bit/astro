@@ -73,7 +73,7 @@ const useSectionViewTracking = () => {
           }
 
           // 画面に 25% 以上入ったタイミングで 1 回だけ送信
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !seenSectionsRef.current.has(sectionId)) {
+          if (entry.isIntersecting && !seenSectionsRef.current.has(sectionId)) {
             trackGAEvent('section_view', {
               page_type: 'home',
               section_id: sectionId,
