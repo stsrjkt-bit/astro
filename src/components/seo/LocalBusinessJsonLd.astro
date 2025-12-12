@@ -1,0 +1,28 @@
+---
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'EducationalOrganization'],
+  name: 'さとう数理塾',
+  url: site,
+  description: '高校生の理系（数学・理科）に特化した個別指導塾。AI教材×個別指導で学習習慣から立て直します。',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'JP',
+    addressRegion: '静岡県',
+    addressLocality: '沼津市',
+    streetAddress: '沢田町1-3 牧原ビル102',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '18:50',
+      closes: '21:50',
+    },
+  ],
+};
+---
+
+{site && <script type="application/ld+json" set:html={JSON.stringify(data)} />}
