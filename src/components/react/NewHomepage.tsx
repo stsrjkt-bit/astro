@@ -52,6 +52,12 @@ const TRACKING_SECTIONS = [
   'home-learning',
 ];
 
+const GALLERY_SRCSET_WIDTHS = [800, 1200, 1800] as const;
+
+const toW = (src: string, w: number) => src.replace(/=s0$/, `=w${w}`);
+
+const buildSrcSet = (src: string) => GALLERY_SRCSET_WIDTHS.map((w) => `${toW(src, w)} ${w}w`).join(', ');
+
 const useSectionViewTracking = () => {
   const viewIndexRef = useRef(1);
   const seenSectionsRef = useRef(new Set<string>());
@@ -1543,10 +1549,14 @@ export default function NewHomepage() {
                 className="snap-center flex-shrink-0 w-[85vw] md:w-[600px] h-[60vw] md:h-[400px] relative rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 group/image cursor-pointer"
               >
                 <img
-                  src={img.src}
+                  src={toW(img.src, 1200)}
+                  srcSet={buildSrcSet(img.src)}
+                  sizes="(min-width: 768px) 600px, 85vw"
                   alt={img.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
                   loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#009DE0]/80 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
               </div>
