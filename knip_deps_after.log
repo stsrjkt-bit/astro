@@ -1,0 +1,19 @@
+Unused dependencies (4)
+@astrojs/react    package.json:24:6
+@astrojs/sitemap  package.json:26:6
+astro-embed       package.json:32:6
+react-dom         package.json:38:6
+Unlisted dependencies (13)
+astrowind    src/components/common/Analytics.astro:2:27       
+astrowind    src/components/common/ApplyColorMode.astro:1:20  
+astrowind    src/components/common/BasicScripts.astro:1:20    
+astrowind    src/components/common/Metadata.astro:4:38        
+astrowind    src/components/common/SiteVerification.astro:1:22
+astrowind    src/components/common/ToggleTheme.astro:2:20     
+astrowind    src/components/seo/LocalBusinessJsonLd.astro:1:22
+vite/client  src/env.d.ts:4:24                                
+astrowind    src/layouts/Layout.astro:2:22                    
+astrowind    src/pages/rss.xml.ts:3:42                        
+astrowind    src/utils/blog.ts:5:26                           
+astrowind    src/utils/permalinks.ts:3:32                     
+astrowind    src/utils/utils.ts:1:22                          
