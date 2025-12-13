@@ -1,0 +1,16 @@
+Unused dependencies (13)
+@astrojs/react              package.json:24:6
+@astrojs/sitemap            package.json:26:6
+@astrolib/analytics         package.json:27:6
+@astrolib/seo               package.json:28:6
+@emailjs/browser            package.json:29:6
+@fontsource-variable/inter  package.json:30:6
+astro-icon                  package.json:32:6
+limax                       package.json:33:6
+lodash.merge                package.json:34:6
+lucide-react                package.json:35:6
+react                       package.json:36:6
+react-dom                   package.json:37:6
+unpic                       package.json:38:6
+Unlisted dependencies (1)
+vite/client  src/env.d.ts:4:24

@@ -10,7 +10,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
+*.log
 
 # environment variables
 .env
@@ -21,9 +21,9 @@ pnpm-debug.log*
 
 pnpm-lock.yaml
 
+# Astro build cache
 .astro/
 
 # Audit files
 audit_*.txt
 knip_*.log
-*.log
