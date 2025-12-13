@@ -1,19 +1,20 @@
-Unused dependencies (4)
-@astrojs/react    package.json:24:6
-@astrojs/sitemap  package.json:26:6
-astro-embed       package.json:32:6
-react-dom         package.json:38:6
-Unlisted dependencies (13)
-astrowind    src/components/common/Analytics.astro:2:27       
-astrowind    src/components/common/ApplyColorMode.astro:1:20  
-astrowind    src/components/common/BasicScripts.astro:1:20    
-astrowind    src/components/common/Metadata.astro:4:38        
-astrowind    src/components/common/SiteVerification.astro:1:22
-astrowind    src/components/common/ToggleTheme.astro:2:20     
-astrowind    src/components/seo/LocalBusinessJsonLd.astro:1:22
-vite/client  src/env.d.ts:4:24                                
-astrowind    src/layouts/Layout.astro:2:22                    
-astrowind    src/pages/rss.xml.ts:3:42                        
-astrowind    src/utils/blog.ts:5:26                           
-astrowind    src/utils/permalinks.ts:3:32                     
-astrowind    src/utils/utils.ts:1:22                          
+Need to install the following packages:
+knip@5.73.4
+Ok to proceed? (y) 
+Unused dependencies (14)
+@astrojs/react              package.json:24:6
+@astrojs/sitemap            package.json:26:6
+@astrolib/analytics         package.json:27:6
+@astrolib/seo               package.json:28:6
+@emailjs/browser            package.json:29:6
+@fontsource-variable/inter  package.json:30:6
+astro-embed                 package.json:32:6
+astro-icon                  package.json:33:6
+limax                       package.json:34:6
+lodash.merge                package.json:35:6
+lucide-react                package.json:36:6
+react                       package.json:37:6
+react-dom                   package.json:38:6
+unpic                       package.json:39:6
+Unlisted dependencies (1)
+vite/client  src/env.d.ts:4:24
