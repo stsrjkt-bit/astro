@@ -1,3 +1,0 @@
-src/components/seo/LocalBusinessJsonLd.astro:9:  '@type': ['LocalBusiness', 'EducationalOrganization'],
-src/layouts/Layout.astro:14:import LocalBusinessJsonLd from '~/components/seo/LocalBusinessJsonLd.astro';
-src/layouts/Layout.astro:41:    {Astro.url.pathname === '/' && <LocalBusinessJsonLd />}
