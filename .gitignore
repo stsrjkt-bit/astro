@@ -21,4 +21,9 @@ pnpm-debug.log*
 
 pnpm-lock.yaml
 
-.astro\n# Audit files\naudit_*.txt
+.astro/
+
+# Audit files
+audit_*.txt
+knip_*.log
+*.log
