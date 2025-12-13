@@ -1,0 +1,21 @@
+src/components/react/ScienceMajorPage.tsx:649:                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「思考プロセス」を確認</h4>
+src/components/react/MathNigatePage.tsx:340:        さとう数理塾では、1対1の対話を通して「なぜその式になるのか」を言葉にしてもらいながら、類題でも使える形で理解を固めていきます。
+src/components/react/MathNigatePage.tsx:602:                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「なぜ？」を解決</h4>
+src/components/react/NewHomepage.tsx:1393:                    <span className="text-3xl font-bold text-[#009DE0]">1:1</span>
+src/components/react/NewHomepage.tsx:1442:                  <h4 className="text-xl font-bold text-[#334455] mb-4">AI教材 × 1対1指導</h4>
+src/components/react/NewHomepage.tsx:1444:                    AIで「どこでつまずいたか」を効率的に発見。その弱点を、講師との1対1の対話で深く理解するハイブリッドな指導スタイルです。
+src/pages/index.astro:9:    '静岡県沼津市沢田町の理系専門個別指導塾です。数学に不安のある進学校の高校生や、国公立・有名私大の理系学部をめざす生徒のために、数学・物理・化学・英語をプロ講師がマンツーマンで指導します。無料の学習相談・体験受付中。',
+src/pages/rikei.astro:8:    '東北大学・東京理科大学・芝浦工業大学・立命館大学などへの合格実績を持つ、沼津の理系専門個別指導塾です。進学校に通う高校生を対象に、数学・物理・化学・英語をプロ講師がマンツーマンで指導し、志望校に合わせた学習計画と受験戦略を一緒に立てます。無料の学習相談を実施しています。',
+src/components/ConsultationForm.jsx:174:            さとう数理塾の個別指導を体験してみませんか？
+src/components/react/ScienceMajorPage.tsx:395:                  確実な学力と自信に変えるための個別指導塾です。
+src/components/react/NewHomepage.tsx:963:      alt: '個別指導デスク',
+src/components/react/NewHomepage.tsx:1189:                  高校生のための個別指導塾
+src/components/react/NewHomepage.tsx:1388:                  当塾は沼津エリアの高校生を対象に、理系科目に特化した個別指導を提供しています。
+src/components/seo/LocalBusinessJsonLd.astro:14:  description: '高校生の理系（数学・理科）に特化した個別指導塾。AI教材×個別指導で学習習慣から立て直します。',
+src/pages/index.astro:6:  title: '沼津の理系専門個別指導塾｜さとう数理塾',
+src/pages/index.astro:9:    '静岡県沼津市沢田町の理系専門個別指導塾です。数学に不安のある進学校の高校生や、国公立・有名私大の理系学部をめざす生徒のために、数学・物理・化学・英語をプロ講師がマンツーマンで指導します。無料の学習相談・体験受付中。',
+src/pages/math-nigate.astro:6:  title: '数学が苦手な高校生のための理系専門個別指導｜さとう数理塾（沼津）',
+src/pages/math-nigate.astro:8:    '数学が赤点・追試ラインで「どこからやり直せばいいか分からない」沼津の進学校に通う高校生へ。さとう数理塾は、数学が苦手でも理系をあきらめたくない生徒のための理系専門個別指導塾です。AI教材とプロ講師の対話で中学内容からつまずきを洗い出し、高校数学を基礎から立て直します。',
+src/pages/rikei.astro:6:  title: '国公立・有名私大の理系学部をめざす高校生の個別指導｜さとう数理塾（沼津）',
+src/pages/rikei.astro:8:    '東北大学・東京理科大学・芝浦工業大学・立命館大学などへの合格実績を持つ、沼津の理系専門個別指導塾です。進学校に通う高校生を対象に、数学・物理・化学・英語をプロ講師がマンツーマンで指導し、志望校に合わせた学習計画と受験戦略を一緒に立てます。無料の学習相談を実施しています。',
+src/config.yaml:17:  description: '沼津の理系専門個別指導。数学が苦手でも、理系をあきらめない。'
