@@ -1,5 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "astro.config.{js,cjs,mjs,ts}",
+    "src/pages/**/*.{astro,js,jsx,ts,tsx,md,mdx}",
+    "src/content/config.{js,ts}"
+  ],
   "project": ["src/**", "vendor/**", "!**/.astro/**", "!dist/**", "!.vercel/**"],
-  "ignoreDependencies": ["astrowind", "vite/client"]
+  "ignoreDependencies": ["astrowind"]
 }
