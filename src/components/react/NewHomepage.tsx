@@ -1390,8 +1390,8 @@ export default function NewHomepage() {
                 </p>
                 <div className="flex gap-4">
                   <div className="flex flex-col items-center">
-                    <span className="text-3xl font-bold text-[#009DE0]">1:1</span>
-                    <span className="text-xs font-bold text-[#334455]/60">完全個別</span>
+                    <span className="text-3xl font-bold text-[#009DE0]">対話</span>
+                    <span className="text-xs font-bold text-[#334455]/60">講師サポート</span>
                   </div>
                   <div className="w-[1px] h-12 bg-slate-200"></div>
                   <div className="flex flex-col items-center">
@@ -1439,9 +1439,9 @@ export default function NewHomepage() {
                   <div className="w-20 h-20 bg-[#F0F9FF] rounded-2xl flex items-center justify-center mb-6 text-[#009DE0] group-hover:bg-[#009DE0] group-hover:text-white transition-colors duration-300">
                     <BookOpen size={40} />
                   </div>
-                  <h4 className="text-xl font-bold text-[#334455] mb-4">AI教材 × 1対1指導</h4>
+                  <h4 className="text-xl font-bold text-[#334455] mb-4">AI教材 × 対話型サポート</h4>
                   <p className="text-sm leading-relaxed text-[#334455]/70">
-                    AIで「どこでつまずいたか」を効率的に発見。その弱点を、講師との1対1の対話で深く理解するハイブリッドな指導スタイルです。
+                    AIで「どこでつまずいたか」を効率的に発見。その弱点を、講師との対話を通じて深く理解するハイブリッドな指導スタイルです。
                   </p>
                 </div>
               </Reveal>
