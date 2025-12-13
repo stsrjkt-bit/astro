@@ -337,7 +337,7 @@ const DIAGNOSIS_RESULTS = {
         <br />
         「わかったつもり」と「自力で解ける」の間にギャップがあり、がんばり方と成果が噛み合っていない可能性が高い状態です。
         <br />
-        さとう数理塾では、1対1の対話を通して「なぜその式になるのか」を言葉にしてもらいながら、類題でも使える形で理解を固めていきます。
+        さとう数理塾では、対話を通して「なぜその式になるのか」を言葉にしてもらいながら、類題でも使える形で理解を固めていきます。
       </>
     ),
   },
@@ -599,7 +599,7 @@ export default function MathNigatePage() {
                     <MessageCircle size={40} />
                   </div>
                   <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「なぜ？」を解決</h4>
+                    <h4 className="text-xl font-bold text-[#334455] mb-3">対話を通じて「なぜ？」を解決</h4>
                     <p className="text-[#334455]/80 leading-relaxed">
                       ただ答えを教えるのではなく、「どうしてこの式になると思う？」と対話をしながら進めます。
                       自分の言葉で説明できるようになることで、「わかったつもり」を排除し、
