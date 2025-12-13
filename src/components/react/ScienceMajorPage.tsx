@@ -646,9 +646,9 @@ export default function ScienceMajorPage() {
                     <MessageCircle size={40} />
                   </div>
                   <div className="flex-1 text-center md:text-left">
-                    <h4 className="text-xl font-bold text-[#334455] mb-3">1対1対話で「思考プロセス」を確認</h4>
+                    <h4 className="text-xl font-bold text-[#334455] mb-3">対話を通じて「思考プロセス」を確認</h4>
                     <p className="text-[#334455]/80 leading-relaxed">
-                      正解した問題でも、「なぜその公式を使ったのか」を講師が問いかけます。
+                      質問があったときは、「なぜその公式を選んだのか」まで一緒に言葉にしてもらいます。
                       自分の言葉で説明することで理解が深まり、
                       <span className="text-[#EA5514] font-bold bg-[#EA5514]/5 px-1">
                         初見の問題にも対応できる応用力
