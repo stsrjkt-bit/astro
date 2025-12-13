@@ -1,0 +1,5 @@
+Unused devDependencies (3)
+@iconify-json/tabler              package.json:47:6
+@typescript-eslint/eslint-plugin  package.json:51:6
+sharp                             package.json:63:6
+Configuration hints (1)
