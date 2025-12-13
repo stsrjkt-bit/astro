@@ -5,10 +5,10 @@ import type { Post } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash } from './permalinks';
 
-const BLOG_BASE = '';
-const CATEGORY_BASE = '';
-const TAG_BASE = '';
-const POST_PERMALINK_PATTERN = '%slug%';
+const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname || '');
+const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname || '');
+const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname || '');
+const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
 
 const generatePermalink = async ({
   id,
